@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = 4000;
+// const PORT = 8080;
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./DB.js');
 const postRoute = require('./post.route');
+const path = require("path")
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -13,6 +15,12 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     err => { console.log('Can not connect to the database' + err) }
 );
 
+// app.use(express.static(__dirname + "/dist/"));
+app.use(express.static(path.join(__dirname, '../dist')))
+app.get(/.*/, function (req, res) {
+    res.sendfile(path.join(__dirname, '../dist'));
+
+})
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
