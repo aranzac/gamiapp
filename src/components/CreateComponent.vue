@@ -36,7 +36,8 @@ export default {
   methods: {
     addPost() {
       // let uri = "http://localhost:4000/posts/add";
-      let uri = "http://localhost:" + process.env.PORT + "/posts/add";
+      let uri =
+        "http://appgami.herokuapp.com:" + process.env.PORT + "/posts/add";
       this.axios.post(uri, this.post).then(() => {
         this.$router.push({ name: "posts" });
       });

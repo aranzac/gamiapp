@@ -41,14 +41,20 @@ export default {
     };
   },
   created() {
-    let uri = "http://localhost:" + process.env.PORT + "/posts";
+    // let uri = "http://localhost:" + process.env.PORT + "/posts";
+    let uri = "http://appgami.herokuapp.com:" + process.env.PORT + "/posts";
+
     this.axios.get(uri).then(response => {
       this.posts = response.data;
     });
   },
   methods: {
     deletePost(id) {
-      let uri = `http://localhost:` + process.env.PORT + `/posts/delete/${id}`;
+      // let uri = `http://localhost:` + process.env.PORT + `/posts/delete/${id}`;
+      let uri =
+        `http://appgami.herokuapp.com:` +
+        process.env.PORT +
+        `/posts/delete/${id}`;
       this.axios.delete(uri).then(response => {
         this.posts.splice(this.posts.indexOf(id), 1);
       });
