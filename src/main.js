@@ -8,7 +8,11 @@ Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
-Vue.use(VueAxios, axios);
+const base = axios.create({
+  baseURL: 'https://appgami.herokuapp.com'
+})
+
+Vue.use(VueAxios, base);
 
 Vue.config.productionTip = false;
 
