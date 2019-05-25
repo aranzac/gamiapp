@@ -35,18 +35,14 @@ export default {
   },
   created() {
     // let uri = `http://localhost:4000/posts/edit/${this.$route.params.id}`;
-    let uri = `http://appgami.herokuapp.com/posts/edit/${
-      this.$route.params.id
-    }`;
+    let uri = `/posts/edit/${this.$route.params.id}`;
     this.axios.get(uri).then(response => {
       this.post = response.data;
     });
   },
   methods: {
     updatePost() {
-      let uri = `http://appgami.herokuapp.com/posts/update/${
-        this.$route.params.id
-      }`;
+      let uri = `/posts/update/${this.$route.params.id}`;
       this.axios.post(uri, this.post).then(() => {
         this.$router.push({ name: "posts" });
       });

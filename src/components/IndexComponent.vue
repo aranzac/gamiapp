@@ -42,7 +42,7 @@ export default {
   },
   created() {
     // let uri = "http://localhost:" + process.env.PORT + "/posts";
-    let uri = "http://appgami.herokuapp.com/posts";
+    let uri = "/posts";
 
     this.axios.get(uri).then(response => {
       this.posts = response.data;
@@ -51,7 +51,7 @@ export default {
   methods: {
     deletePost(id) {
       // let uri = `http://localhost:` + process.env.PORT + `/posts/delete/${id}`;
-      let uri = `http://appgami.herokuapp.com/posts/delete/${id}`;
+      let uri = `/posts/delete/${id}`;
       this.axios.delete(uri).then(response => {
         this.posts.splice(this.posts.indexOf(id), 1);
       });
