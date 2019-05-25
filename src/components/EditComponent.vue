@@ -42,8 +42,7 @@ export default {
   methods: {
     updatePost() {
       let uri = `http://localhost:4000/posts/update/${this.$route.params.id}`;
-      let uri =
-        `http://localhost:` +
+      `http://localhost:` +
         process.env.PORT +
         `/posts/update/${this.$route.params.id}`;
       this.axios.post(uri, this.post).then(() => {
