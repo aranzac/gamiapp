@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = 4000;
-// const PORT = 8080;
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./DB.js');
@@ -28,8 +27,8 @@ app.use(bodyParser.json());
 
 app.use('/posts', postRoute);
 
-// app.listen(PORT, function () {
-//     console.log('Server is running on Port:', PORT);
-// });
+app.listen(PORT, function () {
+    console.log('Server is running on Port:', PORT);
+});
 
-app.listen(process.env.PORT || 4000);
+// app.listen(process.env.PORT || 4000);
