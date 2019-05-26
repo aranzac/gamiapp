@@ -3,7 +3,7 @@
   "short_name": "gami-app",
   "icons": [
     {
-      "src": "./img/icons/morado.png",
+      "src": "./img/morado.png",
       "sizes": "192x192",
       "type": "image/png"
     },

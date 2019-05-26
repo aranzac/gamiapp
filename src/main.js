@@ -1,7 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import BootstrapVue from 'bootstrap-vue'
+import PortalVue from 'portal-vue'
 
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
+Vue.use(PortalVue)
+Vue.use(BootstrapVue)
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
@@ -20,7 +28,7 @@ import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
 import EditComponent from './components/EditComponent.vue';
-import './registerServiceWorker'
+import './registerServiceWorker';
 
 const routes = [
   {
