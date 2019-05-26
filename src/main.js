@@ -28,6 +28,10 @@ import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
 import EditComponent from './components/EditComponent.vue';
+import Perfil from './components/Perfil.vue';
+import Registro from './components/Registro.vue';
+import InicioSesion from './components/InicioSesion.vue';
+
 import './registerServiceWorker';
 
 const routes = [
@@ -45,6 +49,21 @@ const routes = [
     name: 'posts',
     path: '/posts',
     component: IndexComponent
+  },
+  {
+    name: 'registro',
+    path: '/registro',
+    component: Registro
+  },
+  {
+    name: 'iniciosesion',
+    path: '/iniciosesion',
+    component: InicioSesion
+  },
+  {
+    name: 'perfil',
+    path: '/perfil',
+    component: Perfil
   },
   {
     name: 'edit',

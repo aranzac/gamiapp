@@ -3,14 +3,76 @@
     <div class="col-lg-12 title-content">
       <h1 class="title text-white">Bienvenid@</h1>
     </div>
-    <div class="row half bg-light"></div>
-    <!-- <div class="col-md-8">
+    <div>
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-12">
+            <b-card
+              bg-variant="warning"
+              text-variant="white"
+              class="mb-2"
+              style="max-width: 30rem;"
+            >
+              <b-card-text id="preguntas" class="d-block">¿Ya tienes una cuenta?</b-card-text>
+              <b-button
+                href="/iniciosesion"
+                style="font-weight: bold;"
+                variant="light"
+              >Iniciar sesión</b-button>
+            </b-card>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <b-card
+              bg-variant="warning"
+              text-variant="white"
+              class="mb-2"
+              tag="article"
+              style="max-width: 30rem;"
+            >
+              <b-card-text id="preguntas" class="d-block">¿Quieres crear una nueva cuenta?</b-card-text>
+              <b-button href="/registro" style="font-weight: bold;" variant="light">Regístrate</b-button>
+            </b-card>
+          </div>
+        </div>
+      </div>
+      <!-- <row>
+        <div class="col-md-6">
+          <b-card
+            bg-variant="warning"
+            text-variant="white"
+            class="mb-2"
+            tag="article"
+            style="max-width: 20rem;"
+          >
+            <b-card-text>¿Ya tienes una cuenta?</b-card-text>
+            <b-button href="#" variant="light">Iniciar sesión</b-button>
+          </b-card>
+        </div>
+      </row>
+      <row>
+        <div class="col-md-6">
+          <b-card
+            bg-variant="warning"
+            text-variant="white"
+            class="mb-2"
+            tag="article"
+            style="max-width: 20rem;"
+          >
+            <b-card-text>¿Quieres crear una nueva cuenta?</b-card-text>
+            <b-button href="#" variant="light">Regístrate</b-button>
+          </b-card>
+        </div>
+      </row>
+      </div>-->
+      <!-- <div class="col-md-8">
       <div class="card card-default">
         <div class="card-header">Home Component</div>
 
         <div class="card-body">I'm the Home NO Component component.</div>
-      </div>
-    </div>-->
+      </div>-->
+    </div>
   </div>
 </template>
 <script>
@@ -20,26 +82,18 @@ export default {
 </script>
 
 <style>
-.half {
-  width: 40%;
-  margin: auto;
-  border-radius: 20px;
-  margin-top: 20px;
+#preguntas {
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  font-family: "Quicksand";
+  font-weight: bold;
 }
-
-.ppal-bottom {
-  background-color: rgb(106, 180, 209);
-  color: white;
-}
-
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
   text-align: center;
 }
-
 .title {
   font-size: 6em;
   letter-spacing: 1px;
@@ -65,7 +119,7 @@ export default {
   margin: 0 auto;
   background-size: cover;
   background-image: url("../assets/back2.jpg");
-  height: 100vh;
+  height: calc(100vh - 78px);
   text-align: center;
 }
 
