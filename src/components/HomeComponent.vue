@@ -11,14 +11,13 @@
               bg-variant="warning"
               text-variant="white"
               class="mb-2"
+              tag="article"
               style="max-width: 30rem;"
             >
-              <b-card-text id="preguntas" class="d-block">¿Ya tienes una cuenta?</b-card-text>
-              <b-button
-                href="/iniciosesion"
-                style="font-weight: bold;"
-                variant="light"
-              >Iniciar sesión</b-button>
+              <b-card-text id="preguntas" class="d-block">¿Quieres crear una nueva cuenta?</b-card-text>
+              <b-button style="font-weight: bold;" variant="light">
+                <router-link to="/iniciarsesion" class="nav-link">Regístrate</router-link>
+              </b-button>
             </b-card>
           </div>
         </div>
