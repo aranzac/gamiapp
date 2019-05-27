@@ -19,7 +19,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 // app.use(express.static(__dirname + "/dist/"));
 app.use(express.static(path.join(__dirname, '../dist')))
 app.get(/.*/, function (req, res) {
-    res.sendfile(path.join(__dirname, '../dist'));
+    res.sendFile(path.join(__dirname, '../dist'));
 
 })
 app.use(cors());
@@ -29,8 +29,9 @@ app.use(bodyParser.json());
 app.use('/posts', postRoute);
 // app.use('/perfil', userRoute);
 
-app.listen(PORT, function () {
-    console.log('Server is running on Port:', PORT);
-});
+// app.listen(PORT, function () {
+//     console.log('Server is running on Port:', PORT);
+// });
 
-// app.listen(process.env.PORT || 4000);
+console.log(process.env.PORT);
+app.listen(process.env.PORT || 4000);

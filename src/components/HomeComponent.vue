@@ -14,11 +14,9 @@
               style="max-width: 30rem;"
             >
               <b-card-text id="preguntas" class="d-block">¿Ya tienes una cuenta?</b-card-text>
-              <b-button
-                href="/iniciosesion"
-                style="font-weight: bold;"
-                variant="light"
-              >Iniciar sesión</b-button>
+              <b-button style="font-weight: bold;" variant="light">
+                <router-link to="/iniciosesion" class="nav-link">Inicia sesión</router-link>
+              </b-button>
             </b-card>
           </div>
         </div>
