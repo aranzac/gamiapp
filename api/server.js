@@ -7,7 +7,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./DB.js');
 const postRoute = require('./post.route');
-const userRoute = require('./user.route');
+// const userRoute = require('./user.route');
 const path = require("path")
 
 mongoose.Promise = global.Promise;
@@ -29,8 +29,8 @@ app.use(bodyParser.json());
 app.use('/posts', postRoute);
 // app.use('/perfil', userRoute);
 
-// app.listen(PORT, function () {
-//     console.log('Server is running on Port:', PORT);
-// });
+app.listen(PORT, function () {
+    console.log('Server is running on Port:', PORT);
+});
 
-app.listen(process.env.PORT || 4000);
+// app.listen(process.env.PORT || 4000);

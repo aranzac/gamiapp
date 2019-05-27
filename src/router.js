@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeComponent from './views/HomeComponent.vue'
+import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'Inicio',
-      component: HomeComponent
+      component: Home
     },
     {
       path: '/about',

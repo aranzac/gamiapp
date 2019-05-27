@@ -37,15 +37,6 @@ export default {
   },
   components: {
     Form
-  },
-  methods: {
-    // addPost() {
-    //   // let uri = "http://localhost:4000/posts/add";
-    //   let uri = "/posts/add";
-    //   this.axios.post(uri, this.post).then(() => {
-    //     this.$router.push({ name: "posts" });
-    //   });
-    // }
   }
 };
 </script>

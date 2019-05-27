@@ -32,7 +32,9 @@
               style="max-width: 30rem;"
             >
               <b-card-text id="preguntas" class="d-block">¿Quieres crear una nueva cuenta?</b-card-text>
-              <b-button href="/registro" style="font-weight: bold;" variant="light">Regístrate</b-button>
+              <b-button style="font-weight: bold;" variant="light">
+                <router-link to="/registro" class="nav-link">Regístrate</router-link>
+              </b-button>
             </b-card>
           </div>
         </div>

@@ -30,15 +30,15 @@
           <br>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item href="/registro">Registro</b-nav-item>
-            <b-nav-item href="/iniciosesion">Iniciar sesión</b-nav-item>
+            <b-nav-item to="/registro">Registro</b-nav-item>
+            <b-nav-item to="/iniciosesion">Iniciar sesión</b-nav-item>
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template slot="button-content">
                 <em>Usuario</em>
               </template>
-              <b-dropdown-item href="/perfil">Perfil</b-dropdown-item>
-              <b-dropdown-item href="#">Salir</b-dropdown-item>
+              <b-dropdown-item to="/perfil">Perfil</b-dropdown-item>
+              <b-dropdown-item to="#">Salir</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
