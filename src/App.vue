@@ -22,24 +22,25 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <router-link to="/" class="nav-link">Tutorial</router-link>
-            <router-link to="/" class="nav-link">Home</router-link>
-            <router-link to="/" class="nav-link">Información</router-link>
-            <router-link to="/posts" class="nav-link">Actividades</router-link>
-            <router-link to="/rankings" class="nav-link">Rankings</router-link>
+            <router-link to="/" class="nav-link text-light">Tutorial</router-link>
+            <router-link to="/" class="nav-link text-light">Home</router-link>
+            <router-link to="/" class="nav-link text-light">Información</router-link>
+            <router-link to="/tareas" class="nav-link text-light">Actividades</router-link>
+            <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
           </b-navbar-nav>
           <br>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to="/registro">Registro</b-nav-item>
-            <b-nav-item to="/iniciosesion">Iniciar sesión</b-nav-item>
+            <router-link to="/registro" class="nav-link text-light">Registro</router-link>
+            <router-link to="/iniciosesion" class="nav-link text-light">Iniciar sesión</router-link>
+
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template slot="button-content">
-                <em>Usuario</em>
+                <em class="text-light">Usuario</em>
               </template>
-              <b-dropdown-item to="/perfil">Perfil</b-dropdown-item>
-              <b-dropdown-item to="#">Salir</b-dropdown-item>
+              <router-link to="/perfil" class="nav-link text-dark">Perfil</router-link>
+              <router-link to="#" class="nav-link text-dark">Salir</router-link>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -52,6 +53,10 @@
 </template>
 
 <style>
+.oscuro {
+  color: rgba(255, 255, 255, 0.2);
+}
+
 .container {
   margin: 0 !important;
   padding: 0 !important;

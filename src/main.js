@@ -16,9 +16,9 @@ import axios from 'axios';
 
 const base = axios.create({
   // Para despliege
-  baseURL: 'https://appgami.herokuapp.com'
+  // baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  // baseURL: 'http://localhost:5000/'
+  baseURL: 'http://localhost:5000/'
 })
 
 Vue.use(VueAxios, base);
@@ -34,7 +34,7 @@ import Registro from './components/Registro.vue';
 import InicioSesion from './components/InicioSesion.vue';
 import IndexComponentUsuarios from './components/IndexComponentUsuarios.vue';
 import Rankings from './components/Rankings.vue';
-
+import Tareas from './components/Tareas.vue';
 
 
 import './registerServiceWorker';
@@ -84,6 +84,11 @@ const routes = [
     name: 'rankings',
     path: '/rankings',
     component: Rankings
+  },
+  {
+    name: 'tareas',
+    path: '/tareas',
+    component: Tareas
   }
 ];
 

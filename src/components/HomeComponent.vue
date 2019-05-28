@@ -10,13 +10,13 @@
             <b-card
               bg-variant="warning"
               text-variant="white"
-              class="mb-2"
+              class="mb-1"
               tag="article"
               style="max-width: 30rem;"
             >
-              <b-card-text id="preguntas" class="d-block">¿Quieres crear una nueva cuenta?</b-card-text>
+              <b-card-text class="d-block preguntas">¿Tienes una cuenta?</b-card-text>
               <b-button style="font-weight: bold;" variant="light">
-                <router-link to="/iniciarsesion" class="nav-link">Regístrate</router-link>
+                <router-link to="/iniciarsesion" class="nav-link">Iniciar sesión</router-link>
               </b-button>
             </b-card>
           </div>
@@ -26,11 +26,11 @@
             <b-card
               bg-variant="warning"
               text-variant="white"
-              class="mb-2"
+              class="mb-1"
               tag="article"
               style="max-width: 30rem;"
             >
-              <b-card-text id="preguntas" class="d-block">¿Quieres crear una nueva cuenta?</b-card-text>
+              <b-card-text class="d-block preguntas">¿Quieres crear una nueva cuenta?</b-card-text>
               <b-button style="font-weight: bold;" variant="light">
                 <router-link to="/registro" class="nav-link">Regístrate</router-link>
               </b-button>
@@ -83,9 +83,9 @@ export default {
 </script>
 
 <style>
-#preguntas {
-  font-size: 1.5em;
-  letter-spacing: 1px;
+.preguntas {
+  font-size: 1.2em;
+  letter-spacing: 0.8px;
   font-family: "Quicksand";
   font-weight: bold;
 }
