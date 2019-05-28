@@ -15,8 +15,10 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 const base = axios.create({
-  // baseURL: 'https://appgami.herokuapp.com'
-  baseURL: 'http://localhost:5000/'
+  // Para despliege
+  baseURL: 'https://appgami.herokuapp.com'
+  // Para desarrollo
+  // baseURL: 'http://localhost:5000/'
 })
 
 Vue.use(VueAxios, base);

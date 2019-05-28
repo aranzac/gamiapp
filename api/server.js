@@ -28,9 +28,12 @@ app.use(bodyParser.json());
 app.use('/posts', postRoute);
 app.use('/usuarios', userRoute);
 
-app.listen(5000, function () {
-    console.log('Server is running on Port:', 5000);
-});
+
+// Para desarrollo
+// app.listen(5000, function () {
+//     console.log('Server is running on Port:', 5000);
+// });
 
 // console.log(process.env.PORT);
-// app.listen(process.env.PORT || 4000);
+// Para despliegue
+app.listen(process.env.PORT || 4000);
