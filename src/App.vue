@@ -26,6 +26,7 @@
             <router-link to="/" class="nav-link">Home</router-link>
             <router-link to="/" class="nav-link">Información</router-link>
             <router-link to="/posts" class="nav-link">Actividades</router-link>
+            <router-link to="/rankings" class="nav-link">Rankings</router-link>
           </b-navbar-nav>
           <br>
           <!-- Right aligned nav items -->

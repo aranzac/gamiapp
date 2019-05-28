@@ -50,7 +50,7 @@
                   <b>Nombre:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{nombre}}</p>
+                  <p>{{usuarios.nombre}} {{usuarios.apellido}}</p>
                 </div>
               </div>
             </li>
@@ -60,7 +60,7 @@
                   <b>Edad:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{edad}}</p>
+                  <p>{{usuarios.edad}}</p>
                 </div>
               </div>
             </li>
@@ -70,7 +70,7 @@
                   <b>Periodo:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{periodo}}</p>
+                  <p>{{usuarios.periodo}}</p>
                 </div>
               </div>
             </li>
@@ -91,13 +91,14 @@
 export default {
   data() {
     return {
+      usuarios: [],
       title: "Perfil de usuario",
       image: "./../assets/conejito.png",
       mensaje: "holaaaaaa",
-      nombre: "Aranza",
+      nombre: "Adios",
       hora: "jeje",
       edad: "22",
-      periodo: "Infantil",
+      periodo: "Infantalsdil",
       nivel: "1",
       animal: "Conejito",
       puntuacion_actual: "25",
@@ -110,6 +111,15 @@ export default {
         { titulo: "Comer", descripcion: "Otra tareita", completado: false }
       ]
     };
+  },
+  created() {
+    // let uri = "http://localhost:" + process.env.PORT + "/posts";
+    let id = "5cec783063c5c0391c68ab4f";
+    let uri = `/usuarios/${id}`;
+
+    this.axios.get(uri).then(response => {
+      this.usuarios = response.data;
+    });
   },
   head() {
     return {

@@ -15,7 +15,8 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 const base = axios.create({
-  baseURL: 'https://appgami.herokuapp.com'
+  // baseURL: 'https://appgami.herokuapp.com'
+  baseURL: 'http://localhost:5000/'
 })
 
 Vue.use(VueAxios, base);
@@ -29,6 +30,10 @@ import EditComponent from './components/EditComponent.vue';
 import Perfil from './components/Perfil.vue';
 import Registro from './components/Registro.vue';
 import InicioSesion from './components/InicioSesion.vue';
+import IndexComponentUsuarios from './components/IndexComponentUsuarios.vue';
+import Rankings from './components/Rankings.vue';
+
+
 
 import './registerServiceWorker';
 
@@ -67,6 +72,16 @@ const routes = [
     name: 'edit',
     path: '/edit/:id',
     component: EditComponent
+  },
+  {
+    name: 'usuarios',
+    path: '/usuarios',
+    component: IndexComponentUsuarios
+  },
+  {
+    name: 'rankings',
+    path: '/rankings',
+    component: Rankings
   }
 ];
 

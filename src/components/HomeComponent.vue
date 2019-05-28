@@ -1,7 +1,7 @@
 <template>
   <div class="bigbox">
     <div class="col-lg-12 title-content">
-      <h1 class="title text-white">Bienvenid@</h1>
+      <h1 class="title text-white">Bienvenid@s</h1>
     </div>
     <div>
       <div class="container">
