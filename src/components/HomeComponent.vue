@@ -16,7 +16,7 @@
             >
               <b-card-text class="d-block preguntas">¿Tienes una cuenta?</b-card-text>
               <b-button style="font-weight: bold;" variant="light">
-                <router-link to="/iniciarsesion" class="nav-link">Iniciar sesión</router-link>
+                <router-link to="/iniciosesion" class="nav-link">Iniciar sesión</router-link>
               </b-button>
             </b-card>
           </div>
@@ -91,7 +91,7 @@ export default {
 }
 .card {
   margin: 0 auto; /* Added */
-  float: none; /* Added */
+  /* float: none;  */
   margin-bottom: 10px; /* Added */
   text-align: center;
 }

@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const config = require('./DB.js');
 const postRoute = require('./post.route');
 const userRoute = require('./user.route');
+const tareaRoute = require('./tarea.route');
 const path = require("path")
 
 mongoose.Promise = global.Promise;
@@ -27,13 +28,14 @@ app.use(bodyParser.json());
 
 app.use('/posts', postRoute);
 app.use('/usuarios', userRoute);
+app.use('/tareas', tareaRoute);
 
 
 // Para desarrollo
-// app.listen(5000, function () {
-//     console.log('Server is running on Port:', 5000);
-// });
+app.listen(5000, function () {
+    console.log('Server is running on Port:', 5000);
+});
 
 // console.log(process.env.PORT);
 // Para despliegue
-app.listen(process.env.PORT || 4000);
+// app.listen(process.env.PORT || 4000);

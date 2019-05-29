@@ -1,19 +1,5 @@
 <template>
   <div class="container">
-    <!-- <nav class="navbar bg-dark navbar-dark">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/create" class="nav-link">Create Post</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/posts" class="nav-link">Posts</router-link>
-        </li>
-      </ul>
-    </nav>-->
-
     <div>
       <b-navbar toggleable="lg" type="dark" variant="warning">
         <b-navbar-brand id="logo" class="logo" href="/">Gami</b-navbar-brand>
@@ -95,6 +81,13 @@ nav {
   margin-right: 12px;
   font-size: 35px;
   color: white !important;
+}
+
+h2,
+th,
+.btn {
+  font-family: Quicksand;
+  font-weight: bold;
 }
 </style>
 

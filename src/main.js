@@ -35,7 +35,8 @@ import InicioSesion from './components/InicioSesion.vue';
 import IndexComponentUsuarios from './components/IndexComponentUsuarios.vue';
 import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
-
+import PerfilProfesor from './components/PerfilProfesor.vue'
+import PruebaJuego from './components/PruebaJuego.vue'
 
 import './registerServiceWorker';
 
@@ -89,6 +90,16 @@ const routes = [
     name: 'tareas',
     path: '/tareas',
     component: Tareas
+  },
+  {
+    name: 'profesor',
+    path: '/profesor',
+    component: PerfilProfesor
+  },
+  {
+    name: 'juego',
+    path: '/juego',
+    component: PruebaJuego
   }
 ];
 

@@ -1,11 +1,11 @@
 <template>
   <div id="cuerpo">
     <div class="col-lg-12 md-5">
-      <div class="card shadow-sm" style="width: 25rem;">
+      <div class="card card1 shadow-sm" style="width: 25rem;">
         <h2>Perfil</h2>
         <div class="col-lg-12 col-xs-12 col-md-12">
           <img
-            class="card-img-top rounded-sm"
+            class="card card1 card-img-top rounded-sm"
             src="../assets/conejito.png"
             title="Foto de perfil"
             alt="Foto de perfil"
@@ -15,7 +15,7 @@
             <p>{{nivel}}. {{animal}}</p>
           </h2>
         </div>
-        <div class="card-body">
+        <div class="card-body card1-body">
           <ul class="list-group list-group-flush">
             <li class="list-group-item pb-lg-5">
               <div class="row">
@@ -159,7 +159,7 @@ p {
   text-align: right;
 }
 
-.card {
+.card1 {
   /* float: none; Added */
   text-align: center;
   /* margin: 0 auto; */
@@ -167,7 +167,7 @@ p {
   padding: 10px 0px 0px 0px;
 }
 
-.card-body {
+.card1-body {
   font-size: 1em;
 }
 .sub {
@@ -182,14 +182,14 @@ h6 {
 }
 
 @media only screen and (max-width: 992px) {
-  .card {
+  .card1 {
     margin-bottom: 10px;
     text-align: center;
     padding: 5px 0px 0px 0px;
     width: 20rem !important;
     margin-top: 20px;
   }
-  .card-body {
+  .card1-body {
     font-size: 0.8em;
   }
   h2 {
@@ -201,7 +201,7 @@ h6 {
 }
 
 @media only screen and (max-width: 400px) {
-  .card {
+  .card1 {
     width: 15rem !important;
   }
 }
