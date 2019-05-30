@@ -13,6 +13,7 @@
             <router-link to="/" class="nav-link text-light">Información</router-link>
             <router-link to="/tareas" class="nav-link text-light">Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
+            <router-link to="/juego" class="nav-link text-light">Juego</router-link>
           </b-navbar-nav>
           <br>
           <!-- Right aligned nav items -->

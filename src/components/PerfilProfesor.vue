@@ -100,7 +100,7 @@
 export default {
   data() {
     return {
-      post: {}
+      tarea: {}
     };
   },
   methods: {
