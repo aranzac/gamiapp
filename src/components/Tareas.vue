@@ -1,11 +1,9 @@
 <template>
   <div>
-    <h1>Tareas</h1>
+    <h1>Actividades</h1>
     <div class="row">
       <div class="col-md-10"></div>
-      <div class="col-md-2">
-        <router-link :to="{ name: 'tareas' }" class="btn btn-primary">Crear tareas</router-link>
-      </div>
+      <div class="col-md-2"></div>
     </div>
     <br>
 
@@ -19,8 +17,8 @@
       </thead>
       <tbody>
         <tr v-for="tarea in tareas" :key="tarea._id">
-          <td>{{ tarea.nombre }}</td>
-          <td>{{ tarea.apellido }}</td>
+          <td>{{ tarea.titulo }}</td>
+          <td>{{ tarea.descripcion }}</td>
           <td>
             <router-link
               :to="{name: 'edit', params: { id: tarea._id }}"

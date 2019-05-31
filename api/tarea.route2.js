@@ -1,7 +1,7 @@
 const express = require('express');
 const tareaRoutes = express.Router();
 
-let Tarea = require('./tarea.model');
+let Tarea = require('./tarea.model2');
 
 // Defined store route
 tareaRoutes.route('/add').post(function (req, res) {
@@ -18,18 +18,6 @@ tareaRoutes.route('/add').post(function (req, res) {
 // Defined get data(index or listing) route
 tareaRoutes.route('/').get(function (req, res) {
     Tarea.find(function (err, tareas) {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(tareas);
-        }
-    });
-});
-
-tareaRoutes.route('/:id').get(function (req, res) {
-    let id = req.params.id;
-    Tarea.findById(id, function (err, tareas) {
         if (err) {
             res.json(err);
         }
@@ -58,7 +46,6 @@ tareaRoutes.route('/update/:id').post(function (req, res) {
         else {
             tarea.titulo = req.body.titulo;
             tarea.descripcion = req.body.descripcion;
-
             tarea.save().then(() => {
                 res.json('Update complete');
             })

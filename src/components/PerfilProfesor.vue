@@ -19,45 +19,30 @@
             </div>
           </div>
 
-          <!-- <b-modal id="modal-1" title="Crear tarea">
-            <form @submit.prevent="addPost" action="submit">
-                
-              <b-form-group label="Título" label-for="input-1">
-                <b-form-input trim></b-form-input>
-              </b-form-group>
-              <b-form-group label="Descripción" label-for="input-1">
-                <b-form-textarea id="textarea" v-model="text" rows="3" max-rows="6"></b-form-textarea>
-              </b-form-group>
-            </form>
-          </b-modal>-->
-          <!-- <b-button id="show-btn" @click="showModal">Open Modal</b-button> -->
-          <!-- <b-button id="toggle-btn" @click="toggleModal">Toggle Modal</b-button> -->
-
-          <b-modal ref="my-modal" hide-footer title="Crear tarea">
+          <b-modal ref="my-modal" hide-footer title="Crear tareas">
             <div class="d-block">
-              <form @submit.prevent="addPost" action="submit">
-                <b-form-group label="Título" label-for="input-1">
-                  <b-form-input trim></b-form-input>
-                </b-form-group>
-                <b-form-group label="Categoría" label-for="input-3">
-                  <select class="form-control">
-                    <option value disabled selected></option>
-                    <option>Ordenación</option>
-                    <option>Descomposición</option>
-                    <option>Reconocimiento de patrones</option>
-                    <option>Abstracción</option>
-                    <option>Algoritmos</option>
-                  </select>
-                </b-form-group>
-                <b-form-group label="Descripción" label-for="input-3">
-                  <b-form-textarea id="textarea" v-model="text" rows="3" max-rows="6"></b-form-textarea>
-                </b-form-group>
+              <form @submit.prevent="addPost">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Título</label>
+                      <input type="text" class="form-control" v-model="tarea.titulo" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Descripción</label>
+                      <textarea class="form-control" v-model="tarea.descripcion" rows="5" required></textarea>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group text-center">
+                  <button class="btn btn-primary">Create</button>
+                </div>
               </form>
-            </div>
-            <div class="text-center">
-              <b-button class="mt-2" variant="primary" @click="hideModal">
-                <b>Enviar</b>
-              </b-button>
             </div>
           </b-modal>
 
@@ -66,24 +51,15 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Título</th>
-                  <th>Categoría</th>
-                  <th>Acciones</th>
+                  <th>Title</th>
+                  <th>Descripcion</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="tarea in tareas" :key="tarea._id">
-                  <td>{{ tarea.titulo }}</td>
-                  <td>{{ tarea.categoria }}</td>
-                  <td>
-                    <router-link
-                      :to="{name: 'edit', params: { id: tarea._id }}"
-                      class="btn btn-primary"
-                    >Edit</router-link>
-                  </td>
-                  <td>
-                    <button class="btn btn-danger" @click.prevent="deletePost(tarea._id)">Delete</button>
-                  </td>
+                <tr v-for="task in tareas" :key="task._id">
+                  <td>{{ task.titulo }}</td>
+                  <td>{{ task.descripcion }}</td>
                 </tr>
               </tbody>
             </table>
@@ -91,8 +67,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <pre>{{ $data | json }}</pre> -->
   </div>
 </template>
 
@@ -100,16 +74,26 @@
 export default {
   data() {
     return {
-      tarea: {}
+      tarea: {},
+      tareas: []
     };
+  },
+
+  created() {
+    // let uri = "http://localhost:" + process.env.PORT + "/posts";
+    let uri = "/tareas";
+
+    this.axios.get(uri).then(response => {
+      this.tareas = response.data;
+    });
   },
   methods: {
     addPost() {
-      // let uri = "http://localhost:4000/posts/add";
       let uri = "/tareas/add";
       this.axios.post(uri, this.tarea).then(() => {
-        this.$router.push({ name: "tareas" });
+        this.$router.push({ name: "profesor" });
       });
+      hideModal();
     },
     showModal() {
       this.$refs["my-modal"].show();
@@ -125,17 +109,3 @@ export default {
   }
 };
 </script>
-
-<style>
-@media (min-width: 1200px) {
-  .col-lg-4 {
-    display: block;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .card1 {
-    width: 20em !important;
-  }
-}
-</style>

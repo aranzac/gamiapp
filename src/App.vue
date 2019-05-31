@@ -28,6 +28,7 @@
               </template>
               <router-link to="/perfil" class="nav-link text-dark">Perfil</router-link>
               <router-link to="#" class="nav-link text-dark">Salir</router-link>
+              <router-link to="/profesor" class="nav-link text-dark">Perfil de profesor</router-link>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>

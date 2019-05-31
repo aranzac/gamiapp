@@ -1,14 +1,14 @@
 {
-  "name": "gami-app",
-  "short_name": "gami-app",
+  "name": "Gami",
+  "short_name": "Gami",
   "icons": [
     {
-      "src": "./img/morado.png",
+      "src": "./img/icons/icon3.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/icons/morado.png",
+      "src": "./img/icons/icon3.png",
       "sizes": "512x512",
       "type": "image/png"
     }

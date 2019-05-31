@@ -7,11 +7,13 @@ let Tarea = new Schema({
     },
     descripcion: {
         type: String
+    },
+    categoria: {
+        type: String
     }
 }, {
         collection: 'tareas'
     });
-
 
 
 module.exports = mongoose.model('Tarea', Tarea);
