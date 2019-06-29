@@ -14,6 +14,18 @@ Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
+
+////////////////////
+var WPCOM = require('wpcom');
+var wpcom = WPCOM();
+var site = wpcom.site('en.blog.wordpress.com');
+// get posts list
+site.postsList(function (err, data) {
+  if (err) return console.log(err);
+  console.log(data);
+});
+///////////////
+
 const base = axios.create({
   // Para despliege
   baseURL: 'https://appgami.herokuapp.com'
@@ -37,11 +49,9 @@ import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue'
 import PruebaJuego from './components/PruebaJuego.vue'
-
 import './registerServiceWorker';
 
-const routes = [
-  {
+const routes = [{
     name: 'home',
     path: '/',
     component: HomeComponent
@@ -103,6 +113,11 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({ mode: 'history', routes: routes });
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes
+});
 
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+new Vue(Vue.util.extend({
+  router
+}, App)).$mount('#app');

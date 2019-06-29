@@ -22,8 +22,8 @@ let User = new Schema({
         type: String
     }
 }, {
-        collection: 'usuarios'
-    });
+    collection: 'usuarios'
+});
 
 
 

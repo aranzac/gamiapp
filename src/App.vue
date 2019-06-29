@@ -9,11 +9,11 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <router-link to="/" class="nav-link text-light">Tutorial</router-link>
-            <router-link to="/" class="nav-link text-light">Home</router-link>
             <router-link to="/" class="nav-link text-light">Información</router-link>
             <router-link to="/tareas" class="nav-link text-light">Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
             <router-link to="/juego" class="nav-link text-light">Juego</router-link>
+            <a href="/h5p/demo/juegos.html">Juegaso</a>
           </b-navbar-nav>
           <br>
           <!-- Right aligned nav items -->
@@ -55,14 +55,14 @@
     max-width: 100% !important;
   }
 }
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
-}
+} */
 .navbar {
   width: 100% !important;
 }
