@@ -12,6 +12,7 @@
   "main": "babel.config.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.20",
@@ -19,6 +20,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "mongoose": "^5.5.11",
     "popper.js": "^1.15.0",
     "portal-vue": "^2.1.4",

@@ -20,6 +20,15 @@ let User = new Schema({
     },
     password: {
         type: String
+    },
+    periodo: {
+        type: String
+    },
+    nivel: {
+        type: Number
+    },
+    puntuacion: {
+        type: Number
     }
 }, {
     collection: 'usuarios'

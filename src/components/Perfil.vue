@@ -9,10 +9,10 @@
             src="../assets/conejito.png"
             title="Foto de perfil"
             alt="Foto de perfil"
-          >
+          />
           <h2 class="sub">
             <b>Nivel:</b>
-            <p>{{nivel}}. {{animal}}</p>
+            <p>&nbsp;&nbsp;{{nivel}}. {{animal}}</p>
           </h2>
         </div>
         <div class="card-body card1-body">
@@ -23,26 +23,26 @@
                   <b>Puntuación:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{puntuaciacion_total}}</p>
+                  <p>{{puntuacion_total}}</p>
                 </div>
               </div>
 
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-striped"
-                  role="progressbar"
-                  v-bind:style="width"
-                  v-bind:aria-valuenow="puntuacion_actual"
-                  v-bind:aria-valuemin="0"
-                  v-bind:aria-valuemax="100"
-                ></div>
+              <div>
+                <b-progress
+                  :max="puntuacion_final"
+                  :value="puntuacion_actual"
+                  variant="info"
+                  striped
+                  :animated="animate"
+                  class="mt-2"
+                ></b-progress>
               </div>
               <div class="row">
                 <div class="col-lg-12 right">
                   <b>{{puntuacion_actual}} / {{puntuacion_final}}</b>
                 </div>
               </div>
-              <h6 class="text-success center">(Faltan {{restan}}xp para pasar al siguiente nivel)</h6>
+              <!-- <h6 class="text-success center">(Faltan {{restan}}xp para pasar al siguiente nivel)</h6> -->
             </li>
             <li class="list-group-item">
               <div class="row">
@@ -50,7 +50,7 @@
                   <b>Nombre:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{usuarios.nombre}} {{usuarios.apellido}}</p>
+                  <p>{{nombre}} {{apellido}}</p>
                 </div>
               </div>
             </li>
@@ -60,7 +60,7 @@
                   <b>Edad:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{usuarios.edad}}</p>
+                  <p>{{edad}}</p>
                 </div>
               </div>
             </li>
@@ -70,7 +70,7 @@
                   <b>Periodo:</b>
                 </div>
                 <div class="col lg-6 inline right">
-                  <p>{{usuarios.periodo}}</p>
+                  <p>{{periodo}}</p>
                 </div>
               </div>
             </li>
@@ -88,38 +88,77 @@
 </template>
 
 <script>
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import router from "../router";
+import EventBus from "./EventBus";
+
+const animales = [
+  "oveja",
+  "conejo",
+  "gato",
+  "perro",
+  "hipopótamo",
+  "jirafa",
+  "zebra",
+  "elefante",
+  "tigre",
+  "ciervo"
+];
+
+const niveles = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+
 export default {
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
+
     return {
-      usuarios: [],
+      animate: true,
+      nombre: decoded.nombre || "",
+      apellido: decoded.apellido || "",
       title: "Perfil de usuario",
       image: "./../assets/conejito.png",
-      mensaje: "holaaaaaa",
-      nombre: "Adios",
-      hora: "jeje",
-      edad: "22",
-      periodo: "Infantalsdil",
-      nivel: "1",
-      animal: "Conejito",
-      puntuacion_actual: "25",
-      puntuaciacion_total: "25",
-      puntuacion_final: "50",
+      mensaje: "",
+      hora: "",
+      edad: decoded.edad || "",
+      periodo: decoded.periodo || "",
+      nivel: decoded.nivel + 1 || "",
+      animal: "",
+      puntuacion_actual: "",
+      puntuacion_total: "",
+      puntuacion_final: "",
       width: "width:" + 50 + "%;",
       restan: "25",
-      actividades: [
-        { titulo: "Salir", descripcion: "Una tareita", completado: false },
-        { titulo: "Comer", descripcion: "Otra tareita", completado: false }
-      ]
+      porcentaje: "puntuacion"
     };
   },
   created() {
-    // let uri = "http://localhost:" + process.env.PORT + "/posts";
-    let id = "5cec783063c5c0391c68ab4f";
-    let uri = `/usuarios/${id}`;
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
+    let uri = "/jugados";
 
-    this.axios.get(uri).then(response => {
-      this.usuarios = response.data;
-    });
+    this.animal = animales[this.nivel - 1];
+    this.puntuacion_final = niveles[this.nivel - 1];
+    this.puntuacion_actual = 25;
+    this.puntuacion_total = this.puntuacion_actual;
+    if (this.nivel > 1)
+      this.puntuacion_total = this.puntuacion_actual + niveles[this.nivel - 1];
+
+    // this.nombre = decoded.nombre;
+    // console.log(this.nombre);
+
+    // this.axios
+    //   .post("/usuarios", {
+    //     email: decoded.email
+    //   })
+    //   .then(response => {
+    //     this.juegos = response.data;
+    //   });
+
+    // this.axios.get(uri).then(response => {
+    //   this.usuarios = response.data;
+    // });
   },
   head() {
     return {
@@ -139,6 +178,10 @@ img {
   margin: 0px 0px 7px 0px;
   border-radius: 8px;
   padding: 10px 10px 10px 10px;
+}
+
+p {
+  text-transform: capitalize;
 }
 .justify {
   text-align: justify;
@@ -171,7 +214,7 @@ p {
   font-size: 1em;
 }
 .sub {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 .progress {
@@ -203,6 +246,10 @@ h6 {
 @media only screen and (max-width: 400px) {
   .card1 {
     width: 15rem !important;
+  }
+  img {
+    max-width: 146px;
+    max-height: 146px;
   }
 }
 

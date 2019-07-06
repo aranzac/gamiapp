@@ -8,30 +8,24 @@
             <div id="card-form" class="card">
               <h2 v-if="login" class="text-center">Inicio de sesión</h2>
               <h2 v-if="signup" class="text-center">Registro</h2>
-              <form @submit.prevent="addPost" class="col-lg-12">
+              <form v-on:@submit.prevent="addPost" class="col-lg-12">
                 <div v-if="signup" class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="text" class="form-control" v-model="user.nombre" required>
+                  <input type="text" class="form-control" v-model="nombre" required />
                 </div>
                 <div v-if="signup" class="form-group">
                   <label for="apellido">Apellido</label>
-                  <input type="text" class="form-control" v-model="user.apellido" required>
+                  <input type="text" class="form-control" v-model="apellido" required />
                 </div>
                 <div v-if="signup" class="form-group">
                   <label for="apellido" class="d-block">Rol</label>
                   <div class="row">
                     <div class="btn-group btn-group-toggle col-centered" data-toggle="buttons">
                       <label class="btn btn-warning text-light active col-centered">
-                        <input
-                          type="radio"
-                          v-model="user.rol"
-                          autocomplete="off"
-                          value="alumno"
-                          checked
-                        > Alumno/a
+                        <input type="radio" v-model="rol" autocomplete="off" value="alumno" checked /> Alumno/a
                       </label>
                       <label class="btn btn-warning text-light">
-                        <input type="radio" v-model="user.rol" autocomplete="off" value="profesor"> Profesor/a
+                        <input type="radio" v-model="rol" autocomplete="off" value="profesor" /> Profesor/a
                       </label>
                     </div>
                   </div>
@@ -41,7 +35,7 @@
                   <label for="edad">Edad</label>
                   <select
                     class="form-control"
-                    v-model="user.edad"
+                    v-model="edad"
                     name="edad"
                     id="edad"
                     placeholder=" "
@@ -65,11 +59,11 @@
                 </div>
                 <div class="form-group">
                   <label for="email">Correo electrónico</label>
-                  <input type="email" class="form-control" v-model="user.email" required>
+                  <input type="email" class="form-control" v-model="email" required />
                 </div>
                 <div class="form-group">
                   <label for="password">Contraseña</label>
-                  <input type="password" class="form-control" v-model="user.password" required>
+                  <input type="password" class="form-control" v-model="password" required />
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary btn-md">Enviar</button>
@@ -110,19 +104,83 @@
 </template>
 
 <script>
+import axios from "axios";
+// import router from "../main.js";
+import EventBus from "./EventBus";
+
+//
+
 export default {
   data() {
     return {
-      user: {}
+      user: {},
+      direccion: "",
+      nombre: "",
+      apellido: "",
+      email: "",
+      password: "",
+      rol: "",
+      edad: ""
     };
+  },
+  created() {
+    if (this.$route.path == "/iniciosesion") {
+      this.direccion = "perfil";
+    } else if (this.$route.path == "/registro") {
+      this.direccion = "iniciosesion";
+    }
   },
   methods: {
     addPost() {
-      // let uri = "http://localhost:4000/posts/add";
       let uri = "/usuarios/add";
-      this.axios.post(uri, this.user).then(() => {
-        this.$router.push({ name: "usuarios" });
-      });
+      // this.axios.post(uri, this.user).then(() => {
+      //   this.$router.push({ name: this.direccion });
+      // });
+
+      if (this.$route.path == "/registro") {
+        console.log("eys");
+        this.axios
+          .post(uri, {
+            nombre: this.first_name,
+            apellido: this.last_name,
+            edad: this.email,
+            rol: this.password,
+            email: this.email,
+            password: this.password
+          })
+          .then(res => {
+            console.log("Usuario Registrado");
+            this.$router.push({ name: this.direccion });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        console.log("logins");
+        const token = localStorage.usertoken;
+        const decoded = jwtDecode(token);
+        axios
+          .post("/usuarios/login", {
+            email: this.email,
+            password: this.password
+          })
+          .then(res => {
+            if (res.data.error !== undefined) {
+              router.push({ name: "iniciosesion" });
+              this.warning = true;
+            } else {
+              localStorage.setItem("usertoken", res.data);
+
+              this.email = "";
+              this.password = "";
+              router.push({ name: this.direccion });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        this.emitMethod();
+      }
     }
   },
   computed: {
@@ -131,17 +189,12 @@ export default {
     },
     signup: function() {
       return this.$route.path == "/registro" ? true : false;
-    },
-    direccion: function direccion() {
-      if (this.$route.path == "/iniciosesion") {
-        return "/account";
-      } else if (this.$route.path == "/registro") {
-        return "/login";
-      }
     }
   }
 };
 </script>
+
+
 
 <style>
 .col-centered {

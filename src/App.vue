@@ -15,20 +15,23 @@
             <router-link to="/juego" class="nav-link text-light">Juego</router-link>
             <a href="/h5p/demo/juegos.html">Juegaso</a>
           </b-navbar-nav>
-          <br>
+          <br />
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <router-link to="/registro" class="nav-link text-light">Registro</router-link>
-            <router-link to="/iniciosesion" class="nav-link text-light">Iniciar sesión</router-link>
+            <router-link v-if="auth==''" to="/registro" class="nav-link text-light">Registro</router-link>
+            <router-link
+              v-if="auth==''"
+              to="/iniciosesion"
+              class="nav-link text-light"
+            >Iniciar sesión</router-link>
 
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
+            <b-nav-item-dropdown v-if="auth=='loggedin'" right>
               <template slot="button-content">
-                <em class="text-light">Usuario</em>
+                <em class="text-light">Cuenta</em>
               </template>
-              <router-link to="/perfil" class="nav-link text-dark">Perfil</router-link>
-              <router-link to="#" class="nav-link text-dark">Salir</router-link>
+              <router-link to="/perfil" class="nav-link text-dark">Mi perfil</router-link>
               <router-link to="/profesor" class="nav-link text-dark">Perfil de profesor</router-link>
+              <b-dropdown-item @click="logout()">Salir</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -95,10 +98,34 @@ th,
 
 <script>
 import HomeComponent from "./components/HomeComponent.vue";
+import EventBus from "./components/EventBus.vue";
+
 export default {
   name: "app",
   components: {
     HomeComponent
+  },
+  data() {
+    return {
+      auth: "",
+      user: ""
+    };
+  },
+  methods: {
+    logout() {
+      console.log("salienditoo");
+      localStorage.removeItem("usertoken");
+      this.auth = "";
+      this.$router.push({ name: "home" });
+      console.log(this.auth);
+    }
+  },
+  mounted() {
+    EventBus.$on("logged-in", status => {
+      this.auth = status;
+    });
+    // Para que cuando se desconecte sin logout se borre el token, y no aparezca la info
+    if (this.auth == "") localStorage.removeItem("usertoken");
   }
 };
 </script>

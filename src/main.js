@@ -14,18 +14,6 @@ Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
-
-////////////////////
-var WPCOM = require('wpcom');
-var wpcom = WPCOM();
-var site = wpcom.site('en.blog.wordpress.com');
-// get posts list
-site.postsList(function (err, data) {
-  if (err) return console.log(err);
-  console.log(data);
-});
-///////////////
-
 const base = axios.create({
   // Para despliege
   baseURL: 'https://appgami.herokuapp.com'

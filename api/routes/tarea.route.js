@@ -1,14 +1,16 @@
 const express = require('express');
 const tareaRoutes = express.Router();
 
-let Tarea = require('./tarea.model');
+let Tarea = require('../models/tarea.model');
 
 // Defined store route
 tareaRoutes.route('/add').post(function (req, res) {
     let tarea = new Tarea(req.body);
     tarea.save()
         .then(() => {
-            res.status(200).json({ 'business': 'business in added successfully' });
+            res.status(200).json({
+                'business': 'business in added successfully'
+            });
         })
         .catch(() => {
             res.status(400).send("unable to save to database");
@@ -20,8 +22,7 @@ tareaRoutes.route('/').get(function (req, res) {
     Tarea.find(function (err, tareas) {
         if (err) {
             res.json(err);
-        }
-        else {
+        } else {
             res.json(tareas);
         }
     });
@@ -32,8 +33,7 @@ tareaRoutes.route('/:id').get(function (req, res) {
     Tarea.findById(id, function (err, tareas) {
         if (err) {
             res.json(err);
-        }
-        else {
+        } else {
             res.json(tareas);
         }
     });
@@ -60,8 +60,8 @@ tareaRoutes.route('/update/:id').post(function (req, res) {
             tarea.descripcion = req.body.descripcion;
 
             tarea.save().then(() => {
-                res.json('Update complete');
-            })
+                    res.json('Update complete');
+                })
                 .catch(() => {
                     res.status(400).send("unable to update the database");
                 });
@@ -71,7 +71,9 @@ tareaRoutes.route('/update/:id').post(function (req, res) {
 
 // Defined delete | remove | destroy route
 tareaRoutes.route('/delete/:id').delete(function (req, res) {
-    Tarea.findByIdAndRemove({ _id: req.params.id }, function (err) {
+    Tarea.findByIdAndRemove({
+        _id: req.params.id
+    }, function (err) {
         if (err) res.json(err);
         else res.json('Successfully removed');
     });
