@@ -99,12 +99,7 @@ const routes = [{
     name: 'juego',
     path: '/juego',
     component: PruebaJuego
-  },
-  {
-    name: 'jueguini',
-    path: '/jueguini',
-    component: Jueguini
-  },
+  }
 ];
 
 const router = new VueRouter({
