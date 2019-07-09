@@ -10,10 +10,16 @@
           <b-navbar-nav>
             <router-link to="/" class="nav-link text-light">Tutorial</router-link>
             <router-link to="/" class="nav-link text-light">Información</router-link>
-            <router-link to="/tareas" class="nav-link text-light">Actividades</router-link>
+            <router-link
+              v-if="auth=='loggedin'"
+              to="/tareas"
+              class="nav-link text-light"
+            >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
             <router-link to="/juego" class="nav-link text-light">Juego</router-link>
-            <a href="/h5p/demo/juegos.html">Juegaso</a>
+            <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
+
+            <a href="../h5p/demo/juegos.html">Juegaso</a>
           </b-navbar-nav>
           <br />
           <!-- Right aligned nav items -->

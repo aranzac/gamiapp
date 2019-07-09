@@ -26,7 +26,7 @@ userRoutes.route('/add').post(function (req, res) {
         rol: req.body.rol,
         edad: req.body.edad,
         periodo: periodo,
-        nivel: 0,
+        nivel: 1,
         puntuacion: 0
     }
     User.findOne({
@@ -75,7 +75,8 @@ userRoutes.route('/login').post(function (req, res) {
                         rol: user.rol,
                         edad: user.edad,
                         periodo: user.periodo,
-                        nivel: user.nivel
+                        nivel: user.nivel,
+                        puntuacion: user.puntuacion
                     }
 
                     let token = jwt.sign(payload, process.env.SECRET_KEY, {
@@ -98,13 +99,30 @@ userRoutes.route('/login').post(function (req, res) {
         })
 })
 
-// Defined get data(index or listing) route
+// Lista solo los alumnos para el ranking
 userRoutes.route('/').get(function (req, res) {
-    User.find(function (err, usuarios) {
+
+    User.find({
+        rol: "alumno"
+    }, function (err, usuarios) {
         if (err) {
             res.json(err);
         } else {
             res.json(usuarios);
+        }
+    });
+});
+
+
+userRoutes.route('/profile').post(function (req, res) {
+    User.findById({
+        _id: req.body._id
+    }, function (err, usuarios) {
+        if (err) {
+            res.json(err);
+        } else {
+            console.log(usuarios);
+            res.send(usuarios);
         }
     });
 });

@@ -37,6 +37,7 @@ import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue'
 import PruebaJuego from './components/PruebaJuego.vue'
+import Jueguini from '../public/h5p/demo/Jueguini.vue'
 import './registerServiceWorker';
 
 const routes = [{
@@ -98,7 +99,12 @@ const routes = [{
     name: 'juego',
     path: '/juego',
     component: PruebaJuego
-  }
+  },
+  {
+    name: 'jueguini',
+    path: '/jueguini',
+    component: Jueguini
+  },
 ];
 
 const router = new VueRouter({

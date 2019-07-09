@@ -1,89 +1,126 @@
 <template>
   <div id="cuerpo">
-    <div class="col-lg-12 md-5">
-      <div class="card card1 shadow-sm" style="width: 25rem;">
-        <h2>Perfil</h2>
-        <div class="col-lg-12 col-xs-12 col-md-12">
-          <img
-            class="card card1 card-img-top rounded-sm"
-            src="../assets/conejito.png"
-            title="Foto de perfil"
-            alt="Foto de perfil"
-          />
-          <h2 class="sub">
-            <b>Nivel:</b>
-            <p>&nbsp;&nbsp;{{nivel}}. {{animal}}</p>
-          </h2>
-        </div>
-        <div class="card-body card1-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item pb-lg-5">
-              <div class="row">
-                <div class="col lg-6 inline justify">
-                  <b>Puntuación:</b>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mt-3 mb-5">
+        <div class="card card1 shadow-sm" style="width: 25rem;">
+          <h2>Perfil</h2>
+          <div class="col-lg-12 col-xs-12 col-md-12">
+            <img
+              :src="imagen"
+              class="card card1 card-img-top rounded-sm"
+              title="Foto de perfil"
+              alt="Foto de perfil"
+            />
+            <h2 class="sub">
+              <b>Nivel:</b>
+              <p>&nbsp;&nbsp;{{nivel}}. {{animal}}</p>
+            </h2>
+          </div>
+          <div class="card-body card1-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item pb-lg-5">
+                <div class="row">
+                  <div class="col lg-6 inline justify">
+                    <b>Puntuación:</b>
+                  </div>
+                  <div class="col lg-6 inline right">
+                    <p>{{puntuacion_total}}</p>
+                  </div>
                 </div>
-                <div class="col lg-6 inline right">
-                  <p>{{puntuacion_total}}</p>
-                </div>
-              </div>
 
-              <div>
-                <b-progress
-                  :max="puntuacion_final"
-                  :value="puntuacion_actual"
-                  variant="info"
-                  striped
-                  :animated="animate"
-                  class="mt-2"
-                ></b-progress>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 right">
-                  <b>{{puntuacion_actual}} / {{puntuacion_final}}</b>
+                <div>
+                  <!-- <b-progress
+                    :max="0"
+                    :value="0"
+                    variant="info"
+                    striped
+                    :animated="animate"
+                    class="mt-2"
+                  ></b-progress>-->
                 </div>
-              </div>
-              <!-- <h6 class="text-success center">(Faltan {{restan}}xp para pasar al siguiente nivel)</h6> -->
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col lg-6 inline justify">
-                  <b>Nombre:</b>
+                <div class="row">
+                  <div class="col-lg-12 right">
+                    <b>{{puntuacion}} / {{puntuacion_final}}</b>
+                  </div>
                 </div>
-                <div class="col lg-6 inline right">
-                  <p>{{nombre}} {{apellido}}</p>
+                <h6 class="text-success center">(Faltan {{restan}} xp para pasar al siguiente nivel)</h6>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col lg-6 inline justify">
+                    <b>Nombre:</b>
+                  </div>
+                  <div class="col lg-6 inline right">
+                    <p>{{nombre}} {{apellido}}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col lg-6 inline justify">
-                  <b>Edad:</b>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col lg-6 inline justify">
+                    <b>Edad:</b>
+                  </div>
+                  <div class="col lg-6 inline right">
+                    <p>{{edad}}</p>
+                  </div>
                 </div>
-                <div class="col lg-6 inline right">
-                  <p>{{edad}}</p>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col lg-6 inline justify">
+                    <b>Periodo:</b>
+                  </div>
+                  <div class="col lg-6 inline right">
+                    <p>{{periodo}}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col lg-6 inline justify">
-                  <b>Periodo:</b>
-                </div>
-                <div class="col lg-6 inline right">
-                  <p>{{periodo}}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 mt-3 mb-4">
+        <div class="card card1 shadow-sm" style="width: 35rem;">
+          <h2>Logros desbloqueados</h2>
+          <table align="center" class="table centerTable table-sm">
+            <thead>
+              <tr>
+                <th></th>
+                <th scope="col">Logro</th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cuadradito"></td>
+                <td>
+                  <img class="icono" src="../assets/visor.png" />
+                </td>
+                <td class="align-middle">Explorador</td>
+                <td class="align-middle">Has jugado a tareas y juegos por igual</td>
+              </tr>
+              <tr>
+                <td class="cuadradito"></td>
+                <td>
+                  <img class="icono" src="../assets/top.png" />
+                </td>
+                <td class="align-middle">En la cima</td>
+                <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
+              </tr>
+              <tr>
+                <td class="cuadradito"></td>
+                <td>
+                  <img class="icono" src="../assets/lovepc.png" />
+                </td>
+                <td class="align-middle">En la cima</td>
+                <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <div>
-      <ul>
-        <!-- <li v-for="actividad in actividades">{{actividad.titulo}}</li> -->
-      </ul>
-    </div>
-    <!-- <pre>{{ $data | json }}</pre> -->
   </div>
 </template>
 
@@ -108,57 +145,107 @@ const animales = [
 
 const niveles = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
 
+// var path = require("path");
+// var x = path.join("..", "/assets", "visor.png");
+// console.log(x);
+// this.imagen = require(x);
+// console.log(x);
+
 export default {
   data() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-
+    const ruta = "../assets/";
+    const nombre = "visor.png";
+    const rutasa = "../assets/visor.png";
     return {
+      usuario: [],
       animate: true,
-      nombre: decoded.nombre || "",
-      apellido: decoded.apellido || "",
-      title: "Perfil de usuario",
-      image: "./../assets/conejito.png",
-      mensaje: "",
+      nombre: "",
+      apellido: "",
+      imagen: "",
       hora: "",
-      edad: decoded.edad || "",
-      periodo: decoded.periodo || "",
-      nivel: decoded.nivel + 1 || "",
+      edad: "",
+      periodo: "",
+      nivel: "",
       animal: "",
-      puntuacion_actual: "",
+      puntuacion: "",
       puntuacion_total: "",
-      puntuacion_final: "",
+      puntuacion_final: "3",
       width: "width:" + 50 + "%;",
-      restan: "25",
+      restan: "",
       porcentaje: "puntuacion"
     };
+  },
+  methods: {
+    func() {
+      return "../assets/visor.png";
+    }
   },
   created() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
     let uri = "/jugados";
 
-    this.animal = animales[this.nivel - 1];
-    this.puntuacion_final = niveles[this.nivel - 1];
-    this.puntuacion_actual = 25;
-    this.puntuacion_total = this.puntuacion_actual;
-    if (this.nivel > 1)
-      this.puntuacion_total = this.puntuacion_actual + niveles[this.nivel - 1];
+    this.axios
+      .post("usuarios/profile", {
+        _id: decoded._id
+      })
+      .then(response => {
+        // console.log(response.data);
 
-    // this.nombre = decoded.nombre;
-    // console.log(this.nombre);
+        this.usuario = response.data;
+        this.nombre = this.usuario.nombre;
+        this.apellido = this.usuario.apellido;
+        this.edad = this.usuario.edad;
+        this.periodo = this.usuario.periodo;
+        this.puntuacion = this.usuario.puntuacion;
+        this.nivel = this.usuario.nivel;
 
-    // this.axios
-    //   .post("/usuarios", {
-    //     email: decoded.email
-    //   })
-    //   .then(response => {
-    //     this.juegos = response.data;
-    //   });
+        this.animal = animales[this.nivel - 1];
+        this.puntuacion_final = niveles[this.nivel - 1];
+        this.puntuacion = decoded.puntuacion;
+        this.puntuacion_total = this.puntuacion;
+        if (this.nivel > 1)
+          this.puntuacion_total = this.puntuacion + niveles[this.nivel - 1];
 
-    // this.axios.get(uri).then(response => {
-    //   this.usuarios = response.data;
-    // });
+        this.restan = this.puntuacion_final - this.puntuacion;
+        switch (this.nivel) {
+          case 1:
+            this.imagen = require("../assets/1.png");
+            break;
+          case 2:
+            this.imagen = require("../assets/2.png");
+            break;
+          case 3:
+            this.imagen = require("../assets/3.png");
+            break;
+          case 4:
+            this.imagen = require("../assets/4.png");
+            break;
+          case 5:
+            this.imagen = require("../assets/5.png");
+            break;
+          case 6:
+            this.imagen = require("../assets/6.png");
+            break;
+          case 7:
+            this.imagen = require("../assets/7.png");
+            break;
+          case 8:
+            this.imagen = require("../assets/8.png");
+            break;
+          case 9:
+            this.imagen = require("../assets/9.png");
+            break;
+          case 10:
+            this.imagen = require("../assets/10.png");
+            break;
+
+          default:
+          // code block
+        }
+      });
   },
   head() {
     return {
@@ -170,6 +257,14 @@ export default {
 </script>
 
 <style>
+.icono {
+  /* background-image: url(../assets/visor.png) 0 0; */
+  height: 60px;
+  width: 60px;
+  display: inline-block;
+  border: 0px;
+}
+
 img {
   max-width: 200px;
   max-height: 200px;
@@ -208,6 +303,7 @@ p {
   /* margin: 0 auto; */
   /* margin-top: 40px; */
   padding: 10px 0px 0px 0px;
+  margin: 0;
 }
 
 .card1-body {
