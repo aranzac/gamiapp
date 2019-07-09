@@ -37,7 +37,6 @@ import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue'
 import PruebaJuego from './components/PruebaJuego.vue'
-import Jueguini from '../public/h5p/demo/Jueguini.vue'
 import './registerServiceWorker';
 
 const routes = [{
