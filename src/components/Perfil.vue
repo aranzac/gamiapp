@@ -1,123 +1,141 @@
 <template>
-  <div id="cuerpo">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 mt-3 mb-5">
-        <div class="card card1 shadow-sm" style="width: 25rem;">
-          <h2>Perfil</h2>
-          <div class="col-lg-12 col-xs-12 col-md-12">
-            <img
-              :src="imagen"
-              class="card card1 card-img-top rounded-sm"
-              title="Foto de perfil"
-              alt="Foto de perfil"
-            />
-            <h2 class="sub">
-              <b>Nivel:</b>
-              <p>&nbsp;&nbsp;{{nivel}}. {{animal}}</p>
-            </h2>
-          </div>
-          <div class="card-body card1-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item pb-lg-5">
-                <div class="row">
-                  <div class="col lg-6 inline justify">
-                    <b>Puntuación:</b>
-                  </div>
-                  <div class="col lg-6 inline right">
-                    <p>{{puntuacion_total}}</p>
-                  </div>
-                </div>
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-12 col-md-auto">
+        <div class="row">
+          <div class="col-lg-6 mb-5">
+            <div class="card card1 shadow-sm" style="width: 25rem;">
+              <h2>Perfil</h2>
+              <div class="col-lg-12 col-xs-12 col-md-12">
+                <img
+                  :src="imagen"
+                  class="card card1 card-img-top rounded-sm"
+                  title="Foto de perfil"
+                  alt="Foto de perfil"
+                />
+                <h2 class="sub">
+                  <b>Nivel:</b>
+                  <p>&nbsp;&nbsp;{{nivel}}. {{animal}}</p>
+                </h2>
+              </div>
+              <div class="card-body card1-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
+                        <b>Puntuación:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p>{{puntuacion_total}}</p>
+                      </div>
+                    </div>
 
-                <div>
-                  <!-- <b-progress
-                    :max="0"
-                    :value="0"
-                    variant="info"
-                    striped
-                    :animated="animate"
-                    class="mt-2"
-                  ></b-progress>-->
-                </div>
-                <div class="row">
-                  <div class="col-lg-12 right">
-                    <b>{{puntuacion}} / {{puntuacion_final}}</b>
-                  </div>
-                </div>
-                <h6 class="text-success center">(Faltan {{restan}} xp para pasar al siguiente nivel)</h6>
-              </li>
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="col lg-6 inline justify">
-                    <b>Nombre:</b>
-                  </div>
-                  <div class="col lg-6 inline right">
-                    <p>{{nombre}} {{apellido}}</p>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="col lg-6 inline justify">
-                    <b>Edad:</b>
-                  </div>
-                  <div class="col lg-6 inline right">
-                    <p>{{edad}}</p>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="col lg-6 inline justify">
-                    <b>Periodo:</b>
-                  </div>
-                  <div class="col lg-6 inline right">
-                    <p>{{periodo}}</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
+                    <div>
+                      <b-progress
+                        :max="puntuacion_final"
+                        :value="puntuacion"
+                        variant="info"
+                        striped
+                        :animated="animate"
+                        class="mt-2"
+                      ></b-progress>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 right">
+                        <b>{{puntuacion}} / {{puntuacion_final}}</b>
+                      </div>
+                    </div>
+                    <h6
+                      class="text-success center"
+                    >(Faltan {{restan}} xp para pasar al siguiente nivel)</h6>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
+                        <b>Nombre:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p>{{nombre}} {{apellido}}</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
+                        <b>Edad:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p>{{edad}}</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
+                        <b>Periodo:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p>{{periodo}}</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-12 mt-3 mb-4">
-        <div class="card card1 shadow-sm" style="width: 35rem;">
-          <h2>Logros desbloqueados</h2>
-          <table align="center" class="table centerTable table-sm">
-            <thead>
-              <tr>
-                <th></th>
-                <th scope="col">Logro</th>
-                <th scope="col">Título</th>
-                <th scope="col">Descripción</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="cuadradito"></td>
-                <td>
-                  <img class="icono" src="../assets/visor.png" />
-                </td>
-                <td class="align-middle">Explorador</td>
-                <td class="align-middle">Has jugado a tareas y juegos por igual</td>
-              </tr>
-              <tr>
-                <td class="cuadradito"></td>
-                <td>
-                  <img class="icono" src="../assets/top.png" />
-                </td>
-                <td class="align-middle">En la cima</td>
-                <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
-              </tr>
-              <tr>
-                <td class="cuadradito"></td>
-                <td>
-                  <img class="icono" src="../assets/lovepc.png" />
-                </td>
-                <td class="align-middle">En la cima</td>
-                <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-lg-6 mb-5">
+            <div class="card card1 shadow-sm">
+              <h2>Logros desbloqueados</h2>
+              <table align="center" class="table centerTable table-sm">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th scope="col">Logro</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cuadradito"></td>
+                    <td>
+                      <img class="icono" src="../assets/visor.png" />
+                    </td>
+                    <td class="align-middle">Explorador</td>
+                    <td class="align-middle">Has jugado a tareas y juegos por igual</td>
+                  </tr>
+                  <tr>
+                    <td class="cuadradito"></td>
+                    <td>
+                      <img class="icono" src="../assets/top.png" />
+                    </td>
+                    <td class="align-middle">En la cima</td>
+                    <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
+                  </tr>
+                  <tr>
+                    <td class="cuadradito"></td>
+                    <td>
+                      <img class="icono" src="../assets/lovepc.png" />
+                    </td>
+                    <td class="align-middle">En la cima</td>
+                    <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+              <div class="file-field input-field">
+                <div class="btn grey">
+                  <span>File</span>
+                  <input name="myImage" type="file" />
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" />
+                </div>
+              </div>
+              <button type="submit" class="btn">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -144,12 +162,6 @@ const animales = [
 ];
 
 const niveles = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
-
-// var path = require("path");
-// var x = path.join("..", "/assets", "visor.png");
-// console.log(x);
-// this.imagen = require(x);
-// console.log(x);
 
 export default {
   data() {
@@ -201,15 +213,23 @@ export default {
         this.periodo = this.usuario.periodo;
         this.puntuacion = this.usuario.puntuacion;
         this.nivel = this.usuario.nivel;
-
         this.animal = animales[this.nivel - 1];
-        this.puntuacion_final = niveles[this.nivel - 1];
-        this.puntuacion = decoded.puntuacion;
-        this.puntuacion_total = this.puntuacion;
+
+        var y = 0;
+        var inx = 0;
+        while (inx <= this.nivel - 1) {
+          y += niveles[inx];
+          inx++;
+        }
+
+        this.puntuacion_final = y;
+        this.puntuacion = decoded.puntuacion - niveles[this.nivel - 1];
+        this.puntuacion_total = decoded.puntuacion;
         if (this.nivel > 1)
           this.puntuacion_total = this.puntuacion + niveles[this.nivel - 1];
 
         this.restan = this.puntuacion_final - this.puntuacion;
+
         switch (this.nivel) {
           case 1:
             this.imagen = require("../assets/1.png");
@@ -257,6 +277,45 @@ export default {
 </script>
 
 <style>
+@media only screen and (max-width: 320px) {
+  .card.card1 {
+    width: 15rem !important;
+  }
+}
+/* .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: ". izq der ." ". izq der ." ". izq der .";
+}
+
+.izq {
+  grid-area: izq;
+}
+
+.der {
+  grid-area: der;
+}*/
+
+.card1-body {
+  padding: 0px;
+}
+.card.card1 {
+  width: 30rem;
+}
+
+@media only screen and (max-width: 789px) {
+  .card.card1 {
+    width: 20rem;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .card.card1 {
+    width: 10rem;
+    font-size: 0.8em;
+  }
+}
+
 .icono {
   /* background-image: url(../assets/visor.png) 0 0; */
   height: 60px;

@@ -9,6 +9,8 @@ const config = require('./DB.js');
 const postRoute = require('./routes/post.route');
 const userRoute = require('./routes/user.route');
 const tareaRoute = require('./routes/tarea.route');
+const solucionesRoute = require('./routes/soluciones.route');
+
 const path = require("path")
 
 mongoose.Promise = global.Promise;
@@ -29,6 +31,9 @@ app.get(/.*/, function (req, res) {
     res.sendFile(path.join(__dirname, '../dist'));
 })
 
+app.use('/uploads', express.static('uploads'));
+
+
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -38,6 +43,8 @@ app.use(bodyParser.json());
 app.use('/posts', postRoute);
 app.use('/usuarios', userRoute);
 app.use('/tareas', tareaRoute);
+app.use('/soluciones', solucionesRoute);
+
 
 
 // Para desarrollo

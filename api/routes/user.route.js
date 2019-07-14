@@ -121,7 +121,6 @@ userRoutes.route('/profile').post(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            console.log(usuarios);
             res.send(usuarios);
         }
     });

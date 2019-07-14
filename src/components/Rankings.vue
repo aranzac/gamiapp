@@ -75,6 +75,17 @@ h1 {
     font-size: 19px !important;
   }
 }
+@media only screen and (max-width: 360px) {
+  th {
+    padding-right: 3px !important;
+    padding-left: 3px !important;
+    font-size: 0.8em;
+  }
+
+  i {
+    font-size: 19px !important;
+  }
+}
 
 .centerTable {
   margin: 0px auto;
@@ -109,7 +120,6 @@ export default {
   },
   methods: {
     even: function(arr) {
-      // Set slice() to avoid to generate an infinite loop!
       return arr.slice().sort(function(a, b) {
         return b.puntuacion - a.puntuacion;
       });

@@ -6,14 +6,15 @@ let Tarea = require('../models/tarea.model');
 // Defined store route
 tareaRoutes.route('/add').post(function (req, res) {
     let tarea = new Tarea(req.body);
-    tarea.save()
+    tarea
+        .save()
         .then(() => {
             res.status(200).json({
-                'business': 'business in added successfully'
+                business: 'business in added successfully'
             });
         })
         .catch(() => {
-            res.status(400).send("unable to save to database");
+            res.status(400).send('unable to save to database');
         });
 });
 
@@ -39,6 +40,42 @@ tareaRoutes.route('/:id').get(function (req, res) {
     });
 });
 
+tareaRoutes.route('/ver/:id').get(function (req, res) {
+    let id = req.params.id;
+    Tarea.findById(id, function (err, tarea) {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(tarea);
+        }
+    });
+});
+
+tareaRoutes.route('/delete/:id').delete(function (req, res) {
+    Tarea.deleteOne({
+        _id: req.params.id
+    }, function (err) {
+        if (err) res.json(err);
+        else res.json('Successfully removed');
+    });
+});
+
+
+tareaRoutes.route('/creador').post(function (req, res) {
+    let creador = req.body.creador;
+    Tarea.find({
+            creador: creador
+        },
+        function (err, tareas) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(tareas);
+            }
+        }
+    );
+});
+
 // Defined edit route
 tareaRoutes.route('/edit/:id').get(function (req, res) {
     let id = req.params.id;
@@ -53,17 +90,18 @@ tareaRoutes.route('/edit/:id').get(function (req, res) {
 //  Defined update route
 tareaRoutes.route('/update/:id').post(function (req, res) {
     Tarea.findById(req.params.id, function (err, tarea) {
-        if (!tarea)
-            res.status(404).send("data is not found");
+        if (!tarea) res.status(404).send('data is not found');
         else {
             tarea.titulo = req.body.titulo;
             tarea.descripcion = req.body.descripcion;
 
-            tarea.save().then(() => {
+            tarea
+                .save()
+                .then(() => {
                     res.json('Update complete');
                 })
                 .catch(() => {
-                    res.status(400).send("unable to update the database");
+                    res.status(400).send('unable to update the database');
                 });
         }
     });
@@ -72,11 +110,13 @@ tareaRoutes.route('/update/:id').post(function (req, res) {
 // Defined delete | remove | destroy route
 tareaRoutes.route('/delete/:id').delete(function (req, res) {
     Tarea.findByIdAndRemove({
-        _id: req.params.id
-    }, function (err) {
-        if (err) res.json(err);
-        else res.json('Successfully removed');
-    });
+            _id: req.params.id
+        },
+        function (err) {
+            if (err) res.json(err);
+            else res.json('Successfully removed');
+        }
+    );
 });
 
 module.exports = tareaRoutes;

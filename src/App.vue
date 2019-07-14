@@ -2,10 +2,10 @@
   <div class="container">
     <div>
       <b-navbar toggleable="lg" type="dark" variant="warning">
-        <b-navbar-brand id="logo" class="logo" href="/">Gami</b-navbar-brand>
+        <!-- <b-navbar-brand  class="logo" href="/">Gami</b-navbar-brand> -->
+        <router-link to="/" id="logo" class="logo">Gami</router-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <router-link to="/" class="nav-link text-light">Tutorial</router-link>
@@ -18,25 +18,27 @@
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
             <router-link to="/juego" class="nav-link text-light">Juego</router-link>
             <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
-
             <a href="../h5p/demo/juegos.html">Juegaso</a>
           </b-navbar-nav>
           <br />
-          <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <router-link v-if="auth==''" to="/registro" class="nav-link text-light">Registro</router-link>
             <router-link
               v-if="auth==''"
               to="/iniciosesion"
               class="nav-link text-light"
-            >Iniciar sesión</router-link>
+            >Accede a tu cuenta</router-link>
+            <router-link v-if="auth==''" to="/registro" class="nav-link text-light">Registro</router-link>
 
             <b-nav-item-dropdown v-if="auth=='loggedin'" right>
               <template slot="button-content">
-                <em class="text-light">Cuenta</em>
+                <em @click="cuenta()" class="text-light">Cuenta</em>
               </template>
-              <router-link to="/perfil" class="nav-link text-dark">Mi perfil</router-link>
-              <router-link to="/profesor" class="nav-link text-dark">Perfil de profesor</router-link>
+              <router-link
+                v-if="alumno == 'profesor'"
+                to="/profesor"
+                class="nav-link text-dark"
+              >Mi perfil</router-link>
+              <router-link v-if="alumno == ''" to="/perfil" class="nav-link text-dark">Mi perfil</router-link>
               <b-dropdown-item @click="logout()">Salir</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
@@ -105,6 +107,8 @@ th,
 <script>
 import HomeComponent from "./components/HomeComponent.vue";
 import EventBus from "./components/EventBus.vue";
+import jwtDecode from "jwt-decode";
+import { isAbsolute } from "path";
 
 export default {
   name: "app",
@@ -114,16 +118,36 @@ export default {
   data() {
     return {
       auth: "",
-      user: ""
+      user: "",
+      alumno: "",
+      rol: false
     };
+  },
+  created() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
+
+    if (decoded.rol == "profesor") this.rol = true;
+    else if (decoded.rol == "alumno") this.rol = false;
+
+    console.log(this.rol);
+
+    if (decoded.rol == "profesor") this.alumno = "profesor";
+    else if (decoded.rol == "alumno") console.log(this.alumno);
   },
   methods: {
     logout() {
-      console.log("salienditoo");
       localStorage.removeItem("usertoken");
       this.auth = "";
       this.$router.push({ name: "home" });
       console.log(this.auth);
+    },
+    cuenta() {
+      const token = localStorage.usertoken;
+      const decoded = jwtDecode(token);
+      if (decoded.rol == "profesor") this.alumno = "profesor";
+      else if (decoded.rol == "alumno") this.alumno = "";
+      console.log(this.alumno);
     }
   },
   mounted() {

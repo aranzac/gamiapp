@@ -7,10 +7,20 @@ let Tarea = new Schema({
     },
     descripcion: {
         type: String
+    },
+    categoria: {
+        type: String
+    },
+    creador: {
+        type: String
+    },
+    periodo: {
+        type: String
     }
+
 }, {
-        collection: 'tareas'
-    });
+    collection: 'tareas'
+});
 
 
 
