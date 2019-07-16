@@ -10,7 +10,7 @@
               <form @submit.prevent="register" class="col-lg-12">
                 <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="text" class="form-control" v-model="nombre" required />
+                  <input type="text" class="form-control" v-model="nombre" maxlength="9" required />
                 </div>
                 <div class="form-group">
                   <label for="apellido">Apellido</label>

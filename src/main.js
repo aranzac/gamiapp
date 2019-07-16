@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
+import firebase from 'firebase'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -16,9 +17,21 @@ import axios from 'axios';
 
 const base = axios.create({
   // Para despliege
-  baseURL: 'https://appgami.herokuapp.com'
+  // baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  // baseURL: 'http://localhost:5000/'
+  baseURL: 'http://localhost:5000/'
+})
+
+firebase.initializeApp({
+
+  apiKey: "AIzaSyAtGV1ggJO-8AHfXGaSyvhg2SJmON2_rTg",
+  authDomain: "gami-314da.firebaseapp.com",
+  databaseURL: "https://gami-314da.firebaseio.com",
+  projectId: "gami-314da",
+  storageBucket: "gami-314da.appspot.com",
+  messagingSenderId: "626672250699",
+  appId: "1:626672250699:web:d68f3e0273796b7c"
+
 })
 
 Vue.use(VueAxios, base);

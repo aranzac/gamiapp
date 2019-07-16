@@ -123,18 +123,6 @@
                 </tbody>
               </table>
             </div>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-              <div class="file-field input-field">
-                <div class="btn grey">
-                  <span>File</span>
-                  <input name="myImage" type="file" />
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" />
-                </div>
-              </div>
-              <button type="submit" class="btn">Submit</button>
-            </form>
           </div>
         </div>
       </div>

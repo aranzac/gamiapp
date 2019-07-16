@@ -45,7 +45,7 @@
                       <th scope="row">{{ index + 1 }}º</th>
                       <td>{{ user.nombre }}</td>
                       <td>{{ user.periodo }}</td>
-                      <td>{{user.puntuacion}} ptos</td>
+                      <td>{{user.puntuacion}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -72,7 +72,7 @@ h1 {
   }
 
   i {
-    font-size: 19px !important;
+    font-size: 15px !important;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -83,7 +83,7 @@ h1 {
   }
 
   i {
-    font-size: 19px !important;
+    font-size: 14px !important;
   }
 }
 

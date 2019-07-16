@@ -1,21 +1,36 @@
 const express = require('express');
+const app = express();
 const solucionesRoutes = express.Router();
 const cors = require('cors');
-const multer = require("multer");
+const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+var fileupload = require('express-fileupload');
+app.use(
+  fileupload({
+    useTempFiles: true
+  })
+);
+
+var cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'soluciones',
+  api_key: '258673781426355',
+  api_secret: 'c-XJCn-rD8BpJUeZq9vVJ2iqOkE'
+});
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, new Date().toISOString() + file.originalname);
-    }
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
 });
 
 const upload = multer({
-    storage: storage
+  storage: storage
 });
 
 let Soluciones = require('../models/soluciones.model');
@@ -23,19 +38,24 @@ solucionesRoutes.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-solucionesRoutes.route('/add').post(function (req, res) {
-    let solu = new Soluciones(req.body);
-    solu.save()
-        .then(() => {
-            res.status(200).json({
-                business: 'business in added successfully'
-            });
-        })
-        .catch(() => {
-            res.status(400).send('unable to save to database');
-        });
+solucionesRoutes.route('/add').post(function(req, res) {
+  let solu = new Soluciones(req.body);
+  solu
+    .save()
+    .then(() => {
+      res.status(200).json({
+        business: 'business in added successfully'
+      });
+    })
+    .catch(() => {
+      res.status(400).send('unable to save to database');
+    });
 });
 
+solucionesRoutes.post('/foto', function(req, res, next) {
+  const file = req.body;
+  console.log(file);
+});
 
 // solucionesRoutes.post("/foto", upload.single('foto'), (req, res, next) => {
 //     // const product = new Product({
@@ -66,20 +86,21 @@ solucionesRoutes.route('/add').post(function (req, res) {
 //         });
 // });
 
-solucionesRoutes.route('/').post(function (req, res) {
-    let creador = req.body.creador;
+solucionesRoutes.route('/').post(function(req, res) {
+  let creador = req.body.creador;
 
-    Soluciones.find({
-            profesor: creador
-        },
-        function (err, soluciones) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(soluciones);
-            }
-        }
-    );
+  Soluciones.find(
+    {
+      profesor: creador
+    },
+    function(err, soluciones) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(soluciones);
+      }
+    }
+  );
 });
 
 module.exports = solucionesRoutes;

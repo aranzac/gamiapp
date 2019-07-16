@@ -114,6 +114,7 @@ userRoutes.route('/').get(function (req, res) {
 });
 
 
+
 userRoutes.route('/profile').post(function (req, res) {
     User.findById({
         _id: req.body._id
@@ -125,6 +126,27 @@ userRoutes.route('/profile').post(function (req, res) {
         }
     });
 });
+
+
+
+userRoutes.route('/calificar').post(function (req, res) {
+    User.findById({
+        _id: req.body._id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            user.puntuacion = req.body.puntuacion;
+            user.save().then(() => {
+                    res.json('Update complete');
+                })
+                .catch(() => {
+                    res.status(400).send("unable to update the database");
+                });
+        }
+    });
+});
+
 
 
 userRoutes.route('/:id').get(function (req, res) {

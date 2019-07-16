@@ -30,7 +30,7 @@
     </div>
     <div class="row justify-content-md-center mt-5">
       <div class="col-md-6 col-md-auto">
-        <table align="center" class="table centerTable table-hover table-sm">
+        <table align="center" class="table centerTable table-hover table-sm mb-5">
           <thead>
             <tr>
               <th>Título</th>
@@ -72,6 +72,7 @@
                                 class="form-control input-sm"
                                 placeholder
                                 aria-describedby="inputGroup-sizing-sm"
+                                required
                               />
                             </div>
                           </div>
@@ -83,21 +84,23 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>¿Cómo la has resuelto?</label>
-                        <textarea
-                          class="form-control"
-                          v-model="solucion.descripcion"
-                          rows="5"
-                          required
-                        ></textarea>
+                        <textarea class="form-control" v-model="solucion.descripcion" rows required></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>¿Tienes alguna foto de la actividad?</label>
-                        <input type="file" @change="onFileSelected" />
-                        <button @click="onUpload">Upload</button>
+                        <label>¿Tienes alguna foto de la actividad? ¡Súbela!</label>
+                        <input type="file" @change="onFileSelected" required />
+                        <div align="center">
+                          <img width="320" :src="picture" />
+                          <button
+                            class="btn btn-warning text-light d-block"
+                            type="button"
+                            @click="onUpload"
+                          >Subir</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -155,10 +158,6 @@
                   <b>Ver</b>
                 </b-button>
               </td>
-
-              <!-- <td>
-                <button class="btn btn-danger" @click.prevent="deletePost(tarea._id)">Delete</button>
-              </td>-->
             </tr>
           </tbody>
         </table>
@@ -169,6 +168,7 @@
 
 <script>
 import jwtDecode from "jwt-decode";
+import firebase from "firebase";
 
 export default {
   data() {
@@ -181,7 +181,8 @@ export default {
       titulo: "",
       mostrar: false,
       selectedFile: null,
-      foto: ""
+      foto: "",
+      picture: null
     };
   },
   created() {
@@ -192,8 +193,6 @@ export default {
     this.solucion.numero = -1;
     this.solucion.opinion = 0;
     this.solucion.feedback = "";
-    this.solucion.foto = "";
-
     let uri = "/tareas";
 
     const token = localStorage.usertoken;
@@ -216,6 +215,9 @@ export default {
       });
     },
     realizar(id) {
+      this.image = null;
+      this.selectedFile = null;
+      this.picture = null;
       this.$refs["my-modal2"].hide();
       this.$refs["my-modal"].show();
     },
@@ -225,24 +227,13 @@ export default {
 
       this.$refs["my-modal"].hide();
 
-      const fd = new FormData();
-      fd.append("image", this.selectedFile, this.selectedFile.name);
-
       this.solucion.titulo = this.titulo;
-      this.solucion.alumno = decoded.nombre;
+      this.solucion.alumno = decoded._id;
       this.solucion.profesor = this.tarea_aux.creador;
-      this.foto = fd;
+      this.solucion.foto = this.picture;
 
       let uri = "/soluciones/add";
-
-      this.axios.post(uri, this.solucion).then(response => {
-        console.log("regresa");
-        this.axios
-          .post("soluciones/foto", this.solucion.foto)
-          .then(response => {
-            console.log(response);
-          });
-      });
+      this.axios.post(uri, this.solucion);
     },
     valorar(num) {
       this.solucion.numero = num;
@@ -251,12 +242,31 @@ export default {
       this.solucion.opinion = num;
     },
     onFileSelected(event) {
-      // console.log(event);
       this.selectedFile = event.target.files[0];
-      console.log(selectedFile)
     },
     onUpload() {
-      v;
+      const storageRef = firebase
+        .storage()
+        .ref(`/soluciones/${this.selectedFile.name}`);
+      const task = storageRef.put(this.selectedFile);
+      task.on(
+        "state_changed",
+        snapshot => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // this.uploadValue = percentage
+        },
+        error => {
+          console.log(error.message);
+        },
+        () => {
+          // this.uploadValue = 100;
+          task.snapshot.ref.getDownloadURL().then(url => {
+            this.picture = url;
+            console.log(this.picture);
+          });
+        }
+      );
     }
   },
   computed: {
@@ -277,6 +287,10 @@ export default {
 </script>
 
 <style scoped>
+img {
+  border: 0px;
+}
+
 @media only screen and (max-width: 770px) {
   .col-lg-9.col-md-6.col-xs-6 {
     text-align: center;

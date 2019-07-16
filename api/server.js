@@ -45,15 +45,23 @@ app.use('/usuarios', userRoute);
 app.use('/tareas', tareaRoute);
 app.use('/soluciones', solucionesRoute);
 
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    if (req.method === 'OPTIONS') {
+        res.headers('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
+        return res.status(200).json({})
+    }
+    next();
+});
 
 // Para desarrollo
-// app.listen(5000, function () {
-//     console.log('Server is running on Port:', 5000);
-// });
+app.listen(5000, function () {
+    console.log('Server is running on Port:', 5000);
+});
 
 // Para despliegue
 
-app.listen(process.env.PORT || 4000);
+// app.listen(process.env.PORT || 4000);
 
 console.log(process.env.PORT);

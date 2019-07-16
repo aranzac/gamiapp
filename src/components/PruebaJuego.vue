@@ -70,14 +70,6 @@ function myFunction() {
   }
 }
 
-/* .fade-enter-active,
-    .fade-leave-active {
-      transition: opacity 0.5s;
-    }
-    .fade-enter,
-    .fade-leave-active {
-      opacity: 0;
-    } */
 .navbar {
   width: 100% !important;
 }
