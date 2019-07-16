@@ -7,7 +7,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "nodemon api/server.js"
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js"
   },
   "main": "babel.config.js",
   "dependencies": {
