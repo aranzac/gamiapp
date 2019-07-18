@@ -27,9 +27,16 @@ let User = new Schema({
     nivel: {
         type: Number
     },
+    nivel_anterior: {
+        type: Number
+    },
     puntuacion: {
         type: Number
+    },
+    puntuacion_anterior: {
+        type: Number
     }
+
 }, {
     collection: 'usuarios'
 });

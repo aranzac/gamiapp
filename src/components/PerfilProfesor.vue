@@ -127,7 +127,7 @@
                   </thead>
                   <tbody>
                     <tr v-for="task in creadas" :key="task._id">
-                      <td>{{ task.categoria }}</td>
+                      <td>{{ task.titulo }}</td>
 
                       <td>
                         <b-button variant="warning" class="text-light" @click="ver(task._id)">

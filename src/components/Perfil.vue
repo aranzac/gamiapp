@@ -1,7 +1,26 @@
 <template>
   <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-mg-10 col-xs-12" align="center"></div>
+    </div>
+
     <div class="row justify-content-md-center mt-5">
       <div class="col-12 col-md-auto">
+        <div v-if="puntos_nuevos" class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <i class="fa fa-exclamation-circle">&nbsp;&nbsp;</i>
+          ¡Has obtenido {{newPoints}} puntos de experiencia!
+        </div>
+        <div v-if="nivel_nuevo" class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <i class="fab fa-slack-hash">&nbsp;</i>
+          ¡Has subido de nivel!
+        </div>
+        <div v-if="!logro_nuevo" class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <i class="fas fa-award">&nbsp;&nbsp;</i>
+          ¡Has obtenido un nuevo logro!
+        </div>
         <div class="row">
           <div class="col-lg-6 mb-5">
             <div class="card card1 shadow-sm" style="width: 25rem;">
@@ -47,7 +66,7 @@
                     </div>
                     <h6
                       class="text-success center"
-                    >(Faltan {{restan}} xp para pasar al siguiente nivel)</h6>
+                    >(Faltan {{restan}} puntos para pasar al siguiente nivel)</h6>
                   </li>
                   <li class="list-group-item">
                     <div class="row">
@@ -84,7 +103,7 @@
             </div>
           </div>
           <div class="col-lg-6 mb-5">
-            <div class="card card1 shadow-sm">
+            <div class="card card1 shadow-sm" style="width: 25rem;">
               <h2>Logros desbloqueados</h2>
               <table align="center" class="table centerTable table-sm">
                 <thead>
@@ -150,6 +169,7 @@ const animales = [
 ];
 
 const niveles = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+const limites = [50, 150, 300, 500, 750, 1050, 1400, 1800, 2250, 2750];
 
 export default {
   data() {
@@ -169,12 +189,16 @@ export default {
       periodo: "",
       nivel: "",
       animal: "",
-      puntuacion: "",
+      puntuacion: 0,
       puntuacion_total: "",
-      puntuacion_final: "3",
+      puntuacion_final: "",
       width: "width:" + 50 + "%;",
       restan: "",
-      porcentaje: "puntuacion"
+      porcentaje: "puntuacion",
+      nivel_nuevo: false,
+      puntos_nuevos: false,
+      logro_nuevo: false,
+      newPoints: ""
     };
   },
   methods: {
@@ -192,29 +216,55 @@ export default {
         _id: decoded._id
       })
       .then(response => {
-        // console.log(response.data);
-
         this.usuario = response.data;
         this.nombre = this.usuario.nombre;
         this.apellido = this.usuario.apellido;
         this.edad = this.usuario.edad;
         this.periodo = this.usuario.periodo;
-        this.puntuacion = this.usuario.puntuacion;
+        this.puntuacion_total = this.usuario.puntuacion;
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
-
-        var y = 0;
-        var inx = 0;
-        while (inx <= this.nivel - 1) {
-          y += niveles[inx];
-          inx++;
-        }
-
-        this.puntuacion_final = y;
-        this.puntuacion = decoded.puntuacion - niveles[this.nivel - 1];
-        this.puntuacion_total = decoded.puntuacion;
+        this.puntuacion_final = niveles[this.nivel - 1];
         if (this.nivel > 1)
-          this.puntuacion_total = this.puntuacion + niveles[this.nivel - 1];
+          this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
+
+        if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
+          this.puntos_nuevos = true;
+
+          if (this.puntuacion_total > niveles[this.nivel - 2])
+            this.nivel_nuevo = true;
+
+          this.newPoints =
+            this.usuario.puntuacion - this.usuario.puntuacion_anterior;
+
+          this.axios.post("usuarios/resetearpuntos", {
+            _id: this.usuario._id
+          });
+        } else {
+          this.puntos_nuevos = false;
+        }
+        this.nivel_nuevo = false;
+
+        // var y = 0;
+        // var inx = 0;
+        // while (inx <= this.nivel - 1) {
+        //   y += niveles[inx];
+        //   inx++;
+        // }
+
+        // // this.puntuacion_final = y;
+        // this.puntuacion_final = niveles[this.nivel - 1];
+
+        // if (this.nivel != 1)
+        // console.log(decoded.puntuacion);
+        // console.log(niveles[this.nivel - 1]);
+        // this.puntuacion = niveles[this.nivel - 1] - decoded.puntuacion;
+        // console.log(decoded.puntuacion);
+        // console.log(niveles[this.nivel - 1]);
+        // console.log(this.puntuacion);
+
+        // if (this.nivel > 1)
+        //   this.puntuacion = niveles[this.nivel - 1] - this.puntuacion_total;
 
         this.restan = this.puntuacion_final - this.puntuacion;
 

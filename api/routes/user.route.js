@@ -127,7 +127,8 @@ userRoutes.route('/profile').post(function (req, res) {
     });
 });
 
-
+const niveles = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+const limites = [50, 150, 300, 500, 750, 1050, 1400, 1800, 2250, 2750]
 
 userRoutes.route('/calificar').post(function (req, res) {
     User.findById({
@@ -137,6 +138,14 @@ userRoutes.route('/calificar').post(function (req, res) {
             res.json(err);
         } else {
             user.puntuacion = req.body.puntuacion;
+            if (user.puntuacion >= limites[user.nivel - 1])
+                user.nivel++;
+            // console.log(user.puntuacion)
+            // console.log(limites[user.nivel - 1])
+            // console.log(user.nivel)
+            // console.log("________________________________________")
+
+
             user.save().then(() => {
                     res.json('Update complete');
                 })
@@ -147,6 +156,42 @@ userRoutes.route('/calificar').post(function (req, res) {
     });
 });
 
+
+userRoutes.route('/resetearpuntos').post(function (req, res) {
+    User.findById({
+        _id: req.body._id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            user.puntuacion_anterior = user.puntuacion;
+            user.save().then(() => {
+                    res.json('Update complete');
+                })
+                .catch(() => {
+                    res.status(400).send("unable to update the database");
+                });
+        }
+    });
+});
+
+userRoutes.route('/levelup').post(function (req, res) {
+    User.findById({
+        _id: req.body._id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            user.nivel = user.nivel + 1;
+            user.save().then(() => {
+                    res.json('Update complete');
+                })
+                .catch(() => {
+                    res.status(400).send("unable to update the database");
+                });
+        }
+    });
+});
 
 
 userRoutes.route('/:id').get(function (req, res) {
@@ -199,8 +244,5 @@ userRoutes.route('/delete/:id').delete(function (req, res) {
         else res.json('Successfully removed');
     });
 });
-
-
-
 
 module.exports = userRoutes;
