@@ -20,11 +20,15 @@ cloudinary.config({
   api_secret: 'c-XJCn-rD8BpJUeZq9vVJ2iqOkE'
 });
 
+const cloudinaryLib = {
+  Cloudinary: cloudinary
+}
+
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, './uploads/');
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(null, new Date().toISOString() + file.originalname);
   }
 });
@@ -38,8 +42,9 @@ solucionesRoutes.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-solucionesRoutes.route('/add').post(function(req, res) {
+solucionesRoutes.route('/add').post(function (req, res) {
   let solu = new Soluciones(req.body);
+  solu.corregido = false;
   solu
     .save()
     .then(() => {
@@ -52,9 +57,28 @@ solucionesRoutes.route('/add').post(function(req, res) {
     });
 });
 
-solucionesRoutes.post('/foto', function(req, res, next) {
+solucionesRoutes.post('/foto', function (req, res, next) {
   const file = req.body;
   console.log(file);
+});
+
+solucionesRoutes.post('/marcar', function (req, res, next) {
+  Soluciones.findById({
+      _id: req.body._id
+    },
+    function (err, solucion) {
+      if (err) {
+        res.json(err);
+      } else {
+        solucion.corregido = true;
+        solucion.save().then(() => {
+            res.json('Update complete');
+          })
+          .catch(() => {
+            res.status(400).send("unable to update the database");
+          });
+      }
+    });
 });
 
 // solucionesRoutes.post("/foto", upload.single('foto'), (req, res, next) => {
@@ -86,14 +110,14 @@ solucionesRoutes.post('/foto', function(req, res, next) {
 //         });
 // });
 
-solucionesRoutes.route('/').post(function(req, res) {
+solucionesRoutes.route('/').post(function (req, res) {
   let creador = req.body.creador;
 
-  Soluciones.find(
-    {
-      profesor: creador
+  Soluciones.find({
+      profesor: creador,
+      corregido: false
     },
-    function(err, soluciones) {
+    function (err, soluciones) {
       if (err) {
         res.json(err);
       } else {

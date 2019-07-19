@@ -17,9 +17,9 @@ import axios from 'axios';
 
 const base = axios.create({
   // Para despliege
-  // baseURL: 'https://appgami.herokuapp.com'
+  baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  baseURL: 'http://localhost:5000/'
+  // baseURL: 'http://localhost:5000/'
 })
 
 firebase.initializeApp({
@@ -50,6 +50,7 @@ import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue'
 import PruebaJuego from './components/PruebaJuego.vue'
+import Logros from './components/Logros.vue'
 import './registerServiceWorker';
 
 const routes = [{
@@ -111,6 +112,11 @@ const routes = [{
     name: 'juego',
     path: '/juego',
     component: PruebaJuego
+  },
+  {
+    name: 'logros',
+    path: '/logros',
+    component: Logros
   }
 ];
 

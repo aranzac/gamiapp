@@ -11,6 +11,7 @@
           <i class="fa fa-exclamation-circle">&nbsp;&nbsp;</i>
           ¡Has obtenido {{newPoints}} puntos de experiencia!
         </div>
+
         <div v-if="nivel_nuevo" class="alert alert-success alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <i class="fab fa-slack-hash">&nbsp;</i>
@@ -134,13 +135,18 @@
                   <tr>
                     <td class="cuadradito"></td>
                     <td>
-                      <img class="icono" src="../assets/lovepc.png" />
+                      <img class="icono" title="Imagen del logro" src="../assets/love.png" />
                     </td>
                     <td class="align-middle">En la cima</td>
                     <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
                   </tr>
                 </tbody>
               </table>
+              <div class="text-center mt-3">
+                <b-button variant="warning">
+                  <router-link to="/logros" class="nav-link text-light">Ver logros bloqueados</router-link>
+                </b-button>
+              </div>
             </div>
           </div>
         </div>
@@ -231,7 +237,7 @@ export default {
         if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
           this.puntos_nuevos = true;
 
-          if (this.puntuacion_total > niveles[this.nivel - 2])
+          if (this.usuario.puntuacion_anterior < limites[this.nivel - 1])
             this.nivel_nuevo = true;
 
           this.newPoints =
@@ -242,29 +248,8 @@ export default {
           });
         } else {
           this.puntos_nuevos = false;
+          this.nivel_nuevo = false;
         }
-        this.nivel_nuevo = false;
-
-        // var y = 0;
-        // var inx = 0;
-        // while (inx <= this.nivel - 1) {
-        //   y += niveles[inx];
-        //   inx++;
-        // }
-
-        // // this.puntuacion_final = y;
-        // this.puntuacion_final = niveles[this.nivel - 1];
-
-        // if (this.nivel != 1)
-        // console.log(decoded.puntuacion);
-        // console.log(niveles[this.nivel - 1]);
-        // this.puntuacion = niveles[this.nivel - 1] - decoded.puntuacion;
-        // console.log(decoded.puntuacion);
-        // console.log(niveles[this.nivel - 1]);
-        // console.log(this.puntuacion);
-
-        // if (this.nivel > 1)
-        //   this.puntuacion = niveles[this.nivel - 1] - this.puntuacion_total;
 
         this.restan = this.puntuacion_final - this.puntuacion;
 

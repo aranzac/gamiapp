@@ -228,9 +228,10 @@ export default {
       this.$refs["my-modal"].hide();
 
       this.solucion.titulo = this.titulo;
-      this.solucion.alumno = decoded._id;
+      this.solucion.alumno = decoded.nombre;
       this.solucion.profesor = this.tarea_aux.creador;
       this.solucion.foto = this.picture;
+      this.solucion.id_alumno = decoded._id;
 
       let uri = "/soluciones/add";
       this.axios.post(uri, this.solucion);

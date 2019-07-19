@@ -1,8 +1,8 @@
 {
-  "name": "gami-app",
+  "name": "gami",
   "version": "0.1.0",
   "private": true,
-  "description": "## Project setup ``` npm install ```",
+  "description": "## Trabajo de Fin de Grado - Sistema gamificado sobre pensamiento computacional",
   "author": "Aranza Carolina Cabrera Castellano (alu0100889680@ull.edu.es)",
   "scripts": {
     "serve": "vue-cli-service serve",

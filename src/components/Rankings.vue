@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-2 col-mg-2 col-xs-0"></div>
           <div class="col-lg-8 col-mg-10 col-xs-12">
-            <div id="card-form" class="card mb-5">
+            <div id="card-form" class="card mb-5" style="width: 25rem;">
               <h1 class="text-center mt-2">Ranking</h1>
               <div class="row">
                 <div class="col-md-10 mt-1"></div>

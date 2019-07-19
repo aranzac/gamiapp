@@ -35,8 +35,16 @@ let User = new Schema({
     },
     puntuacion_anterior: {
         type: Number
+    },
+    tareas_resueltas: {
+        type: Number
+    },
+    ultima_conexion: {
+        type: Date
+    },
+    racha: {
+        type: Number
     }
-
 }, {
     collection: 'usuarios'
 });

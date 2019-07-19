@@ -27,7 +27,9 @@ userRoutes.route('/add').post(function (req, res) {
         edad: req.body.edad,
         periodo: periodo,
         nivel: 1,
-        puntuacion: 0
+        puntuacion: 0,
+        tareas_resueltas: 0,
+        racha: 0
     }
     User.findOne({
             email: req.body.email
@@ -76,12 +78,28 @@ userRoutes.route('/login').post(function (req, res) {
                         edad: user.edad,
                         periodo: user.periodo,
                         nivel: user.nivel,
-                        puntuacion: user.puntuacion
+                        puntuacion: user.puntuacion,
                     }
 
                     let token = jwt.sign(payload, process.env.SECRET_KEY, {
                         expiresIn: 1800
                     })
+
+                    // // Guardar el momento de la conexión actual como última conexión 
+                    if (payload.rol == "alumno") {
+                        user.ultima_conexion = new Date();
+                        user.racha
+                        user.save()
+                            .then(user => {
+                                res.json({
+                                    status: user.email + ' se ha conectado'
+                                })
+                            })
+                            .catch(err => {
+                                res.send('error: ' + err)
+                            })
+                    }
+
                     res.send(token);
                 } else {
                     res.json({
@@ -113,8 +131,6 @@ userRoutes.route('/').get(function (req, res) {
     });
 });
 
-
-
 userRoutes.route('/profile').post(function (req, res) {
     User.findById({
         _id: req.body._id
@@ -140,11 +156,6 @@ userRoutes.route('/calificar').post(function (req, res) {
             user.puntuacion = req.body.puntuacion;
             if (user.puntuacion >= limites[user.nivel - 1])
                 user.nivel++;
-            // console.log(user.puntuacion)
-            // console.log(limites[user.nivel - 1])
-            // console.log(user.nivel)
-            // console.log("________________________________________")
-
 
             user.save().then(() => {
                     res.json('Update complete');
@@ -155,7 +166,6 @@ userRoutes.route('/calificar').post(function (req, res) {
         }
     });
 });
-
 
 userRoutes.route('/resetearpuntos').post(function (req, res) {
     User.findById({

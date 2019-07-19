@@ -324,6 +324,7 @@ export default {
       tarea_aux3: {},
       creadas: [],
       usuario: "",
+      _id: "",
       nombre: "",
       apellido: "",
       correo: "",
@@ -354,6 +355,7 @@ export default {
         this.nombre = this.usuario.nombre;
         this.apellido = this.usuario.apellido;
         this.correo = this.usuario.email;
+        this._id = this.usuario._id;
 
         let uri2 = "tareas/creador";
         this.axios.post(uri2, { creador: this.correo }).then(response => {
@@ -377,11 +379,13 @@ export default {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
 
-      this.tarea.creador = decoded.email;
+      this.tarea.creador = decoded._id;
       this.axios.post(uri, this.tarea).then(() => {
-        this.axios.post(uri2, { creador: this.correo }).then(response => {
+        this.axios.post(uri2, { _id: this._id }).then(response => {
           this.creadas = response.data;
           this.numero_tareas = this.creadas.length;
+
+          // Para resetear los campos
           this.tarea.titulo = "";
           this.tarea.categoria = "";
           this.tarea.descripcion = "";
@@ -397,7 +401,6 @@ export default {
           _id: this.tarea_aux2.alumno
         })
         .then(response => {
-          // console.log(response.data);
           var puntuacion = this.nota * 5 + response.data.puntuacion;
 
           this.axios
@@ -406,14 +409,19 @@ export default {
               puntuacion: puntuacion
             })
             .then(response => {
-              // console.log("regresaa");
               this.axios
                 .post("usuarios/profile", {
                   _id: this.tarea_aux2.alumno
                 })
                 .then(response => {
-                  // console.log(response.data);
                   this.$refs["my-modal4"].hide();
+                  this.axios
+                    .post("soluciones/marcar", {
+                      _id: this.tarea_aux2._id
+                    })
+                    .then(res => {
+                      console.log("Llega");
+                    });
                 });
             });
         });

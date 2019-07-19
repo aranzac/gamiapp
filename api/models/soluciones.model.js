@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Soluciones = new Schema({
+    id_alumno: {
+        type: String
+    },
     alumno: {
         type: String
     },
