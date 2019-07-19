@@ -137,11 +137,7 @@ export default {
   },
   methods: {
     toggleClass() {
-      // console.log("hola");
-      // console.log(this.isActive);
       this.isActive = !this.isActive;
-      // console.log(this.isActive);
-      // console.log(this.rol);
     },
     register() {
       this.axios

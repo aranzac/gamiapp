@@ -62,7 +62,6 @@ userRoutes.route('/add').post(function (req, res) {
 
 
 userRoutes.route('/login').post(function (req, res) {
-
     User.findOne({
             email: req.body.email
         })
@@ -85,19 +84,11 @@ userRoutes.route('/login').post(function (req, res) {
                         expiresIn: 1800
                     })
 
-                    // // Guardar el momento de la conexión actual como última conexión 
-                    if (payload.rol == "alumno") {
+                    // Guardar el momento de la conexión actual como última conexión 
+                    if (user.rol == "alumno") {
                         user.ultima_conexion = new Date();
                         user.racha
                         user.save()
-                            .then(user => {
-                                res.json({
-                                    status: user.email + ' se ha conectado'
-                                })
-                            })
-                            .catch(err => {
-                                res.send('error: ' + err)
-                            })
                     }
 
                     res.send(token);

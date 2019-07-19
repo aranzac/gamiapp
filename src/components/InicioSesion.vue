@@ -37,7 +37,6 @@
 
 <script>
 import axios from "axios";
-// import router from "../main.js";
 import EventBus from "./EventBus";
 import jwtDecode from "jwt-decode";
 
