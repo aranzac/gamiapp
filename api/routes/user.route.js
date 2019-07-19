@@ -84,12 +84,12 @@ userRoutes.route('/login').post(function (req, res) {
                         expiresIn: 1800
                     })
 
-                    // Guardar el momento de la conexión actual como última conexión 
-                    if (user.rol == "alumno") {
-                        user.ultima_conexion = new Date();
-                        user.racha
-                        user.save()
-                    }
+                    // // Guardar el momento de la conexión actual como última conexión 
+                    // if (user.rol == "alumno") {
+                    //     user.ultima_conexion = new Date();
+                    //     user.racha
+                    //     user.save()
+                    // }
 
                     res.send(token);
                 } else {
