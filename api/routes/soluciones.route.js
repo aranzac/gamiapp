@@ -59,7 +59,6 @@ solucionesRoutes.route('/add').post(function (req, res) {
 
 solucionesRoutes.post('/foto', function (req, res, next) {
   const file = req.body;
-  console.log(file);
 });
 
 solucionesRoutes.post('/marcar', function (req, res, next) {
@@ -80,35 +79,6 @@ solucionesRoutes.post('/marcar', function (req, res, next) {
       }
     });
 });
-
-// solucionesRoutes.post("/foto", upload.single('foto'), (req, res, next) => {
-//     // const product = new Product({
-//     //     productImage: req.file.path
-//     // });
-//     let foto = new Soluciones
-//     product
-//         .save()
-//         .then(result => {
-//             console.log(result);
-//             res.status(201).json({
-//                 message: "Created product successfully"
-//                 // createdProduct: {
-//                 //     name: result.name,
-//                 //     price: result.price,
-//                 //     _id: result._id,
-//                 //     request: {
-//                 //         type: 'GET',
-//                 //         url: "http://localhost:3000/products/" + result._id
-//                 //     }
-//                 // }
-//             });
-//         })
-//         .catch(err => {
-//             res.status(500).json({
-//                 error: err
-//             });
-//         });
-// });
 
 solucionesRoutes.route('/').post(function (req, res) {
   let creador = req.body.creador;

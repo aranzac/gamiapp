@@ -43,9 +43,6 @@ function myFunction() {
     ".h5p-joubelui-score-number"
   );
 
-  // var x = document.querySelector(".h5p-task-description");
-  console.log("-----------------");
-  // console.log(x);
   console.log(iframeContent.textContent);
 }
 </script>

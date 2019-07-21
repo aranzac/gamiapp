@@ -130,8 +130,6 @@ export default {
     if (decoded.rol == "profesor") this.rol = true;
     else if (decoded.rol == "alumno") this.rol = false;
 
-    console.log(this.rol);
-
     if (decoded.rol == "profesor") this.alumno = "profesor";
     else if (decoded.rol == "alumno") console.log(this.alumno);
   },
@@ -140,14 +138,12 @@ export default {
       localStorage.removeItem("usertoken");
       this.auth = "";
       this.$router.push({ name: "home" });
-      console.log(this.auth);
     },
     cuenta() {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
       if (decoded.rol == "profesor") this.alumno = "profesor";
       else if (decoded.rol == "alumno") this.alumno = "";
-      console.log(this.alumno);
     }
   },
   mounted() {

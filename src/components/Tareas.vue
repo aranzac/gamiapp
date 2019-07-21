@@ -22,7 +22,7 @@
         <option selected disabled>Filtrar por categoría</option>
         <option value="Abstracción">Abstracción</option>
         <option value="Descomposición">Descomposición</option>
-        <option value="Pensamiento">Pensamiento iterativo</option>
+        <option value="Pensamiento iterativo">Pensamiento iterativo</option>
         <option value="Algoritmos">Algoritmos</option>
         <option value="Depuración">Depuración</option>
         <option style="background-color: lightgrey; color: grey;" value>Eliminar filtros</option>
@@ -264,7 +264,6 @@ export default {
           // this.uploadValue = 100;
           task.snapshot.ref.getDownloadURL().then(url => {
             this.picture = url;
-            console.log(this.picture);
           });
         }
       );

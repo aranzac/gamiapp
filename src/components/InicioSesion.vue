@@ -52,9 +52,6 @@ export default {
 
   methods: {
     login() {
-      console.log("login");
-      // router.push({ name: "perfil" });
-
       this.axios
         .post("/usuarios/login", {
           email: this.email,

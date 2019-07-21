@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div
-      class="row justify-content-md-center justify-content-lg-center justify-content-xs-center mt-5"
-    >
+    <div class="row justify-content-md-center justify-content-lg-center justify-content-xs-center">
       <div class="col-12 col-md-auto">
         <div
           class="row justify-content-md-center justify-content-xs-center justify-content-lg-center"
@@ -177,8 +175,8 @@
               </div>
             </div>
           </div>
-          <div class="col-1-3 mb-5">
-            <div class="card card1 shadow-sm" style="width: 20rem;">
+          <div class="col-1-3 mb-5 m-3">
+            <div class="card card1 shadow-sm" style="width: 25rem;">
               <h2 class="mt-2">Tareas por corregir</h2>
               <b-modal id="my-modal3" ref="my-modal3" hide-footer title="Ver solución">
                 <div class="d-block">
@@ -290,6 +288,9 @@
 </template>
 
 <style scoped>
+.col-12.col-md-auto {
+  margin-top: 40px !important;
+}
 .table {
   width: 100%;
   max-width: 100%;
@@ -305,6 +306,31 @@
   margin: 0 auto; /* Added */
   float: none; /* Added */
   margin-bottom: 10px; /* Added */
+}
+
+@media only screen and (max-width: 320px) {
+  .card1 {
+    width: 20rem !important;
+  }
+}
+
+.card1-body {
+  padding: 0px;
+}
+.card.card1 {
+  width: 30rem;
+}
+
+@media only screen and (max-width: 789px) {
+  .card.card1 {
+    width: 30rem;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .card.card1 {
+    width: 20rem;
+    font-size: 0.8em;
+  }
 }
 </style>
 
@@ -366,9 +392,6 @@ export default {
         let uri3 = "/soluciones";
         this.axios.post(uri3, { creador: this.correo }).then(response => {
           this.soluciones = response.data;
-          // console.log("-----------------");
-          // console.log(this.soluciones);
-          // console.log("-----------------");
         });
       });
   },
@@ -420,7 +443,12 @@ export default {
                       _id: this.tarea_aux2._id
                     })
                     .then(res => {
-                      console.log("Llega");
+                      let uri3 = "/soluciones";
+                      this.axios
+                        .post(uri3, { creador: this.correo })
+                        .then(response => {
+                          this.soluciones = response.data;
+                        });
                     });
                 });
             });
@@ -462,10 +490,6 @@ export default {
       this.$refs["my-modal3"].hide();
       this.tarea_aux3 = tarea;
       this.$refs["my-modal4"].show();
-
-      // console.log(this.tarea_aux2.alumno);
-
-      // this.$refs["my-modal4"].hide();
     },
     showModal() {
       this.$refs["my-modal"].show();

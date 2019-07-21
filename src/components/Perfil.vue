@@ -305,20 +305,6 @@ export default {
     width: 15rem !important;
   }
 }
-/* .grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: ". izq der ." ". izq der ." ". izq der .";
-}
-
-.izq {
-  grid-area: izq;
-}
-
-.der {
-  grid-area: der;
-}*/
 
 .card1-body {
   padding: 0px;
@@ -353,6 +339,7 @@ img {
 
   border: 2px solid lightgrey;
   margin: 0px 0px 7px 0px;
+  margin: auto;
   border-radius: 8px;
   padding: 10px 10px 10px 10px;
 }
