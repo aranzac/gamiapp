@@ -29,7 +29,9 @@ userRoutes.route('/add').post(function (req, res) {
         nivel: 1,
         puntuacion: 0,
         tareas_resueltas: 0,
-        racha: 0
+        racha: 0,
+        logros: [],
+        ultima_conexion: null
     }
     User.findOne({
             email: req.body.email
@@ -84,12 +86,12 @@ userRoutes.route('/login').post(function (req, res) {
                         expiresIn: 1800
                     })
 
-                    // // Guardar el momento de la conexión actual como última conexión 
-                    // if (user.rol == "alumno") {
-                    //     user.ultima_conexion = new Date();
-                    //     user.racha
-                    //     user.save()
-                    // }
+                    // Guardar el momento de la conexión actual como última conexión 
+                    if (user.rol == "alumno") {
+                        user.ultima_conexion = new Date();
+                        // user.racha
+                        user.save()
+                    }
 
                     res.send(token);
                 } else {
@@ -145,6 +147,7 @@ userRoutes.route('/calificar').post(function (req, res) {
             res.json(err);
         } else {
             user.puntuacion = req.body.puntuacion;
+
             if (user.puntuacion >= limites[user.nivel - 1])
                 user.nivel++;
 
@@ -168,6 +171,25 @@ userRoutes.route('/resetearpuntos').post(function (req, res) {
             user.puntuacion_anterior = user.puntuacion;
             user.save().then(() => {
                     res.json('Update complete');
+                })
+                .catch(() => {
+                    res.status(400).send("unable to update the database");
+                });
+        }
+    });
+});
+
+userRoutes.route('/addlogro').post(function (req, res) {
+    User.findById({
+        _id: req.body.id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            var aux = [];
+            user.logros = user.logros.concat(req.body.logros)
+            user.save().then(() => {
+                    res.send(user.logros);
                 })
                 .catch(() => {
                     res.status(400).send("unable to update the database");

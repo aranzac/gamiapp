@@ -17,14 +17,14 @@
           <i class="fab fa-slack-hash">&nbsp;</i>
           ¡Has subido de nivel!
         </div>
-        <div v-if="!logro_nuevo" class="alert alert-success alert-dismissible">
+        <div v-if="logro_nuevo" class="alert alert-success alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <i class="fas fa-award">&nbsp;&nbsp;</i>
           ¡Has obtenido un nuevo logro!
         </div>
         <div class="row">
-          <div class="col-lg-6 mb-5">
-            <div class="card card1 shadow-sm" style="width: 25rem;">
+          <div class="col-lg-5 mb-5">
+            <div class="card card1 shadow-sm" style="width: 20rem;">
               <h2>Perfil</h2>
               <div class="col-lg-12 col-xs-12 col-md-12">
                 <img
@@ -103,8 +103,25 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6 mb-5">
-            <div class="card card1 shadow-sm" style="width: 25rem;">
+          <div class="col-lg-7 mb-5">
+            <b-modal
+              id="my-modal"
+              style="width: 10rem;"
+              ref="my-modal"
+              hide-footer
+              title="Logro descargable"
+            >
+              <!-- <div class="row">Descarga o imprime este archivo en tu dispositivo</div>
+              <br />
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <a href download>
+                    <i class="fas fa-file-pdf"></i>
+                  </a>
+                </div>
+              </div>-->
+            </b-modal>
+            <div id class="card card1 shadow-sm" style="width: 30rem;">
               <h2>Logros desbloqueados</h2>
               <table align="center" class="table centerTable table-sm">
                 <thead>
@@ -113,32 +130,23 @@
                     <th scope="col">Logro</th>
                     <th scope="col">Título</th>
                     <th scope="col">Descripción</th>
+                    <!-- <th scope="col">asdasd</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr></tr>
+                  <tr v-for="logro in logros_render" :key="logro._id">
                     <td class="cuadradito"></td>
                     <td>
-                      <img class="icono" src="../assets/visor.png" />
+                      <img class="icono" title="Imagen del logro" :src="logro.imagen" />
                     </td>
-                    <td class="align-middle">Explorador</td>
-                    <td class="align-middle">Has jugado a tareas y juegos por igual</td>
-                  </tr>
-                  <tr>
-                    <td class="cuadradito"></td>
-                    <td>
-                      <img class="icono" src="../assets/top.png" />
-                    </td>
-                    <td class="align-middle">En la cima</td>
-                    <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
-                  </tr>
-                  <tr>
-                    <td class="cuadradito"></td>
-                    <td>
-                      <img class="icono" title="Imagen del logro" src="../assets/love.png" />
-                    </td>
-                    <td class="align-middle">En la cima</td>
-                    <td class="align-middle">Has alcanzado el primer puesto del ranking</td>
+                    <td class="align-middle">{{logro.titulo}}</td>
+                    <td class="align-middle">{{logro.descripcion}}</td>
+                    <!-- <td>
+                      <button class="btn btn-warning text-light" @click="open()">
+                        <i class="fas fa-eye"></i>&nbsp;Ver logro
+                      </button>
+                    </td>-->
                   </tr>
                 </tbody>
               </table>
@@ -187,6 +195,7 @@ export default {
     return {
       usuario: [],
       animate: true,
+      _id: "",
       nombre: "",
       apellido: "",
       imagen: "",
@@ -196,23 +205,119 @@ export default {
       nivel: "",
       animal: "",
       puntuacion: 0,
-      puntuacion_total: "",
-      puntuacion_final: "",
+      puntuacion_total: 0,
+      puntuacion_final: 0,
       width: "width:" + 50 + "%;",
       restan: "",
       porcentaje: "puntuacion",
       nivel_nuevo: false,
       puntos_nuevos: false,
       logro_nuevo: false,
-      newPoints: ""
+      newPoints: "",
+      logros: [],
+      logros_user: [],
+      logros_render: []
     };
   },
   methods: {
     func() {
       return "../assets/visor.png";
+    },
+    open() {
+      this.$refs["my-modal"].show();
+    },
+    add_logros() {
+      this.axios.get("/logros").then(response => {
+        this.logros = response.data;
+        var aux = [];
+
+        //Logros que no ha conseguido
+        for (var i = 0; i < this.logros.length; i++) {
+          if (!this.logros_user.includes(i)) aux.push(i);
+        }
+
+        var logros_nuevos = [];
+
+        for (var i = 0; i < aux.length; i++) {
+          switch (aux[i]) {
+            case 1:
+              if (this.nivel_nuevo) if (this.nivel >= 2) logros_nuevos.push(1);
+              break;
+            case 2:
+              if (this.nivel_nuevo) if (this.nivel >= 3) logros_nuevos.push(2);
+              break;
+            case 3:
+              if (this.nivel_nuevo) if (this.nivel >= 4) logros_nuevos.push(3);
+              break;
+            case 4:
+              if (this.nivel_nuevo) if (this.nivel >= 5) logros_nuevos.push(4);
+              break;
+            case 5:
+              if (this.nivel_nuevo) if (this.nivel >= 6) logros_nuevos.push(5);
+              break;
+            case 6:
+              if (this.nivel_nuevo) if (this.nivel >= 7) logros_nuevos.push(6);
+              break;
+            case 7:
+              if (this.nivel_nuevo) if (this.nivel >= 8) logros_nuevos.push(7);
+              break;
+            case 8:
+              if (this.nivel_nuevo) if (this.nivel >= 9) logros_nuevos.push(8);
+              break;
+            case 9:
+              if (this.nivel_nuevo) if (this.nivel >= 10) logros_nuevos.push(9);
+              break;
+            case 10:
+              if (this.nivel_nuevo)
+                if (this.nivel == 10)
+                  if (this.puntuacion == 1) logros_nuevos.push(5);
+              break;
+            case 11:
+              break;
+          }
+        }
+        if (!logros_nuevos.length == 0) this.logro_nuevo = true;
+        else this.logro_nuevo = false;
+
+        var to_add = [];
+
+        for (var i = 0; i < logros_nuevos.length; i++) {
+          if (!this.logros_user.includes(logros_nuevos[i]))
+            to_add.push(logros_nuevos[i]);
+        }
+        if (to_add.length != 0)
+          this.axios
+            .post("usuarios/addlogro", {
+              id: this._id,
+              logros: to_add
+            })
+            .then(response => {
+              this.logros_user = response.data;
+            });
+      });
+    },
+    add_puntos() {
+      if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
+        this.puntos_nuevos = true;
+
+        if (this.usuario.puntuacion_anterior < limites[this.nivel - 1])
+          this.nivel_nuevo = true;
+
+        this.newPoints =
+          this.usuario.puntuacion - this.usuario.puntuacion_anterior;
+
+        this.axios.post("usuarios/resetearpuntos", {
+          _id: this.usuario._id
+        });
+      } else {
+        this.puntos_nuevos = false;
+        this.nivel_nuevo = false;
+      }
     }
   },
   created() {
+    this.logro_nuevo = false;
+
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
     let uri = "/jugados";
@@ -223,6 +328,7 @@ export default {
       })
       .then(response => {
         this.usuario = response.data;
+        this._id = response.data._id;
         this.nombre = this.usuario.nombre;
         this.apellido = this.usuario.apellido;
         this.edad = this.usuario.edad;
@@ -234,22 +340,18 @@ export default {
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
 
-        if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
-          this.puntos_nuevos = true;
+        this.logros_user = this.usuario.logros;
 
-          if (this.usuario.puntuacion_anterior < limites[this.nivel - 1])
-            this.nivel_nuevo = true;
+        // Comprobar si hay puntos nuevos y si ha subido de nivel
+        this.add_puntos();
 
-          this.newPoints =
-            this.usuario.puntuacion - this.usuario.puntuacion_anterior;
+        //Comprobar si ha conseguido logros nuevos
+        this.add_logros();
 
-          this.axios.post("usuarios/resetearpuntos", {
-            _id: this.usuario._id
-          });
-        } else {
-          this.puntos_nuevos = false;
-          this.nivel_nuevo = false;
-        }
+        let uri2 = "logros/ver";
+        this.axios.post(uri2, { logros: this.logros_user }).then(res => {
+          this.logros_render = res.data;
+        });
 
         this.restan = this.puntuacion_final - this.puntuacion;
 
@@ -286,7 +388,6 @@ export default {
             break;
 
           default:
-          // code block
         }
       });
   },
@@ -300,6 +401,17 @@ export default {
 </script>
 
 <style>
+.fas.fa-file-pdf {
+  font-size: 8em;
+  color: #dd0b0b;
+  /* background: rgb(161, 7, 7);
+  background: linear-gradient(
+    0deg,
+    rgba(161, 7, 7, 1) 37%,
+    rgba(235, 12, 12, 1) 100%
+  ); */
+}
+
 @media only screen and (max-width: 320px) {
   .card.card1 {
     width: 15rem !important;

@@ -12,23 +12,16 @@
                   <tr>
                     <th scope="col">Icono</th>
                     <th scope="col">Logro</th>
-                    <th scope="col">Se necesita</th>
+                    <th scope="col">Requisito</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for="logro in logros" :key="logro._id">
                     <th scope="row">
-                      <img class="icono" src="../assets/visor.png" />
+                      <img title="Icono del logro" class="icono" :src="logro.imagen" />
                     </th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <img class="icono" src="../assets/visor.png" />
-                    </th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
+                    <td>{{logro.titulo}}</td>
+                    <td>{{logro.descripcion}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -41,53 +34,24 @@
 </template>
 
 <script>
-// const token = localStorage.usertoken;
-// const decoded = jwtDecode(token);
-// export default {
-//   data() {
-//     return {
-//       email: "",
-//       password: "",
-//       warning1: false,
-//       warning2: false
-//     };
-//   },
-
-//   methods: {
-//     login() {
-//       console.log("login");
-//       // router.push({ name: "perfil" });
-
-//       this.axios
-//         .post("/usuarios/login", {
-//           email: this.email,
-//           password: this.password
-//         })
-//         .then(res => {
-//           if (res.data.error !== undefined) {
-//             if (res.data.error == "1") {
-//               this.warning2 = false;
-//               this.warning1 = true;
-//             } else if (res.data.error == "2") {
-//               this.warning1 = false;
-//               this.warning2 = true;
-//             }
-//           } else {
-//             localStorage.setItem("usertoken", res.data);
-
-//             if (decoded.rol == "alumno") this.$router.push({ name: "perfil" });
-//             else if (decoded.rol == "profesor")
-//               this.$router.push({ name: "profesor" });
-//           }
-//         })
-//         .catch(err => {});
-//       this.emitMethod();
-//     },
-//     emitMethod() {
-//       EventBus.$emit("logged-in", "loggedin");
-//     }
-//   }
-// };
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      warning1: false,
+      warning2: false,
+      logros: []
+    };
+  },
+  created() {
+    this.axios.post("logros/add");
+    this.axios.get("logros/").then(response => {
+      this.logros = response.data;
+      console.log(this.logros);
+    });
+  }
+};
 </script>
 
 
@@ -100,9 +64,11 @@ image {
 }
 .icono {
   padding: 0px;
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   margin: 0px;
+  border-radius: 20px;
+  border: 0px solid #232324;
 }
 
 @media only screen and (max-width: 1147px) {

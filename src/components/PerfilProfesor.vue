@@ -421,20 +421,21 @@ export default {
     addScore(tarea) {
       this.axios
         .post("usuarios/profile", {
-          _id: this.tarea_aux2.alumno
+          _id: this.tarea_aux2.id_alumno
         })
         .then(response => {
+       
           var puntuacion = this.nota * 5 + response.data.puntuacion;
 
           this.axios
             .post("usuarios/calificar", {
-              _id: this.tarea_aux2.alumno,
+              _id: this.tarea_aux2.id_alumno,
               puntuacion: puntuacion
             })
             .then(response => {
               this.axios
                 .post("usuarios/profile", {
-                  _id: this.tarea_aux2.alumno
+                  _id: this.tarea_aux2.id_alumno
                 })
                 .then(response => {
                   this.$refs["my-modal4"].hide();

@@ -44,7 +44,8 @@ let User = new Schema({
     },
     racha: {
         type: Number
-    }
+    },
+    logros: [Number]
 }, {
     collection: 'usuarios'
 });

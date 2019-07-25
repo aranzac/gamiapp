@@ -10,6 +10,8 @@ const postRoute = require('./routes/post.route');
 const userRoute = require('./routes/user.route');
 const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
+const logrosRoute = require('./routes/logros.route');
+
 
 const path = require("path")
 
@@ -44,6 +46,8 @@ app.use('/posts', postRoute);
 app.use('/usuarios', userRoute);
 app.use('/tareas', tareaRoute);
 app.use('/soluciones', solucionesRoute);
+app.use('/logros', logrosRoute);
+
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

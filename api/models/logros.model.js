@@ -1,19 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Tarea = new Schema({
+let Logro = new Schema({
+    inx: {
+        type: Number
+    },
     titulo: {
+        type: String
+    },
+    imagen: {
         type: String
     },
     descripcion: {
         type: String
     },
-    categoria: {
+    necesita: {
         type: String
     }
 }, {
-    collection: 'tareas'
+    collection: 'logros'
 });
 
 
-module.exports = mongoose.model('Tarea', Tarea);
+module.exports = mongoose.model('Logro', Logro);

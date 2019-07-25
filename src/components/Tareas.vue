@@ -92,7 +92,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>¿Tienes alguna foto de la actividad? ¡Súbela!</label>
-                        <input type="file" @change="onFileSelected" required />
+                        <input type="file" @change="onFileSelected" />
                         <div align="center">
                           <img width="320" :src="picture" />
                           <button
@@ -105,7 +105,6 @@
                     </div>
                   </div>
 
-                  <br />
                   <div class="form-group text-center">
                     <button class="btn btn-primary">Añadir tarea</button>
                   </div>
