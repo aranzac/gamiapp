@@ -71,9 +71,9 @@ export default {
             const token = localStorage.usertoken;
             const decoded = jwtDecode(token);
 
-            if (decoded.rol == "alumno") this.$router.push({ name: "perfil" });
-            else if (decoded.rol == "profesor")
-              this.$router.push({ name: "profesor" });
+            if (decoded.rol == "alumno") this.$router.push({ name: "Perfil" });
+            else if (decoded.rol == "Perfil de profesor")
+              this.$router.push({ name: "Perfil de profesor" });
           }
         })
         .catch(err => {});

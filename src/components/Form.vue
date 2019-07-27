@@ -125,9 +125,9 @@ export default {
   },
   created() {
     if (this.$route.path == "/iniciosesion") {
-      this.direccion = "perfil";
+      this.direccion = "Perfil";
     } else if (this.$route.path == "/registro") {
-      this.direccion = "iniciosesion";
+      this.direccion = "Inicio de Sesión";
     }
   },
   methods: {
@@ -166,7 +166,7 @@ export default {
           })
           .then(res => {
             if (res.data.error !== undefined) {
-              router.push({ name: "iniciosesion" });
+              router.push({ name: "Inicio de Sesión" });
               this.warning = true;
             } else {
               localStorage.setItem("usertoken", res.data);

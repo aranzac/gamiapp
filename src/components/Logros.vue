@@ -48,7 +48,6 @@ export default {
     this.axios.post("logros/add");
     this.axios.get("logros/").then(response => {
       this.logros = response.data;
-      console.log(this.logros);
     });
   }
 };

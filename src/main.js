@@ -57,13 +57,14 @@ import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue'
 import PruebaJuego from './components/PruebaJuego.vue'
 import Logros from './components/Logros.vue'
+import Tutorial from './components/Tutorial.vue'
 import './registerServiceWorker';
 
 
 
 
 const routes = [{
-    name: 'home',
+    name: 'Inicio',
     path: '/',
     component: HomeComponent,
 
@@ -79,17 +80,17 @@ const routes = [{
     component: IndexComponent
   },
   {
-    name: 'registro',
+    name: 'Registro',
     path: '/registro',
     component: Registro
   },
   {
-    name: 'iniciosesion',
+    name: 'Inicio de Sesión',
     path: '/iniciosesion',
     component: InicioSesion
   },
   {
-    name: 'perfil',
+    name: 'Perfil',
     path: '/perfil',
     component: Perfil
   },
@@ -104,17 +105,17 @@ const routes = [{
     component: IndexComponentUsuarios
   },
   {
-    name: 'rankings',
+    name: 'Ranking',
     path: '/rankings',
     component: Rankings
   },
   {
-    name: 'tareas',
+    name: 'Actividades',
     path: '/tareas',
     component: Tareas
   },
   {
-    name: 'profesor',
+    name: 'Perfil de profesor',
     path: '/profesor',
     component: PerfilProfesor
   },
@@ -124,9 +125,14 @@ const routes = [{
     component: PruebaJuego
   },
   {
-    name: 'logros',
+    name: 'Logros',
     path: '/logros',
     component: Logros
+  },
+  {
+    name: 'Tutorial',
+    path: '/tutorial',
+    component: Tutorial
   }
 ];
 

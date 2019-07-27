@@ -127,12 +127,10 @@ export default {
     };
   },
   created() {
-    console.log(this.rol);
-    console.log("registrando");
     if (this.$route.path == "/iniciosesion") {
-      this.direccion = "perfil";
+      this.direccion = "Perfil";
     } else if (this.$route.path == "/registro") {
-      this.direccion = "iniciosesion";
+      this.direccion = "Inicio de Sesión";
     }
   },
   methods: {
@@ -150,7 +148,6 @@ export default {
           password: this.password
         })
         .then(res => {
-          console.log("Usuario Registrado");
           this.$router.push({ name: this.direccion });
         })
         .catch(err => {
@@ -159,11 +156,9 @@ export default {
     },
     toggleOn() {
       this.rol = "alumno";
-      console.log(this.rol);
     },
     toggleOff() {
       this.rol = "profesor";
-      console.log(this.rol);
     }
   },
   computed: {
@@ -185,16 +180,6 @@ export default {
 .styleA {
   background-color: #ffc107;
 }
-
-/* input:checked label {
-  background-color: red;
-} */
-
-/* label:checked {
-  height: 50px;
-  width: 50px;
-  background-color: red;
-} */
 
 #etiqueta:checked + #input {
   font-weight: bold;

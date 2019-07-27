@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col-md-10"></div>
       <div class="col-md-2">
-        <router-link :to="{ name: 'registro' }" class="btn btn-primary">Registrar usuario</router-link>
+        <router-link :to="{ name: 'Registro' }" class="btn btn-primary">Registrar usuario</router-link>
       </div>
     </div>
-    <br>
+    <br />
 
     <table class="table table-hover">
       <thead>

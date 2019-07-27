@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <!-- <vue-headful
-        title="Gami"
-        description="Portal gamificado para aprender Pensamiento Computacional."
-      />-->
+      <vue-headful :title="$route.name" />
 
       <b-navbar toggleable="lg" type="dark" variant="warning">
         <!-- <b-navbar-brand  class="logo" href="/">Gami</b-navbar-brand> -->
@@ -13,7 +10,7 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <router-link to="/" class="nav-link text-light">Tutorial</router-link>
+            <router-link to="/tutorial" class="nav-link text-light">Tutorial</router-link>
             <router-link to="/" class="nav-link text-light">Información</router-link>
             <router-link
               v-if="auth=='loggedin'"
@@ -142,7 +139,7 @@ export default {
     logout() {
       localStorage.removeItem("usertoken");
       this.auth = "";
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: "Inicio" });
     },
     cuenta() {
       const token = localStorage.usertoken;

@@ -1,14 +1,8 @@
 <template>
   <div class="container">
-    <!-- <vue-headful :title="title" /> -->
-    <!-- <vue-headful
-      title="Gami"
-      description="Portal gamificado para aprender Pensamiento Computacional."
-    />-->
     <div class="row">
       <div class="col-lg-8 col-mg-10 col-xs-12" align="center"></div>
     </div>
-
     <div class="row justify-content-md-center mt-5">
       <div class="col-12 col-md-auto">
         <div v-if="puntos_nuevos" class="alert alert-success alert-dismissible">
@@ -225,7 +219,10 @@ export default {
       newPoints: "",
       logros: [],
       logros_user: [],
-      logros_render: []
+      logros_render: [],
+      racha: "",
+      aux: "",
+      logros_nuevos: []
     };
   },
   methods: {
@@ -277,11 +274,40 @@ export default {
               if (this.nivel_nuevo) if (this.nivel >= 10) logros_nuevos.push(9);
               break;
             case 10:
-              if (this.nivel_nuevo)
-                if (this.nivel == 10)
-                  if (this.puntuacion == 1) logros_nuevos.push(5);
+              if (this.nivel == 10)
+                if (this.puntuacion_total == limites[limites.length - 1])
+                  logros_nuevos.push(10);
               break;
-            case 11:
+            case 12:
+              this.axios.get("usuarios/max").then(res => {
+                // console.log(res.data);
+                // console.log(this._id);
+                // console.log(logros_nuevos);
+                if (res.data == this._id) {
+                  // console.log("ohla");
+                  // console.log(this.aux);
+                  this.aux = 12;
+                  // console.log(this.aux);
+                  this.logros_nuevos.push(this.aux);
+                }
+              });
+
+              console.log(this.aux);
+              // if (this.aux != "")
+              this.logros_nuevos.push(this.aux);
+              console.log(this.logros_nuevos);
+
+              break;
+            case 13:
+              if (this.nivel == 10)
+                if (this.puntuacion_total == limites[limites.length - 1])
+                  logros_nuevos.push(13);
+              break;
+            case 14:
+              if (this.racha >= 7) logros_nuevos.push(14);
+              break;
+            case 15:
+              if (this.racha >= 30) logros_nuevos.push(15);
               break;
           }
         }
@@ -302,6 +328,10 @@ export default {
             })
             .then(response => {
               this.logros_user = response.data;
+              let uri2 = "logros/ver";
+              this.axios.post(uri2, { logros: this.logros_user }).then(res => {
+                this.logros_render = res.data;
+              });
             });
       });
     },
@@ -329,7 +359,6 @@ export default {
 
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-    // document.title = `Perfil de ${decoded.rol}`;
 
     let uri = "/jugados";
 
@@ -348,21 +377,22 @@ export default {
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
         this.puntuacion_final = niveles[this.nivel - 1];
+        this.racha = this.usuario.racha;
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
 
         this.logros_user = this.usuario.logros;
+
+        let uri2 = "logros/ver";
+        this.axios.post(uri2, { logros: this.logros_user }).then(res => {
+          this.logros_render = res.data;
+        });
 
         // Comprobar si hay puntos nuevos y si ha subido de nivel
         this.add_puntos();
 
         //Comprobar si ha conseguido logros nuevos
         this.add_logros();
-
-        let uri2 = "logros/ver";
-        this.axios.post(uri2, { logros: this.logros_user }).then(res => {
-          this.logros_render = res.data;
-        });
 
         this.restan = this.puntuacion_final - this.puntuacion;
 
