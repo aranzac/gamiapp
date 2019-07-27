@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <!-- <vue-headful :title="title" /> -->
+    <!-- <vue-headful
+      title="Gami"
+      description="Portal gamificado para aprender Pensamiento Computacional."
+    />-->
     <div class="row">
       <div class="col-lg-8 col-mg-10 col-xs-12" align="center"></div>
     </div>
@@ -152,7 +157,10 @@
               </table>
               <div class="text-center mt-3">
                 <b-button variant="warning">
-                  <router-link to="/logros" class="nav-link text-light">Ver logros bloqueados</router-link>
+                  <router-link
+                    to="/logros"
+                    class="nav-link text-light p-0"
+                  >Todos los logros posibles</router-link>
                 </b-button>
               </div>
             </div>
@@ -193,6 +201,7 @@ export default {
     const nombre = "visor.png";
     const rutasa = "../assets/visor.png";
     return {
+      title: "Hola",
       usuario: [],
       animate: true,
       _id: "",
@@ -320,6 +329,8 @@ export default {
 
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
+    // document.title = `Perfil de ${decoded.rol}`;
+
     let uri = "/jugados";
 
     this.axios

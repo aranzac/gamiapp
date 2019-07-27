@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
+
+import vueHeadful from 'vue-headful';
+
 import firebase from 'firebase'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -12,14 +15,17 @@ Vue.use(BootstrapVue)
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+
+Vue.component('vue-headful', vueHeadful);
+
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 const base = axios.create({
   // Para despliege
-  baseURL: 'https://appgami.herokuapp.com'
+  // baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  // baseURL: 'http://localhost:5000/'
+  baseURL: 'http://localhost:5000/'
 })
 
 firebase.initializeApp({
@@ -53,10 +59,14 @@ import PruebaJuego from './components/PruebaJuego.vue'
 import Logros from './components/Logros.vue'
 import './registerServiceWorker';
 
+
+
+
 const routes = [{
     name: 'home',
     path: '/',
-    component: HomeComponent
+    component: HomeComponent,
+
   },
   {
     name: 'create',
@@ -124,6 +134,10 @@ const router = new VueRouter({
   mode: 'history',
   routes: routes
 });
+
+
+
+Vue.component('vue-headful', vueHeadful);
 
 new Vue(Vue.util.extend({
   router

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div>
+      <!-- <vue-headful
+        title="Gami"
+        description="Portal gamificado para aprender Pensamiento Computacional."
+      />-->
+
       <b-navbar toggleable="lg" type="dark" variant="warning">
         <!-- <b-navbar-brand  class="logo" href="/">Gami</b-navbar-brand> -->
         <router-link to="/" id="logo" class="logo">Gami</router-link>

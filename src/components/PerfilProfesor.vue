@@ -216,7 +216,7 @@
                         class="btn text-light"
                         @click="calificar(tarea_aux)"
                       >
-                        <b>Califixcar</b>
+                        <b>Calificar</b>
                       </b-button>
                     </div>
                   </div>
@@ -424,7 +424,6 @@ export default {
           _id: this.tarea_aux2.id_alumno
         })
         .then(response => {
-       
           var puntuacion = this.nota * 5 + response.data.puntuacion;
 
           this.axios
