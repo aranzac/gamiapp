@@ -86,20 +86,20 @@ userRoutes.route('/login').post(function (req, res) {
                         expiresIn: 1800
                     })
 
-                    // Guardar el momento de la conexión actual como última conexión 
-                    if (user.rol == "alumno") {
-                        var aux = user.ultima_conexion;
-                        user.ultima_conexion = new Date();
+                    // // Guardar el momento de la conexión actual como última conexión 
+                    // if (user.rol == "alumno") {
+                    //     var aux = user.ultima_conexion;
+                    //     user.ultima_conexion = new Date();
 
-                        // Actualizar la racha
-                        if (aux != null) {
-                            var one_day = 1000 * 60 * 60 * 24;
-                            var d1 = aux.getTime();
-                            var d2 = user.ultima_conexion.getTime();
-                            user.racha = Math.round(Math.abs(d2 - d1) / one_day);
-                            user.save();
-                        }
-                    }
+                    //     // Actualizar la racha
+                    //     if (aux != null) {
+                    //         var one_day = 1000 * 60 * 60 * 24;
+                    //         var d1 = aux.getTime();
+                    //         var d2 = user.ultima_conexion.getTime();
+                    //         user.racha = Math.round(Math.abs(d2 - d1) / one_day);
+                    //         user.save();
+                    //     }
+                    // }
 
                     res.send(token);
                 } else {
@@ -117,6 +117,36 @@ userRoutes.route('/login').post(function (req, res) {
             res.send('error: ' + err)
         })
 })
+
+userRoutes.route('/updateracha/:id').get(function (req, res) {
+    User.findById({
+        _id: req.params.id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+
+            var aux = user.ultima_conexion;
+            user.ultima_conexion = new Date();
+
+            // Actualizar la racha
+            if (aux != null) {
+
+                var one_day = 1000 * 60 * 60 * 24;
+                var d1 = aux.getTime();
+                var d2 = user.ultima_conexion.getTime();
+
+                user.racha = Math.round(Math.abs(d2 - d1) / one_day);
+                var aux2 = user.racha
+                console.log(user.racha)
+                // user.save();
+                // res.send(aux2);
+                //     res.send(user.racha)
+            }
+
+        }
+    });
+});
 
 // Lista solo los alumnos para el ranking
 userRoutes.route('/').get(function (req, res) {
@@ -136,7 +166,7 @@ userRoutes.route('/').get(function (req, res) {
 
 
 
-userRoutes.route('/max').get(function (req, res) {
+userRoutes.route('/max/:id').get(function (req, res) {
     User.find({
         rol: "alumno"
     }, function (err, usuarios) {
@@ -156,11 +186,33 @@ userRoutes.route('/max').get(function (req, res) {
             usuarios = array2.sort(function (a, b) {
                 return a[1] - b[1];
             });
+            User.findById({
+                _id: req.params.id
+            }, function (err, user) {
+                if (err) {
+                    res.json(err);
+                } else {
+                    // res.send(user);
+                    var a = usuarios[usuarios.length - 1][0].toString()
+                    var b = user._id.toString()
+
+                    if (usuarios[usuarios.length - 1][0].toString() == user._id.toString()) {
+                        // user.logros = user.logros.push(12)
+                        var aux = [12];
+                        user.logros = user.logros.concat(aux)
+                        user.save();
+                    }
+
+                }
+            });
+
 
             // Enviamos el id_ de la ultima posición que será el de mayor puntuacion
             // console.log(usuarios)
+            // if (usuarios[usuarios.length - 1][0]._id)
             // console.log(usuarios[usuarios.length - 1][0]);
-            res.json(usuarios[usuarios.length - 1][0]);
+            // res.send(usuarios[usuarios.length - 1][0]);
+            // return usuarios[usuarios.length - 1][0];
         }
     });
 });
@@ -189,7 +241,7 @@ userRoutes.route('/calificar').post(function (req, res) {
         } else {
             user.puntuacion = req.body.puntuacion;
 
-            if (user.puntuacion >= limites[user.nivel - 1])
+            if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;
 
             user.save().then(() => {
@@ -227,7 +279,6 @@ userRoutes.route('/addlogro').post(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            var aux = [];
             user.logros = user.logros.concat(req.body.logros)
             user.save().then(() => {
                     res.send(user.logros);
@@ -246,7 +297,8 @@ userRoutes.route('/levelup').post(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            user.nivel = user.nivel + 1;
+            if (user.nivel < 10)
+                user.nivel = user.nivel + 1;
             user.save().then(() => {
                     res.json('Update complete');
                 })

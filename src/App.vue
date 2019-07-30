@@ -3,7 +3,7 @@
     <div>
       <vue-headful :title="$route.name" />
 
-      <b-navbar toggleable="lg" type="dark" variant="warning">
+      <b-navbar toggleable="lg" type="dark" variant="info">
         <!-- <b-navbar-brand  class="logo" href="/">Gami</b-navbar-brand> -->
         <router-link to="/" id="logo" class="logo">Gami</router-link>
 
@@ -11,16 +11,16 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <router-link to="/tutorial" class="nav-link text-light">Tutorial</router-link>
-            <router-link to="/" class="nav-link text-light">Información</router-link>
+            <!-- <router-link to="/" class="nav-link text-light">Información</router-link> -->
             <router-link
               v-if="auth=='loggedin'"
               to="/tareas"
               class="nav-link text-light"
             >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
-            <router-link to="/juego" class="nav-link text-light">Juego</router-link>
-            <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
-            <a href="../h5p/demo/juegos.html">Juegaso</a>
+            <!-- <router-link to="/juego" class="nav-link text-light">Juego</router-link> -->
+            <!-- <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link> -->
+            <!-- <a href="../h5p/demo/juegos.html">Juegaso</a> -->
           </b-navbar-nav>
           <br />
           <b-navbar-nav class="ml-auto">
@@ -103,6 +103,29 @@ th,
 .btn {
   font-family: Quicksand;
   font-weight: bold;
+}
+
+.navbar-nav > .nav-link {
+  color: white;
+  /* font-weight: 500; */
+  font-size: 1.1em;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.navbar-nav > .nav-link:hover {
+  /* color: rgb(223, 222, 222) !important; */
+  color: white !important;
+  /* font-weight: 700; */
+  font-size: 1.1em;
+  text-decoration: underline;
+}
+
+.navbar-nav > a.nav-link:focus {
+  /* color: rgb(236, 233, 233) !important; */
+  color: whitesmoke !important;
+  font-weight: 700;
+  text-decoration: underline;
 }
 </style>
 

@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                   <label for="apellido" class="d-block">Rol</label>
-                  <section>
+                  <section class="text-center">
                     <!-- <label v-bind:style="{"background-color" : (isActive? "#d4a108" : "#ffc107" )}" @click="toggleClass()" class="btn btn-warning text-light btn-secondary"> -->
                     <label
                       v-bind:class="{ styleB: isActive, styleA: !isActive }"
@@ -46,13 +46,6 @@
                         value="profesor"
                       />Profesor
                     </label>
-
-                    <!-- <span>value: {{isActive}}</span>
-                      
-                       <span>value: {{nombre}}</span>
-                        <span>value: {{apellido}}</span>
-                         <span>value: {{edad}}</span>
-                    <span>value: {{rol}}</span>-->
                   </section>
                 </div>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="row pt-5 pr-5 pl-5">
-      <h1 class="col-lg-9 col-md-6 col-xs-6">
-        Todas las actividades
+      <h1 class="col-lg-9 col-md-6 col-xs-6 titulo2">
+        Actividades
         <a
           class="text-justify"
           data-toggle="popover"
@@ -10,7 +10,7 @@
           data-placement="bottom"
           data-content="Estas actividades te permiten aprender Pensamiento Computacional mientras realizas una tarea en tu aula o incluso en tu casa. Busca una que te guste, sigue las instrucciones y finalmente rellena el formulario para que un profesor pueda valorar tu actividad."
         >
-          <i class="fas fa-info-circle text-warning"></i>
+          <i class="fas fa-info-circle text-warning" style="font-size:50px"></i>
         </a>
       </h1>
 
@@ -286,6 +286,18 @@ export default {
 </script>
 
 <style scoped>
+.titulo2 {
+  font-family: Quicksand;
+  font-weight: bold;
+  font-size: 4em;
+}
+
+@media only screen and (max-width: 540px) {
+  .titulo2 {
+    font-size: 3em;
+  }
+}
+
 img {
   border: 0px;
 }

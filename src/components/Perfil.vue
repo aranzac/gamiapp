@@ -10,7 +10,11 @@
           <i class="fa fa-exclamation-circle">&nbsp;&nbsp;</i>
           ¡Has obtenido {{newPoints}} puntos de experiencia!
         </div>
-
+        <div v-if="racha_perdida" class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <i class="far fa-frown">&nbsp;</i>
+          Has perdido la racha. Sigue conectándote cada día para recuperarla.
+        </div>
         <div v-if="nivel_nuevo" class="alert alert-success alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <i class="fab fa-slack-hash">&nbsp;</i>
@@ -95,6 +99,16 @@
                       </div>
                       <div class="col lg-6 inline right">
                         <p>{{periodo}}</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
+                        <b>Racha:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p>{{racha}}</p>
                       </div>
                     </div>
                   </li>
@@ -216,6 +230,7 @@ export default {
       nivel_nuevo: false,
       puntos_nuevos: false,
       logro_nuevo: false,
+      racha_perdida: false,
       newPoints: "",
       logros: [],
       logros_user: [],
@@ -232,7 +247,13 @@ export default {
     open() {
       this.$refs["my-modal"].show();
     },
+    get_max_user() {
+      console.log("hola");
+      console.log(this.axios.get("usuarios/max"));
+      return this.axios.get("usuarios/max");
+    },
     add_logros() {
+      var au2;
       this.axios.get("/logros").then(response => {
         this.logros = response.data;
         var aux = [];
@@ -275,28 +296,13 @@ export default {
               break;
             case 10:
               if (this.nivel == 10)
-                if (this.puntuacion_total == limites[limites.length - 1])
+                if (this.puntuacion_total >= limites[limites.length - 1])
                   logros_nuevos.push(10);
               break;
             case 12:
-              this.axios.get("usuarios/max").then(res => {
-                // console.log(res.data);
-                // console.log(this._id);
-                // console.log(logros_nuevos);
-                if (res.data == this._id) {
-                  // console.log("ohla");
-                  // console.log(this.aux);
-                  this.aux = 12;
-                  // console.log(this.aux);
-                  this.logros_nuevos.push(this.aux);
-                }
-              });
-
-              console.log(this.aux);
-              // if (this.aux != "")
-              this.logros_nuevos.push(this.aux);
-              console.log(this.logros_nuevos);
-
+              console.log("12");
+              var uri = `usuarios/max/${this._id}`;
+              this.axios.get(uri);
               break;
             case 13:
               if (this.nivel == 10)
@@ -339,7 +345,10 @@ export default {
       if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
         this.puntos_nuevos = true;
 
-        if (this.usuario.puntuacion_anterior < limites[this.nivel - 1])
+        if (
+          this.usuario.puntuacion_anterior < limites[this.nivel - 2] &&
+          this.usuario.puntuacion > limites[this.nivel - 2]
+        )
           this.nivel_nuevo = true;
 
         this.newPoints =
@@ -377,58 +386,73 @@ export default {
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
         this.puntuacion_final = niveles[this.nivel - 1];
-        this.racha = this.usuario.racha;
+        // this.racha = this.usuario.racha;
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
 
-        this.logros_user = this.usuario.logros;
+        if (this.usuario.rol == "alumno") {
+          var racha_aux = this.usuario.racha;
 
-        let uri2 = "logros/ver";
-        this.axios.post(uri2, { logros: this.logros_user }).then(res => {
-          this.logros_render = res.data;
-        });
+          var uri3 = `usuarios/updateracha/${this._id}`;
+          this.axios.get(uri3).then(res => {
+            console.log(res.data);
 
-        // Comprobar si hay puntos nuevos y si ha subido de nivel
-        this.add_puntos();
+            if (racha_aux > res.data) {
+              this.racha_perdida = true;
+              console.log("hola guapa");
+            }
+          });
 
-        //Comprobar si ha conseguido logros nuevos
-        this.add_logros();
+          this.logros_user = this.usuario.logros;
 
-        this.restan = this.puntuacion_final - this.puntuacion;
+          let uri2 = "logros/ver";
+          this.axios.post(uri2, { logros: this.logros_user }).then(res => {
+            this.logros_render = res.data;
+          });
 
-        switch (this.nivel) {
-          case 1:
-            this.imagen = require("../assets/1.png");
-            break;
-          case 2:
-            this.imagen = require("../assets/2.png");
-            break;
-          case 3:
-            this.imagen = require("../assets/3.png");
-            break;
-          case 4:
-            this.imagen = require("../assets/4.png");
-            break;
-          case 5:
-            this.imagen = require("../assets/5.png");
-            break;
-          case 6:
-            this.imagen = require("../assets/6.png");
-            break;
-          case 7:
-            this.imagen = require("../assets/7.png");
-            break;
-          case 8:
-            this.imagen = require("../assets/8.png");
-            break;
-          case 9:
-            this.imagen = require("../assets/9.png");
-            break;
-          case 10:
-            this.imagen = require("../assets/10.png");
-            break;
+          // Comprobar si hay puntos nuevos y si ha subido de nivel
+          this.add_puntos();
 
-          default:
+          //Comprobar si ha conseguido logros nuevos
+          this.add_logros();
+
+          this.restan = this.puntuacion_final - this.puntuacion;
+          if (this.restan < 0) this.restan = 0;
+
+          switch (this.nivel) {
+            case 1:
+              this.imagen = require("../assets/1.png");
+              break;
+            case 2:
+              this.imagen = require("../assets/2.png");
+              break;
+            case 3:
+              this.imagen = require("../assets/3.png");
+              break;
+            case 4:
+              this.imagen = require("../assets/4.png");
+              break;
+            case 5:
+              this.imagen = require("../assets/5.png");
+              break;
+            case 6:
+              this.imagen = require("../assets/6.png");
+              break;
+            case 7:
+              this.imagen = require("../assets/7.png");
+              break;
+            case 8:
+              this.imagen = require("../assets/8.png");
+              break;
+            case 9:
+              this.imagen = require("../assets/9.png");
+              break;
+            case 10:
+              this.imagen = require("../assets/10.png");
+              break;
+
+            default:
+          }
         }
       });
   },

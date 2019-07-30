@@ -3,13 +3,21 @@
     <section id="loginform" class="outer-wrapper">
       <div class="container">
         <div class="row">
-          <div class="col-lg-2 col-mg-2 col-xs-0"></div>
-          <div class="col-lg-8 col-mg-10 col-xs-12">
+          <h1 class="col-lg-9 col-md-6 col-xs-6 titulo2 pt-3 pl-5 pb-3">
+            Ranking
+            <a
+              class="text-justify"
+              data-toggle="popover"
+              data-trigger="hover"
+              data-placement="bottom"
+              data-content="Aquí se muestran todos los usuarios ordenados por puntuación. Participa constantemente para conseguir más puntos y llegar a la primera posición del ranking."
+            >
+              <i class="fas fa-info-circle text-warning" style="font-size:50px"></i>
+            </a>
+          </h1>
+          <div class="col-lg-12 col-mg-12 col-xs-12">
             <div id="card-form" class="card mb-5" style="width: 25rem;">
-              <h1 class="text-center mt-2">Ranking</h1>
               <div class="row">
-                <div class="col-md-10 mt-1"></div>
-
                 <table align="center" class="table centerTable table-hover table-sm">
                   <thead>
                     <tr>
@@ -59,6 +67,24 @@
 </template>
 
 <style scoped>
+.titulo2 {
+  font-family: Quicksand;
+  font-weight: bold;
+  font-size: 4em;
+}
+
+@media only screen and (max-width: 988px) {
+  .titulo2 {
+    padding-left: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .titulo2 {
+    font-size: 3em;
+  }
+}
+
 h1 {
   font-family: Quicksand;
   font-weight: bold;
@@ -112,6 +138,10 @@ export default {
     };
   },
   created() {
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover();
+    });
+
     let uri = "/usuarios";
 
     this.axios.get(uri).then(response => {
