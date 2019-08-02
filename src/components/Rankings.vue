@@ -12,7 +12,7 @@
               data-placement="bottom"
               data-content="Aquí se muestran todos los usuarios ordenados por puntuación. Participa constantemente para conseguir más puntos y llegar a la primera posición del ranking."
             >
-              <i class="fas fa-info-circle text-warning" style="font-size:50px"></i>
+              <i class="fas fa-info-circle text-warning info" style="font-size:50px"></i>
             </a>
           </h1>
           <div class="col-lg-12 col-mg-12 col-xs-12">
@@ -76,6 +76,7 @@
 @media only screen and (max-width: 988px) {
   .titulo2 {
     padding-left: 0px !important;
+    text-align: center;
   }
 }
 
@@ -96,10 +97,10 @@ h1 {
     padding-left: 6px !important;
     font-size: 0.9em;
   }
-
+  /* 
   i {
     font-size: 15px !important;
-  }
+  } */
 }
 @media only screen and (max-width: 360px) {
   th {
@@ -108,8 +109,8 @@ h1 {
     font-size: 0.8em;
   }
 
-  i {
-    font-size: 14px !important;
+  .info {
+    font-size: 35px !important;
   }
 }
 
@@ -123,14 +124,14 @@ h1 {
   /* padding-right: 5px; */
   margin-top: 4px;
 }
-
+/* 
 i {
   font-size: 30px;
-}
+} */
 </style>
 
 
-<script >
+// <script >
 export default {
   data() {
     return {

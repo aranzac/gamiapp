@@ -8,9 +8,9 @@
           data-toggle="popover"
           data-trigger="hover"
           data-placement="bottom"
-          data-content="Estas actividades te permiten aprender Pensamiento Computacional mientras realizas una tarea en tu aula o incluso en tu casa. Busca una que te guste, sigue las instrucciones y finalmente rellena el formulario para que un profesor pueda valorar tu actividad."
+          data-content="Estas actividades te permiten aprender Pensamiento Computacional mientras realizas una tarea en tu aula o incluso en tu casa. Busca una que te guste, sigue las instrucciones y finalmente rellena el formulario para que un profesor o profesora pueda valorar tu actividad."
         >
-          <i class="fas fa-info-circle text-warning" style="font-size:50px"></i>
+          <i class="fas fa-info-circle text-warning info" style="font-size:50px"></i>
         </a>
       </h1>
 
@@ -292,9 +292,19 @@ export default {
   font-size: 4em;
 }
 
+@media only screen and (max-width: 1000px) {
+  .titulo2 {
+    font-size: 3em;
+  }
+  .info {
+    font-size: 30px !important;
+  }
+}
+
 @media only screen and (max-width: 540px) {
   .titulo2 {
     font-size: 3em;
+    padding-left: 0px;
   }
 }
 
@@ -312,6 +322,9 @@ img {
   }
   .row.justify-content-md-center {
     margin-top: 0px !important;
+  }
+  .info {
+    font-size: 35px !important;
   }
 }
 @media only screen and (max-width: 643px) {

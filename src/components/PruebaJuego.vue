@@ -1,7 +1,3 @@
-
-
-
-
 <template>
   <div>
     <h1>Juego 1. Nivel 2</h1>
@@ -26,25 +22,47 @@
 
 
 <script>
+// var __oldJQuery = jQuery;
+// jQuery = H5P.jQuery;
+
+// (function($) {
+//   $(function() {
+//     $(".h5p-container").h5p({
+//       frameJs: "../dist/js/h5p-standalone-frame.min.js",
+//       frameCss: "../dist/styles/h5p.css",
+//       h5pContent: "../workspace/hervir",
+//       displayOptions: {
+//         // OPTIONAL hide the frame or download, export etc. buttons they are visible by default
+//         frame: true,
+//         copyright: true,
+//         embed: false,
+//         download: false,
+//         icon: true,
+//         export: false
+//       }
+//     });
+//   });
+// })(H5P.jQuery);
+
 export default {};
 $(document).ready(function() {
   $('[data-toggle="popover"]').popover();
 });
 
-function myFunction() {
-  var iframe = document.querySelector("#h5p-iframe-1");
-  var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+// function myFunction() {
+//   var iframe = document.querySelector("#h5p-iframe-1");
+//   var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
 
-  if (!iframeDocument) {
-    throw "iframe couldn't be found in DOM.";
-  }
+//   if (!iframeDocument) {
+//     throw "iframe couldn't be found in DOM.";
+//   }
 
-  var iframeContent = iframeDocument.querySelector(
-    ".h5p-joubelui-score-number"
-  );
+//   var iframeContent = iframeDocument.querySelector(
+//     ".h5p-joubelui-score-number"
+//   );
 
-  console.log(iframeContent.textContent);
-}
+//   console.log(iframeContent.textContent);
+// }
 </script>
 
 

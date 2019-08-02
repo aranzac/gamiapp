@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row pt-5 pr-5 pl-5">
-      <h1 class="titulo2 col-lg-9 col-md-6 col-xs-6">
+      <h1 class="titulo2 col-lg-9 col-md-9 col-xs-9">
         Tutorial
         <a
           class="text-justify"
@@ -10,7 +10,7 @@
           data-placement="right"
           data-content="Haz click en alguno de los temas para consultarlo "
         >
-          <i class="fas fa-info-circle text-warning" style="font-size:50px"></i>
+          <i class="fas fa-info-circle text-warning info" style="font-size:50px"></i>
         </a>
       </h1>
     </div>
@@ -38,7 +38,38 @@
               </b-card-body>
             </b-collapse>
           </b-card>
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block href="#" v-b-toggle.accordion-9 variant="info">¿Cómo guardar la app?</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-9" accordion="my-accordion" role="tabpanel">
+              <b-card-body class="text-justify">
+                <b-card-text>{{ text9 }}</b-card-text>
 
+                <br />
+                <b-card-text>
+                  <b>{{text10}}</b>
+                </b-card-text>
+                <br />
+                <div align="center">
+                  <img class="pasos" alt="Paso 1" src="../assets/paso1IOS.png" />
+                  <img class="pasos" alt="Paso 2" src="../assets/paso2IOS.png" />
+                  <img class="pasos" alt="Paso 3" src="../assets/paso3IOS.png" />
+                </div>
+
+                <br />
+                <b-card-text>
+                  <b>{{text11}}</b>
+                </b-card-text>
+                <br />
+                <div align="center">
+                  <img class="pasos" alt="Paso 1" src="../assets/paso1IOS.png" />
+                  <img class="pasos" alt="Paso 2" src="../assets/paso2IOS.png" />
+                  <img class="pasos" alt="Paso 3" src="../assets/paso3IOS.png" />
+                </div>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
           <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
               <b-button block href="#" v-b-toggle.accordion-3 variant="info">Perfiles</b-button>
@@ -137,7 +168,11 @@ export default {
       text7:
         "Para subir de nivel debes esperar a que un profesor o profesora evalúe las actividades que has realizado previamente. A medida que subas de nivel el juego se irá complicando y necesitarás más puntos para pasar al siguiente. Si eres constante y te conectas una semana seguida obtendrás una racha que bonificará tus puntuaciones siguientes. Desde que no te conectes un día perderás dicha racha :(",
       text8:
-        "Los logros te ayudan a reconocer tu trabajo y tu progreso. Cada vez que superes un nivel obtendrás el logro correspondiente. Sé el o la mejor para ganar más logros que nadie. Puedes consultar todos los logros disponibles en el siguiente enlace"
+        "Los logros te ayudan a reconocer tu trabajo y tu progreso. Cada vez que superes un nivel obtendrás el logro correspondiente. Sé el o la mejor para ganar más logros que nadie. Puedes consultar todos los logros disponibles en el siguiente enlace",
+      text9:
+        "Para guardar la página web de Gami en la pantalla principal de tu dispositivo debes seguir los siguientes pasos según el sistema operativo: ",
+      text10: "IOS (Debe ser con el navegador safari): ",
+      text11: "Android (Con Google Chrome): "
     };
   },
   created() {
@@ -190,6 +225,34 @@ p.card-text {
   }
   .p-3 {
     padding: 0px !important;
+  }
+  .info {
+    font-size: 35px !important;
+  }
+}
+
+.pasos {
+  border: 0px;
+  max-width: 60%;
+  max-height: 60%;
+  margin: 0px !important;
+  display: block;
+}
+
+@media only screen and (max-width: 790px) {
+  img.pasos {
+    min-width: 80%;
+    min-height: 80%;
+  }
+  .titulo2 {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  img.pasos {
+    min-width: 100%;
+    min-height: 100%;
   }
 }
 </style>

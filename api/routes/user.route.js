@@ -116,6 +116,20 @@ userRoutes.route('/login').post(function (req, res) {
         .catch(err => {
             res.send('error: ' + err)
         })
+});
+
+userRoutes.route('/getracha/:id').get(function (req, res) {
+    User.findById({
+        _id: req.params.id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({
+                racha: user.racha
+            })
+        }
+    })
 })
 
 userRoutes.route('/updateracha/:id').get(function (req, res) {
@@ -125,25 +139,43 @@ userRoutes.route('/updateracha/:id').get(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-
             var aux = user.ultima_conexion;
-            user.ultima_conexion = new Date();
+            var copia = user.racha;
+            var hoy = new Date();
+            user.ultima_conexion = hoy;
 
-            // Actualizar la racha
+            // Actualizar la racha. Pregunta si es nulo para que no lo compare en caso de que sea la primera vez que se conecta (No hay dos fechas que comparar)
             if (aux != null) {
 
                 var one_day = 1000 * 60 * 60 * 24;
                 var d1 = aux.getTime();
                 var d2 = user.ultima_conexion.getTime();
 
-                user.racha = Math.round(Math.abs(d2 - d1) / one_day);
-                var aux2 = user.racha
-                console.log(user.racha)
-                // user.save();
-                // res.send(aux2);
-                //     res.send(user.racha)
-            }
+                var diff = Math.round(Math.abs(d2 - d1) / one_day);
 
+                // Si ha pasado más de un día sin conectarse
+                if (diff > 1) {
+                    user.racha = 0
+                } else
+                    // Si se ha conectado en menos de 1 dia pero los dias son distintos, por lo tanto, aumenta la racha en un día
+                    if (user.ultima_conexion.getDate() != hoy.getDate()) {
+                        user.racha++;
+                    } else {
+                        // user.racha--;
+                    }
+                // console.log(racha);
+                user.save().then(response => {
+                    res.json({
+                        racha: copia
+                    })
+                })
+
+            } else {
+                user.save();
+                res.json({
+                    status: 'Primer acceso tras el registro'
+                })
+            }
         }
     });
 });
@@ -157,14 +189,10 @@ userRoutes.route('/').get(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-
-
             res.json(usuarios);
         }
     });
 });
-
-
 
 userRoutes.route('/max/:id').get(function (req, res) {
     User.find({
@@ -239,7 +267,20 @@ userRoutes.route('/calificar').post(function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            user.puntuacion = req.body.puntuacion;
+            var suma;
+
+            // Se calcula lo que se va a sumar
+            if (user.racha >= 2) {
+
+                // Con racha se aplica una bonificación que corresponde al porcentaje formado por racha * 0.1
+                suma = Math.round(req.body.puntuacion * 5 + req.body.puntuacion * 5 * user.racha * 0.1);
+
+            } else {
+                suma = req.body.puntuacion * 5;
+            }
+
+            //  Suma final sobre los puntos actuales del usuario
+            user.puntuacion = (suma + user.puntuacion);
 
             if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;

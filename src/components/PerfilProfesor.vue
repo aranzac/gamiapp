@@ -424,12 +424,13 @@ export default {
           _id: this.tarea_aux2.id_alumno
         })
         .then(response => {
-          var puntuacion = this.nota * 5 + response.data.puntuacion;
+          // var puntuacion = this.nota * 5 + response.data.puntuacion;
 
+          // console.log(this.nota);
           this.axios
             .post("usuarios/calificar", {
               _id: this.tarea_aux2.id_alumno,
-              puntuacion: puntuacion
+              puntuacion: this.nota
             })
             .then(response => {
               this.axios

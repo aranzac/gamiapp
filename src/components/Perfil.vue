@@ -15,6 +15,11 @@
           <i class="far fa-frown">&nbsp;</i>
           Has perdido la racha. Sigue conectándote cada día para recuperarla.
         </div>
+        <div v-if="racha_aumentada" class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <i class="far fa-smile">&nbsp;&nbsp;</i>
+          ¡Tu racha ha aumentado! Sigue conectándote cada día para no perderla.
+        </div>
         <div v-if="nivel_nuevo" class="alert alert-success alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <i class="fab fa-slack-hash">&nbsp;</i>
@@ -108,7 +113,7 @@
                         <b>Racha:</b>
                       </div>
                       <div class="col lg-6 inline right">
-                        <p>{{racha}}</p>
+                        <p class="minimizar">{{racha}} días seguidos conectándote</p>
                       </div>
                     </div>
                   </li>
@@ -231,6 +236,7 @@ export default {
       puntos_nuevos: false,
       logro_nuevo: false,
       racha_perdida: false,
+      racha_aumentada: false,
       newPoints: "",
       logros: [],
       logros_user: [],
@@ -248,8 +254,6 @@ export default {
       this.$refs["my-modal"].show();
     },
     get_max_user() {
-      console.log("hola");
-      console.log(this.axios.get("usuarios/max"));
       return this.axios.get("usuarios/max");
     },
     add_logros() {
@@ -300,7 +304,6 @@ export default {
                   logros_nuevos.push(10);
               break;
             case 12:
-              console.log("12");
               var uri = `usuarios/max/${this._id}`;
               this.axios.get(uri);
               break;
@@ -342,7 +345,10 @@ export default {
       });
     },
     add_puntos() {
-      if (this.puntuacion_total - this.usuario.puntuacion_anterior != 0) {
+      if (
+        this.puntuacion_total - this.usuario.puntuacion_anterior != 0 &&
+        this.puntuacion_total != 0
+      ) {
         this.puntos_nuevos = true;
 
         if (
@@ -364,10 +370,10 @@ export default {
     }
   },
   created() {
-    this.logro_nuevo = false;
-
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
+
+    this.logro_nuevo = false;
 
     let uri = "/jugados";
 
@@ -386,7 +392,7 @@ export default {
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
         this.puntuacion_final = niveles[this.nivel - 1];
-        // this.racha = this.usuario.racha;
+        this.racha = this.usuario.racha;
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
 
@@ -395,12 +401,19 @@ export default {
 
           var uri3 = `usuarios/updateracha/${this._id}`;
           this.axios.get(uri3).then(res => {
-            console.log(res.data);
+            var old = res.data.racha;
+            console.log(old);
 
-            if (racha_aux > res.data) {
-              this.racha_perdida = true;
-              console.log("hola guapa");
-            }
+            var uri4 = `usuarios/getracha/${this._id}`;
+            this.axios.get(uri4).then(res => {
+              this.racha = res.data.racha;
+              console.log(this.racha);
+              if (old != 0 && this.racha == 0) {
+                this.racha_perdida = true;
+              } else if (this.racha > old) {
+                this.racha_aumentada = true;
+              }
+            });
           });
 
           this.logros_user = this.usuario.logros;
@@ -416,9 +429,11 @@ export default {
           //Comprobar si ha conseguido logros nuevos
           this.add_logros();
 
+          // Calcular los puntos que faltan para el siguiente nivel
           this.restan = this.puntuacion_final - this.puntuacion;
           if (this.restan < 0) this.restan = 0;
 
+          // Para asignar las imagenes segun los niveles
           switch (this.nivel) {
             case 1:
               this.imagen = require("../assets/1.png");
@@ -466,6 +481,10 @@ export default {
 </script>
 
 <style>
+.minimizar {
+  text-transform: initial;
+}
+
 .fas.fa-file-pdf {
   font-size: 8em;
   color: #dd0b0b;
