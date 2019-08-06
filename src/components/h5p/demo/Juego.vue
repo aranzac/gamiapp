@@ -20,9 +20,9 @@ module.exports = {
   },
   mounted() {
     // Se proporciona la librería necesaria para que encuentre la var H5P.jQuery
-    let src = document.createElement("script");
-    src.setAttribute("src", "/dist/js/h5p-standalone-main.min.js");
-    document.head.appendChild(src);
+    // let src = document.createElement("script");
+    // src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    // document.head.appendChild(src);
     (function($) {
       $(function() {
         $(".h5p-container").h5p({
