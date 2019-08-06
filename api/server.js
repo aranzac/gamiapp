@@ -58,14 +58,14 @@ app.use((req, res, next) => {
     next();
 });
 
-// Para desarrollo
-app.listen(5000, function () {
-    console.log('Server is running on Port:', 5000);
-});
+// // Para desarrollo
+// app.listen(5000, function () {
+//     console.log('Server is running on Port:', 5000);
+// });
 
 // Para despliegue
 
-// app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 4000);
 
 
 console.log(process.env.PORT);
