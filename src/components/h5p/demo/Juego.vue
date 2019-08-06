@@ -21,7 +21,7 @@ module.exports = {
   mounted() {
     // Se proporciona la librería necesaria para que encuentre la var H5P.jQuery
     let src = document.createElement("script");
-    src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    src.setAttribute("src", "/dist/js/h5p-standalone-main.min.js");
     document.head.appendChild(src);
     (function($) {
       $(function() {
@@ -29,7 +29,7 @@ module.exports = {
           id: 1, // OPTIONAL id change this if using multiple h5ps on the same page
           frameJs: "/h5p/dist/js/h5p-standalone-frame.min.js", // OPTIONAL if you move the location of h5p-standalone-frame.min.js
           frameCss: "/h5p/dist/styles/h5p.css", // OPTIONAL if you move the location of h5p.css
-          h5pContent: "/h5p/workspace/hervir", // Location of the unpacked H5P content,
+          h5pContent: "/h5p/workspace/example", // Location of the unpacked H5P content,
           displayOptions: {
             // OPTIONAL hide the frame or download, export etc. buttons they are visible by default
             frame: true,
