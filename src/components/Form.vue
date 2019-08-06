@@ -105,10 +105,7 @@
 
 <script>
 import axios from "axios";
-// import router from "../main.js";
 import EventBus from "./EventBus";
-
-//
 
 export default {
   data() {

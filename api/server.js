@@ -12,7 +12,6 @@ const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
 const logrosRoute = require('./routes/logros.route');
 
-
 const path = require("path")
 
 mongoose.Promise = global.Promise;
@@ -67,6 +66,6 @@ app.use((req, res, next) => {
 // Para despliegue
 
 app.listen(process.env.PORT || 4000);
-// 
+
 
 console.log(process.env.PORT);

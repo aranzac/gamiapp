@@ -149,6 +149,12 @@ export default {
       rol: false
     };
   },
+  mounted() {
+    let recaptchaLink4 = document.createElement("script");
+    recaptchaLink4.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.js");
+
+    document.head.appendChild(recaptchaLink4);
+  },
   created() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
@@ -157,7 +163,6 @@ export default {
     else if (decoded.rol == "alumno") this.rol = false;
 
     if (decoded.rol == "profesor") this.alumno = "profesor";
-    else if (decoded.rol == "alumno") console.log(this.alumno);
   },
   methods: {
     logout() {

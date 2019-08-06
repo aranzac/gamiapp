@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import BootstrapVue from 'bootstrap-vue'
-import PortalVue from 'portal-vue'
+import Vue from 'vue';
+import App from './App.vue';
+import BootstrapVue from 'bootstrap-vue';
+import PortalVue from 'portal-vue';
 
 import vueHeadful from 'vue-headful';
 
-import firebase from 'firebase'
+import firebase from 'firebase';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.use(PortalVue)
-Vue.use(BootstrapVue)
+Vue.use(PortalVue);
+Vue.use(BootstrapVue);
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
@@ -26,19 +26,17 @@ const base = axios.create({
   baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
   // baseURL: 'http://localhost:5000/'
-})
+});
 
 firebase.initializeApp({
-
-  apiKey: "AIzaSyAtGV1ggJO-8AHfXGaSyvhg2SJmON2_rTg",
-  authDomain: "gami-314da.firebaseapp.com",
-  databaseURL: "https://gami-314da.firebaseio.com",
-  projectId: "gami-314da",
-  storageBucket: "gami-314da.appspot.com",
-  messagingSenderId: "626672250699",
-  appId: "1:626672250699:web:d68f3e0273796b7c"
-
-})
+  apiKey: 'AIzaSyAtGV1ggJO-8AHfXGaSyvhg2SJmON2_rTg',
+  authDomain: 'gami-314da.firebaseapp.com',
+  databaseURL: 'https://gami-314da.firebaseio.com',
+  projectId: 'gami-314da',
+  storageBucket: 'gami-314da.appspot.com',
+  messagingSenderId: '626672250699',
+  appId: '1:626672250699:web:d68f3e0273796b7c'
+});
 
 Vue.use(VueAxios, base);
 
@@ -54,20 +52,16 @@ import InicioSesion from './components/InicioSesion.vue';
 import IndexComponentUsuarios from './components/IndexComponentUsuarios.vue';
 import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
-import PerfilProfesor from './components/PerfilProfesor.vue'
-import PruebaJuego from './components/PruebaJuego.vue'
-import Logros from './components/Logros.vue'
-import Tutorial from './components/Tutorial.vue'
+import PerfilProfesor from './components/PerfilProfesor.vue';
+import Juego from './components/h5p/demo/Juego.vue';
+import Logros from './components/Logros.vue';
+import Tutorial from './components/Tutorial.vue';
 import './registerServiceWorker';
-
-
-
 
 const routes = [{
     name: 'Inicio',
     path: '/',
-    component: HomeComponent,
-
+    component: HomeComponent
   },
   {
     name: 'create',
@@ -122,7 +116,7 @@ const routes = [{
   {
     name: 'juego',
     path: '/juego',
-    component: PruebaJuego
+    component: Juego
   },
   {
     name: 'Logros',
@@ -141,10 +135,12 @@ const router = new VueRouter({
   routes: routes
 });
 
-
-
 Vue.component('vue-headful', vueHeadful);
 
-new Vue(Vue.util.extend({
-  router
-}, App)).$mount('#app');
+new Vue(
+  Vue.util.extend({
+      router
+    },
+    App
+  )
+).$mount('#app');
