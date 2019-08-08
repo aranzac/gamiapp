@@ -402,9 +402,9 @@ export default {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
 
-      this.tarea.creador = decoded._id;
+      this.tarea.creador = this.correo;
       this.axios.post(uri, this.tarea).then(() => {
-        this.axios.post(uri2, { _id: this._id }).then(response => {
+        this.axios.post(uri2, { _id: this.correo }).then(response => {
           this.creadas = response.data;
           this.numero_tareas = this.creadas.length;
 
@@ -413,6 +413,12 @@ export default {
           this.tarea.categoria = "";
           this.tarea.descripcion = "";
           this.tarea.periodo = "";
+
+          let uri3 = "tareas/creador";
+          this.axios.post(uri3, { creador: this.correo }).then(response => {
+            this.creadas = response.data;
+            this.numero_tareas = this.creadas.length;
+          });
         });
       });
 

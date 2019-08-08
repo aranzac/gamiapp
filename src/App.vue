@@ -18,10 +18,10 @@
               class="nav-link text-light"
             >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
-            <router-link to="/juego" class="nav-link text-light">Juego</router-link>
-            <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
+            <router-link v-if="alumno == ''" to="/juego" class="nav-link text-light">Juego</router-link>
+            <!-- <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
             <a href="../h5p/demo/juegos.html">Juegaso</a>
-            <a href="../h5p/demo/prueba.html">Prueba</a>
+            <a href="../h5p/demo/prueba.html">Prueba</a>-->
           </b-navbar-nav>
           <br />
           <b-navbar-nav class="ml-auto">
@@ -150,10 +150,9 @@ export default {
     };
   },
   mounted() {
-    let recaptchaLink4 = document.createElement("script");
-    recaptchaLink4.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.js");
-
-    document.head.appendChild(recaptchaLink4);
+    let src = document.createElement("script");
+    src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    document.head.appendChild(src);
   },
   created() {
     const token = localStorage.usertoken;

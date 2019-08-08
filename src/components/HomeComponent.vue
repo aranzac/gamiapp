@@ -87,7 +87,6 @@ export default {
   mounted() {
     let recaptchaLink4 = document.createElement("script");
     recaptchaLink4.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.js");
-
     document.head.appendChild(recaptchaLink4);
   }
 };

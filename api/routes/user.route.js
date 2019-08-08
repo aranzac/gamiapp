@@ -268,20 +268,18 @@ userRoutes.route('/calificar').post(function (req, res) {
             res.json(err);
         } else {
             var suma;
-
             // Se calcula lo que se va a sumar
             if (user.racha >= 2) {
 
                 // Con racha se aplica una bonificación que corresponde al porcentaje formado por racha * 0.1
                 suma = Math.round(req.body.puntuacion * 5 + req.body.puntuacion * 5 * user.racha * 0.1);
-
+                console.log(suma)
             } else {
                 suma = req.body.puntuacion * 5;
             }
 
             //  Suma final sobre los puntos actuales del usuario
             user.puntuacion = (suma + user.puntuacion);
-
             if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;
 
