@@ -360,6 +360,21 @@ userRoutes.route('/:id').get(function (req, res) {
     });
 });
 
+userRoutes.route('/existente').post(function (req, res) {
+    let email = req.body.email;
+    User.findOne({
+        email: email
+    }, function (err, user) {
+        if (user) {
+            res.json(user.email);
+        } else if (!user) {
+            res.json({
+                error: 'Not used'
+            })
+        }
+    });
+});
+
 // Defined edit route
 userRoutes.route('/edit/:id').get(function (req, res) {
     let id = req.params.id;

@@ -150,9 +150,9 @@ export default {
     };
   },
   mounted() {
-    let src = document.createElement("script");
-    src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
-    document.head.appendChild(src);
+    // let src = document.createElement("script");
+    // src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    // document.head.appendChild(src);
   },
   created() {
     const token = localStorage.usertoken;

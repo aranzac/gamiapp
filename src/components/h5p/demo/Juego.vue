@@ -21,9 +21,23 @@ module.exports = {
   mounted() {
     // Se proporciona la librería necesaria para que encuentre la var H5P.jQuery
 
-    let src = document.createElement("script");
-    src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
-    document.head.appendChild(src);
+    // let src = document.createElement("script");
+    // src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    // document.head.appendChild(src);
+
+    let src2 = document.createElement("script");
+    src2.setAttribute(
+      "src",
+      "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/librerias%2Fh5p-standalone-main.js?alt=media&token=3162952e-7ed4-49d2-8ea0-10c6c60050b8"
+    );
+    document.head.appendChild(src2);
+
+    let src3 = document.createElement("script");
+    src3.setAttribute(
+      "src",
+      "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/librerias%2Fh5p-standalone-main.min.js?alt=media&token=823674b3-fd43-4700-ae5f-d51a34e0d090"
+    );
+    document.head.appendChild(src3);
 
     (function($) {
       $(function() {

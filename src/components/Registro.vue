@@ -10,11 +10,34 @@
               <form @submit.prevent="register" class="col-lg-12">
                 <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="text" class="form-control" v-model="nombre" maxlength="9" required />
+                  <input
+                    id="name"
+                    type="text"
+                    class="form-control"
+                    v-model="nombre"
+                    @change="nameValid()"
+                    maxlength="9"
+                    required
+                  />
+                  <div class="valid-feedback">¡Este nombre es válido!</div>
+                  <div
+                    class="invalid-feedback"
+                  >Este nombre no es válido. Debe tener al menos 3 letras y no puede contener carácteres especiales</div>
                 </div>
                 <div class="form-group">
                   <label for="apellido">Apellido</label>
-                  <input type="text" class="form-control" v-model="apellido" required />
+                  <input
+                    id="apellido"
+                    type="text"
+                    class="form-control"
+                    @change="apellidoValid()"
+                    v-model="apellido"
+                    required
+                  />
+                  <div class="valid-feedback">¡Este apellido es válido!</div>
+                  <div
+                    class="invalid-feedback"
+                  >Este apellido no es válido. Debe tener al menos 3 letras y no puede contener carácteres especiales</div>
                 </div>
                 <div class="form-group">
                   <label for="apellido" class="d-block">Rol</label>
@@ -25,7 +48,7 @@
                       class="btn btn-warning text-light btn-secondary"
                     >
                       <input
-                        id="input"
+                        id="rol"
                         class="clase"
                         type="radio"
                         v-on:change="toggleClass()"
@@ -38,7 +61,6 @@
                       class="btn btn-warning text-light btn-secondary"
                     >
                       <input
-                        id="input"
                         class="clase"
                         type="radio"
                         v-on:change="toggleClass()"
@@ -48,7 +70,6 @@
                     </label>
                   </section>
                 </div>
-
                 <div class="form-group">
                   <label v-if="isActive" for="edad">Edad</label>
                   <select
@@ -78,11 +99,39 @@
                 </div>
                 <div class="form-group">
                   <label for="email">Correo electrónico</label>
-                  <input type="email" class="form-control" v-model="email" required />
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    @change="emailValid()"
+                    v-model="email"
+                    required
+                  />
+                  <div id="valido" class="valid-feedback d-none">¡Este correo es válido!</div>
+                  <div
+                    id="falla1"
+                    class="invalid-feedback d-none"
+                  >Este correo no es válido. Debe tener la siguiente forma: caracteres@caracteres.dominio</div>
+                  <div
+                    id="falla2"
+                    class="invalid-feedback d-none"
+                  >Ya existe una cuenta para este correo.</div>
                 </div>
                 <div class="form-group">
                   <label for="password">Contraseña</label>
-                  <input type="password" class="form-control" v-model="password" required />
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    v-model="password"
+                    @change="passwordValid()"
+                    required
+                  />
+                  <div id="valido" class="valid-feedback">¡Esta contraseña es válida!</div>
+                  <div
+                    id="falla1"
+                    class="invalid-feedback"
+                  >Esta contraseña no es válida. Debe tener una longitud mínima de 6 carácteres, incluir al menos una letra minúscula y al menos una letra mayúscula</div>
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary btn-md">Enviar</button>
@@ -103,6 +152,16 @@ import axios from "axios";
 import EventBus from "./EventBus";
 import { isAbsolute } from "path";
 
+function validar(el) {
+  el.classList.remove("is-invalid");
+  el.classList.add("is-valid");
+}
+
+function invalidar(el) {
+  el.classList.remove("is-valid");
+  el.classList.add("is-invalid");
+}
+
 export default {
   data() {
     return {
@@ -116,7 +175,11 @@ export default {
       rol: "alumno",
       edad: "",
       gender: "",
-      isActive: true
+      isActive: true,
+      val_name: false,
+      val_apellido: false,
+      val_password: false,
+      val_correo: false
     };
   },
   created() {
@@ -127,6 +190,57 @@ export default {
     }
   },
   methods: {
+    nameValid() {
+      var exp = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+      var element = document.querySelector("#name");
+      if (exp.test(this.nombre)) validar(element);
+      else invalidar(element);
+    },
+    apellidoValid() {
+      var exp = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+      var element = document.querySelector("#apellido");
+      if (exp.test(this.apellido)) {
+        validar(element);
+      } else invalidar(element);
+    },
+    emailValid() {
+      var msj = document.querySelector("#valido");
+      var msj2 = document.querySelector("#falla1");
+
+      var exp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+      if (exp.test(this.email)) {
+        msj2.classList.remove("d-block");
+        this.validar_correo(this.email);
+      } else {
+        msj.classList.remove("d-block");
+        msj.classList.add("d-none");
+        msj2.classList.add("d-block");
+      }
+    },
+    validar_correo(email) {
+      var msj = document.querySelector("#valido");
+      var msj2 = document.querySelector("#falla1");
+      var msj3 = document.querySelector("#falla2");
+
+      this.axios.post("usuarios/existente", { email: email }).then(res => {
+        if (res.data.error == "Not used") {
+          msj2.classList.remove("d-block");
+          msj3.classList.remove("d-block");
+          msj.classList.add("d-block");
+          var aux = document.querySelector("#email");
+          validar(aux);
+        } else if (res.data == email) {
+          msj.classList.remove("d-block");
+          msj3.classList.add("d-block");
+        }
+      });
+    },
+    passwordValid() {
+      var exp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
+      var element = document.querySelector("#password");
+      if (exp.test(this.password)) validar(element);
+      else invalidar(element);
+    },
     toggleClass() {
       this.isActive = !this.isActive;
     },
