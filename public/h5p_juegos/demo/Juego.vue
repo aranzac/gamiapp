@@ -1,6 +1,14 @@
+
+  <script type="text/javascript" src="../dist/js/h5p-standalone-main.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+
+
 <template>
   <div class="hello">
-    Juego 1. {{who}}
+    Hellooo {{who}}
     <div class="h5p-container"></div>
 
     <b-button variant="warning" class="text-light" @click="myfuncion()">
@@ -18,34 +26,13 @@ module.exports = {
       who: "world!"
     };
   },
-  mounted() {
-    // Se proporciona la librería necesaria para que encuentre la var H5P.jQuery
-
-    // let src = document.createElement("script");
-    // src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
-    // document.head.appendChild(src);
-
-    let src2 = document.createElement("script");
-    src2.setAttribute(
-      "src",
-      "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/librerias%2Fh5p-standalone-main.js?alt=media&token=3162952e-7ed4-49d2-8ea0-10c6c60050b8"
-    );
-    document.head.appendChild(src2);
-
-    let src3 = document.createElement("script");
-    src3.setAttribute(
-      "src",
-      "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/librerias%2Fh5p-standalone-main.min.js?alt=media&token=823674b3-fd43-4700-ae5f-d51a34e0d090"
-    );
-    document.head.appendChild(src3);
-
+  mounted: function() {
     (function($) {
       $(function() {
         $(".h5p-container").h5p({
-          id: 1, // OPTIONAL id change this if using multiple h5ps on the same page
-          frameJs: "/h5p_juegos/dist/js/h5p-standalone-frame.min.js", // OPTIONAL if you move the location of h5p-standalone-frame.min.js
-          frameCss: "/h5p_juegos/dist/styles/h5p.css", // OPTIONAL if you move the location of h5p.css
-          h5pContent: "/h5p_juegos/workspace/example", // Location of the unpacked H5P content,
+          frameJs: "../dist/js/h5p-standalone-frame.min.js",
+          frameCss: "../dist/styles/h5p.css",
+          h5pContent: "../workspace/hervir",
           displayOptions: {
             // OPTIONAL hide the frame or download, export etc. buttons they are visible by default
             frame: true,
