@@ -43,9 +43,9 @@ module.exports = {
       $(function() {
         $(".h5p-container").h5p({
           id: 1, // OPTIONAL id change this if using multiple h5ps on the same page
-          frameJs: "/h5p/dist/js/h5p-standalone-frame.min.js", // OPTIONAL if you move the location of h5p-standalone-frame.min.js
-          frameCss: "/h5p/dist/styles/h5p.css", // OPTIONAL if you move the location of h5p.css
-          h5pContent: "/h5p/workspace/example", // Location of the unpacked H5P content,
+          frameJs: "./h5p/dist/js/h5p-standalone-frame.min.js", // OPTIONAL if you move the location of h5p-standalone-frame.min.js
+          frameCss: "./h5p/dist/styles/h5p.css", // OPTIONAL if you move the location of h5p.css
+          h5pContent: "./h5p/workspace/example", // Location of the unpacked H5P content,
           displayOptions: {
             // OPTIONAL hide the frame or download, export etc. buttons they are visible by default
             frame: true,

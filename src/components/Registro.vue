@@ -134,7 +134,12 @@
                   >Esta contraseña no es válida. Debe tener una longitud mínima de 6 carácteres, incluir al menos una letra minúscula y al menos una letra mayúscula</div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-md">Enviar</button>
+                  <button
+                    id="deshabilitado"
+                    type="submit"
+                    class="btn btn-primary btn-md"
+                    :disabled="!val_name || !val_apellido || !val_password || !val_correo"
+                  >Enviar</button>
                 </div>
               </form>
             </div>
@@ -179,7 +184,8 @@ export default {
       val_name: false,
       val_apellido: false,
       val_password: false,
-      val_correo: false
+      val_correo: false,
+      botonactivo: false
     };
   },
   created() {
@@ -193,15 +199,24 @@ export default {
     nameValid() {
       var exp = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
       var element = document.querySelector("#name");
-      if (exp.test(this.nombre)) validar(element);
-      else invalidar(element);
+      if (exp.test(this.nombre)) {
+        validar(element);
+        this.val_name = true;
+      } else {
+        invalidar(element);
+        this.val_name = false;
+      }
     },
     apellidoValid() {
       var exp = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
       var element = document.querySelector("#apellido");
       if (exp.test(this.apellido)) {
         validar(element);
-      } else invalidar(element);
+        this.val_apellido = true;
+      } else {
+        invalidar(element);
+        this.val_apellido = false;
+      }
     },
     emailValid() {
       var msj = document.querySelector("#valido");
@@ -211,10 +226,12 @@ export default {
       if (exp.test(this.email)) {
         msj2.classList.remove("d-block");
         this.validar_correo(this.email);
+        this.val_correo = true;
       } else {
         msj.classList.remove("d-block");
         msj.classList.add("d-none");
         msj2.classList.add("d-block");
+        this.val_correo = false;
       }
     },
     validar_correo(email) {
@@ -238,28 +255,41 @@ export default {
     passwordValid() {
       var exp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
       var element = document.querySelector("#password");
-      if (exp.test(this.password)) validar(element);
-      else invalidar(element);
+      if (exp.test(this.password)) {
+        validar(element);
+        this.val_password = true;
+      } else {
+        invalidar(element);
+        this.val_password = false;
+      }
     },
     toggleClass() {
       this.isActive = !this.isActive;
     },
     register() {
-      this.axios
-        .post("/usuarios/add", {
-          nombre: this.nombre,
-          apellido: this.apellido,
-          edad: this.edad,
-          rol: this.rol,
-          email: this.email,
-          password: this.password
-        })
-        .then(res => {
-          this.$router.push({ name: this.direccion });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      if (
+        this.val_name &&
+        this.val_apellido &&
+        this.val_correo &&
+        this.val_password
+      ) {
+        this.botonactivo = true;
+        this.axios
+          .post("/usuarios/add", {
+            nombre: this.nombre,
+            apellido: this.apellido,
+            edad: this.edad,
+            rol: this.rol,
+            email: this.email,
+            password: this.password
+          })
+          .then(res => {
+            this.$router.push({ name: this.direccion });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     },
     toggleOn() {
       this.rol = "alumno";
@@ -280,6 +310,11 @@ export default {
 </script>
 
 <style>
+#deshabilitado:disabled {
+  background-color: lightgray;
+  color: grey;
+}
+
 .styleB {
   background-color: #d4a108;
 }
@@ -324,6 +359,7 @@ h2 {
 
 #card-form {
   text-align: justify !important;
+  margin-bottom: 50px;
 }
 
 @media only screen and (max-width: 780px) {
