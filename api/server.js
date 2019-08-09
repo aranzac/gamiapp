@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 // });
 
 // Para despliegue
-// app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 4000);
 
 
 console.log(process.env.PORT);
