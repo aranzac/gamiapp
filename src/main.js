@@ -25,7 +25,7 @@ const base = axios.create({
   // Para despliege
   baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  // baseURL: 'http://localhost:5000/'
+  baseURL: 'http://localhost:5000/'
 });
 
 firebase.initializeApp({
