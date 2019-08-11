@@ -92,7 +92,11 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>¿Tienes alguna foto de la actividad? ¡Súbela!</label>
-                        <input type="file" @change="onFileSelected" />
+                        <input
+                          type="file"
+                          @change="onFileSelected"
+                          accept="image/x-png, image/gif, image/jpeg"
+                        />
                         <div align="center">
                           <img width="320" :src="picture" />
                           <button
