@@ -15,7 +15,7 @@ const juegosRoute = require('./routes/juegos.route');
 
 /////////// SSL //////////
 const sslRedirect = require('heroku-ssl-redirect');
-const secure = require('express-force-https');
+// const secure = require('express-force-https');
 
 
 
@@ -59,7 +59,7 @@ app.use('/juegos', juegosRoute);
 ///////// SSL MIDDLEWARE /////////
 app.use(sslRedirect);
 
-app.use(secure)
+// app.use(secure)
 
 
 app.use((req, res, next) => {
