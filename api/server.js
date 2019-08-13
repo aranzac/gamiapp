@@ -12,7 +12,11 @@ const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
 const logrosRoute = require('./routes/logros.route');
 const juegosRoute = require('./routes/juegos.route');
+
+/////////// SSL //////////
 const sslRedirect = require('heroku-ssl-redirect');
+const secure = require('express-force-https');
+
 
 
 const path = require("path")
@@ -51,7 +55,12 @@ app.use('/soluciones', solucionesRoute);
 app.use('/logros', logrosRoute);
 app.use('/juegos', juegosRoute);
 
-app.use(sslRedirect());
+
+///////// SSL MIDDLEWARE /////////
+app.use(sslRedirect);
+
+app.use(secure)
+
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

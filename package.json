@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "express-fileupload": "^1.1.5",
+    "express-force-https": "^1.0.0",
     "firebase": "^6.3.0",
     "heroku-ssl-redirect": "0.0.4",
     "html-loader": "^0.5.5",
