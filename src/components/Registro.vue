@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <section id="loginform" class="outer-wrapper">
       <div class="container">
         <div class="row">
@@ -17,6 +17,7 @@
                     v-model="nombre"
                     @change="nameValid()"
                     maxlength="9"
+                    autocomplete="on"
                     required
                   />
                   <div class="valid-feedback">¡Este nombre es válido!</div>
@@ -32,6 +33,7 @@
                     class="form-control"
                     @change="apellidoValid()"
                     v-model="apellido"
+                    autocomplete="on"
                     required
                   />
                   <div class="valid-feedback">¡Este apellido es válido!</div>
@@ -54,6 +56,7 @@
                         v-on:change="toggleClass()"
                         v-model="rol"
                         value="alumno"
+                        autocomplete="on"
                       />Alumno
                     </label>
                     <label
@@ -66,6 +69,7 @@
                         v-on:change="toggleClass()"
                         v-model="rol"
                         value="profesor"
+                        autocomplete="on"
                       />Profesor
                     </label>
                   </section>
@@ -105,6 +109,7 @@
                     class="form-control"
                     @change="emailValid()"
                     v-model="email"
+                    autocomplete="on"
                     required
                   />
                   <div id="valido" class="valid-feedback d-none">¡Este correo es válido!</div>
@@ -125,6 +130,7 @@
                     class="form-control"
                     v-model="password"
                     @change="passwordValid()"
+                    autocomplete="on"
                     required
                   />
                   <div id="valido" class="valid-feedback">¡Esta contraseña es válida!</div>

@@ -4,9 +4,7 @@
       <vue-headful :title="$route.name" />
 
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <!-- <b-navbar-brand  class="logo" href="/">Gami</b-navbar-brand> -->
         <router-link to="/" id="logo" class="logo">Gami</router-link>
-
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
@@ -18,7 +16,10 @@
               class="nav-link text-light"
             >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
-            <router-link v-if="alumno == ''" to="/juego" class="nav-link text-light">Juego</router-link>
+            <!-- <router-link v-if="alumno == ''" to="/juego" class="nav-link text-light">Juego</router-link> -->
+            <router-link v-if="alumno == 'alumno'" to="/juegos" class="nav-link text-light">Juegos</router-link>
+            <router-link to="/juegos" class="nav-link text-light">Juegos</router-link>
+
             <!-- <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
             <a href="../h5p/demo/juegos.html">Juegaso</a>
             <a href="../h5p/demo/prueba.html">Prueba</a>-->
@@ -132,13 +133,18 @@ th,
 
 <script>
 import HomeComponent from "./components/HomeComponent.vue";
+import Barra from "./components/Barra.vue";
+
 import EventBus from "./components/EventBus.vue";
+// import Navbar from "./components/Navbar.vue";
+
 import jwtDecode from "jwt-decode";
 import { isAbsolute } from "path";
 
 export default {
   name: "app",
   components: {
+    Barra,
     HomeComponent
   },
   data() {
@@ -150,19 +156,21 @@ export default {
     };
   },
   mounted() {
-    // let src = document.createElement("script");
-    // src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
-    // document.head.appendChild(src);
+    let src = document.createElement("script");
+    src.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.min.js");
+    document.head.appendChild(src);
   },
   created() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-
+    this.alumno = "";
+    // if()
     if (decoded.rol == "profesor") this.rol = true;
     else if (decoded.rol == "alumno") this.rol = false;
-
     if (decoded.rol == "profesor") this.alumno = "profesor";
+    else if (decoded.rol == "alumno") this.alumno = "alumno";
   },
+
   methods: {
     logout() {
       localStorage.removeItem("usertoken");

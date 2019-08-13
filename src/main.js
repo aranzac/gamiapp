@@ -25,7 +25,7 @@ const base = axios.create({
   // Para despliege
   baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  baseURL: 'http://localhost:5000/'
+  // baseURL: 'http://localhost:5000/'
 });
 
 firebase.initializeApp({
@@ -45,7 +45,6 @@ Vue.config.productionTip = false;
 import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
-import EditComponent from './components/EditComponent.vue';
 import Perfil from './components/Perfil.vue';
 import Registro from './components/Registro.vue';
 import InicioSesion from './components/InicioSesion.vue';
@@ -56,6 +55,8 @@ import PerfilProfesor from './components/PerfilProfesor.vue';
 import Juego from './components/h5p/demo/Juego.vue';
 import Logros from './components/Logros.vue';
 import Tutorial from './components/Tutorial.vue';
+import Juegos from './components/Juegos.vue'
+
 import './registerServiceWorker';
 
 const routes = [{
@@ -89,11 +90,6 @@ const routes = [{
     component: Perfil
   },
   {
-    name: 'edit',
-    path: '/edit/:id',
-    component: EditComponent
-  },
-  {
     name: 'usuarios',
     path: '/usuarios',
     component: IndexComponentUsuarios
@@ -113,11 +109,11 @@ const routes = [{
     path: '/profesor',
     component: PerfilProfesor
   },
-  {
-    name: 'juego',
-    path: '/juego',
-    component: Juego
-  },
+  // {
+  //   name: 'juego',
+  //   path: '/juego',
+  //   component: Juego
+  // },
   {
     name: 'Logros',
     path: '/logros',
@@ -127,7 +123,18 @@ const routes = [{
     name: 'Tutorial',
     path: '/tutorial',
     component: Tutorial
+  },
+  {
+    name: 'Juegos',
+    path: '/juegos',
+    component: Juegos
+  },
+  {
+    name: 'juego',
+    path: '/juego/:id',
+    component: Juego
   }
+
 ];
 
 const router = new VueRouter({

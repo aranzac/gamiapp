@@ -16,11 +16,11 @@
               <form v-on:submit.prevent="login" class="col-lg-12">
                 <div class="form-group">
                   <label for="email">Correo electrónico</label>
-                  <input type="email" class="form-control" v-model="email" />
+                  <input type="email" class="form-control" v-model="email" autocomplete="on" />
                 </div>
                 <div class="form-group">
                   <label for="password">Contraseña</label>
-                  <input type="password" class="form-control" v-model="password" />
+                  <input type="password" class="form-control" v-model="password" autocomplete="on" />
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary btn-md">Enviar</button>

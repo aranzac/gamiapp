@@ -162,9 +162,7 @@ userRoutes.route('/updateracha/:id').get(function (req, res) {
                         user.racha++;
                     } else {
                         // user.racha--;
-                    }
-                // console.log(racha);
-                user.save().then(response => {
+                    } user.save().then(response => {
                     res.json({
                         racha: copia
                     })
@@ -273,7 +271,6 @@ userRoutes.route('/calificar').post(function (req, res) {
 
                 // Con racha se aplica una bonificación que corresponde al porcentaje formado por racha * 0.1
                 suma = Math.round(req.body.puntuacion * 5 + req.body.puntuacion * 5 * user.racha * 0.1);
-                console.log(suma)
             } else {
                 suma = req.body.puntuacion * 5;
             }
@@ -292,6 +289,39 @@ userRoutes.route('/calificar').post(function (req, res) {
         }
     });
 });
+
+userRoutes.route('/earn').post(function (req, res) {
+    User.findById({
+        _id: req.body._id
+    }, function (err, user) {
+        if (err) {
+            res.json(err);
+        } else {
+            var suma;
+            // Se calcula lo que se va a sumar
+            if (user.racha >= 2) {
+
+                // Con racha se aplica una bonificación que corresponde al porcentaje formado por racha * 0.1
+                suma = Math.round(req.body.puntuacion * user.racha * 0.1);
+            } else {
+                suma = req.body.puntuacion;
+            }
+
+            user.puntuacion = (suma + user.puntuacion);
+            if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
+                user.nivel++;
+
+            user.save().then(() => {
+                    res.json({
+                        puntos: suma
+                    })
+                })
+                .catch(() => {
+                    res.status(400).send("unable to update the database");
+                });
+        }
+    });
+})
 
 userRoutes.route('/resetearpuntos').post(function (req, res) {
     User.findById({

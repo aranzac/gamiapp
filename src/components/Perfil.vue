@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="row">
       <div class="col-lg-8 col-mg-10 col-xs-12" align="center"></div>
     </div>
@@ -402,12 +402,10 @@ export default {
           var uri3 = `usuarios/updateracha/${this._id}`;
           this.axios.get(uri3).then(res => {
             var old = res.data.racha;
-            console.log(old);
 
             var uri4 = `usuarios/getracha/${this._id}`;
             this.axios.get(uri4).then(res => {
               this.racha = res.data.racha;
-              console.log(this.racha);
               if (old != 0 && this.racha == 0) {
                 this.racha_perdida = true;
               } else if (this.racha > old) {
@@ -481,6 +479,11 @@ export default {
 </script>
 
 <style>
+.main {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+
 .minimizar {
   text-transform: initial;
 }

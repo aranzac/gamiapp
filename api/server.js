@@ -11,6 +11,8 @@ const userRoute = require('./routes/user.route');
 const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
 const logrosRoute = require('./routes/logros.route');
+const juegosRoute = require('./routes/juegos.route');
+
 
 const path = require("path")
 
@@ -46,6 +48,8 @@ app.use('/usuarios', userRoute);
 app.use('/tareas', tareaRoute);
 app.use('/soluciones', solucionesRoute);
 app.use('/logros', logrosRoute);
+app.use('/juegos', juegosRoute);
+
 
 
 app.use((req, res, next) => {
