@@ -130,7 +130,7 @@ const routes = [{
     component: Juegos
   },
   {
-    name: 'juego',
+    name: 'Juego',
     path: '/juego/:id',
     component: Juego
   }

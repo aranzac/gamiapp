@@ -1,5 +1,7 @@
 <template>
   <div class="main">
+    <vue-headful :title="$route.name + ' - ' + juego.titulo" />
+
     <div class="row justify-content-md-center alert">
       <div id="grupo_top" class="col-lg-12 col-md-12 col-xs-12">
         <div v-if="nuevos_puntos" class="alert alert-success alert-dismissible">

@@ -10,7 +10,7 @@
         <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
         <!-- <router-link v-if="alumno == ''" to="/juego" class="nav-link text-light">Juego</router-link> -->
         <router-link v-if="alumno == 'alumno'" to="/juegos" class="nav-link text-light">Juegos</router-link>
-        <router-link to="/juegos" class="nav-link text-light">Juegos</router-link>
+        <!-- <router-link to="/juegos" class="nav-link text-light">Juegos</router-link> -->
 
         <!-- <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
             <a href="../h5p/demo/juegos.html">Juegaso</a>

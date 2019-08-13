@@ -8,7 +8,7 @@
           data-toggle="popover"
           data-trigger="hover"
           data-placement="bottom"
-          data-content="Estas actividades te permiten aprender Pensamiento Computacional mientras realizas una tarea en tu aula o incluso en tu casa. Busca una que te guste, sigue las instrucciones y finalmente rellena el formulario para que un profesor o profesora pueda valorar tu actividad."
+          data-content="Podrás practicar el Pensamiento Computacional con estos pequeños juegos. Elige el tema, luego el juego, y cuando hayas terminado haz click en 'Comprobar' y después en 'Obtener puntos para que se sumen a tus puntos actuales.'"
         >
           <i class="fas fa-info-circle text-warning info" style="font-size:50px"></i>
         </a>
@@ -54,7 +54,7 @@
               <td>{{ juego.titulo }}</td>
               <td>{{ juego.categoria }}</td>
               <td>
-                <router-link :to="{ name: 'juego', params: {id: juego._id } }">
+                <router-link :to="{ name: 'Juego', params: {id: juego._id } }">
                   <b-button type="submit" variant="info" class="btn text-light">
                     <b>¡Jugar!</b>
                   </b-button>

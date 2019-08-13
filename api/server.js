@@ -12,6 +12,7 @@ const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
 const logrosRoute = require('./routes/logros.route');
 const juegosRoute = require('./routes/juegos.route');
+const sslRedirect = require('heroku-ssl-redirect');
 
 
 const path = require("path")
@@ -50,7 +51,7 @@ app.use('/soluciones', solucionesRoute);
 app.use('/logros', logrosRoute);
 app.use('/juegos', juegosRoute);
 
-
+app.use(sslRedirect());
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
