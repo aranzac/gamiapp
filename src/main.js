@@ -59,7 +59,7 @@ import Juegos from './components/Juegos.vue'
 
 import './registerServiceWorker';
 
-const routes = [{
+const rutas = [{
     name: 'Inicio',
     path: '/',
     component: HomeComponent
@@ -130,7 +130,7 @@ const routes = [{
     component: Juegos
   },
   {
-    name: 'Juego',
+    name: 'juego',
     path: '/juego/:id',
     component: Juego
   }
@@ -139,34 +139,16 @@ const routes = [{
 
 const router = new VueRouter({
   mode: 'history',
-  routes: routes
-  // history: true,
-  // hashbang: false,
-  // linkActiveClass: 'active',
-  // base: '/',
-  // fallback: false, //router should fallback to hash (#) mode when the browser does not support history.pushState
-
+  hash: false,
+  routes: rutas
 });
 
-router.mode = 'html5'
-export default router;
+// Vue.component('vue-headful', vueHeadful);
 
-Vue.component('vue-headful', vueHeadful);
-
-// new Vue(
-//   Vue.util.extend({
-//       router
-//     },
-//     App
-//   )
-
-// ).$mount('#app');
-
-new Vue({
-  el: '#app',
-  components: {
+new Vue(
+  Vue.util.extend({
+      router
+    },
     App
-  },
-  template: `<App/>`,
-  router
-})
+  )
+).$mount('#app');
