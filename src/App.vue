@@ -14,7 +14,7 @@
               class="nav-link text-light"
             >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
-            <router-link v-if="alumno == 'alumno'" to="/juegos" class="nav-link text-light">Juegos</router-link>
+            <router-link v-if="auth=='loggedin'" to="/juegos" class="nav-link text-light">Juegos</router-link>
           </b-navbar-nav>
           <br />
           <b-navbar-nav class="ml-auto">

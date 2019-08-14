@@ -15,7 +15,6 @@ Vue.use(BootstrapVue);
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-
 Vue.component('vue-headful', vueHeadful);
 
 import VueAxios from 'vue-axios';
@@ -43,12 +42,9 @@ Vue.use(VueAxios, base);
 Vue.config.productionTip = false;
 
 import HomeComponent from './components/HomeComponent.vue';
-import CreateComponent from './components/CreateComponent.vue';
-import IndexComponent from './components/IndexComponent.vue';
 import Perfil from './components/Perfil.vue';
 import Registro from './components/Registro.vue';
 import InicioSesion from './components/InicioSesion.vue';
-import IndexComponentUsuarios from './components/IndexComponentUsuarios.vue';
 import Rankings from './components/Rankings.vue';
 import Tareas from './components/Tareas.vue';
 import PerfilProfesor from './components/PerfilProfesor.vue';
@@ -63,16 +59,6 @@ const rutas = [{
     name: 'Inicio',
     path: '/',
     component: HomeComponent
-  },
-  {
-    name: 'create',
-    path: '/create',
-    component: CreateComponent
-  },
-  {
-    name: 'posts',
-    path: '/posts',
-    component: IndexComponent
   },
   {
     name: 'Registro',
@@ -90,11 +76,6 @@ const rutas = [{
     component: Perfil
   },
   {
-    name: 'usuarios',
-    path: '/usuarios',
-    component: IndexComponentUsuarios
-  },
-  {
     name: 'Ranking',
     path: '/rankings',
     component: Rankings
@@ -109,11 +90,6 @@ const rutas = [{
     path: '/profesor',
     component: PerfilProfesor
   },
-  // {
-  //   name: 'juego',
-  //   path: '/juego',
-  //   component: Juego
-  // },
   {
     name: 'Logros',
     path: '/logros',
@@ -130,7 +106,7 @@ const rutas = [{
     component: Juegos
   },
   {
-    name: 'juego',
+    name: 'Juego',
     path: '/juego/:id',
     component: Juego
   }
