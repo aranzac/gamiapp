@@ -23,9 +23,9 @@ import axios from 'axios';
 
 const base = axios.create({
   // Para despliege
-  baseURL: 'https://appgami.herokuapp.com'
+  // baseURL: 'https://appgami.herokuapp.com'
   // Para desarrollo
-  // baseURL: 'http://localhost:5000/'
+  baseURL: 'http://localhost:5000/'
 });
 
 firebase.initializeApp({
@@ -139,8 +139,17 @@ const routes = [{
 
 const router = new VueRouter({
   mode: 'history',
-  routes: routes
+  routes: routes,
+  history: true,
+  hashbang: false,
+  linkActiveClass: 'active',
+  base: '/',
+  fallback: false, //router should fallback to hash (#) mode when the browser does not support history.pushState
+
 });
+
+router.mode = 'html5'
+export default router;
 
 Vue.component('vue-headful', vueHeadful);
 
