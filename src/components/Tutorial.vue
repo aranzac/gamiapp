@@ -63,9 +63,9 @@
                 </b-card-text>
                 <br />
                 <div align="center">
-                  <img class="pasos" alt="Paso 1" src="../assets/paso1IOS.png" />
-                  <img class="pasos" alt="Paso 2" src="../assets/paso2IOS.png" />
-                  <img class="pasos" alt="Paso 3" src="../assets/paso3IOS.png" />
+                  <img class="pasos" alt="Paso 1" src="../assets/paso1.png" />
+                  <img class="pasos" alt="Paso 2" src="../assets/paso2.png" />
+                  <img class="pasos" alt="Paso 3" src="../assets/paso3.png" />
                 </div>
               </b-card-body>
             </b-collapse>

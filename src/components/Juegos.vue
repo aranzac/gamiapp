@@ -28,17 +28,7 @@
         <option style="background-color: lightgrey; color: grey;" value>Eliminar filtros</option>
       </select>
     </div>
-    <!-- <form @submit.prevent="add" class="col-lg-12">
-      <label for="name">Titulo</label>
-      <input id="name" v-model="titulo" type="text" name="name" />
-      <label for="name">Categoria</label>
-      <input id="name" v-model="categoria" type="text" name="name" />
-      <label for="name">Carpeta</label>
-      <input id="name" v-model="carpeta" type="text" name="name" />
-      <b-button type="submit" variant="warning" class="btn text-light">
-        <b>Enviar</b>
-      </b-button>
-    </form>-->
+
     <div class="row justify-content-md-center mt-5">
       <div class="col-md-8 col-xs-6 col-md-auto">
         <table align="center" class="table centerTable table-hover table-sm mb-5">

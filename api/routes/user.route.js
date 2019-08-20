@@ -86,20 +86,20 @@ userRoutes.route('/login').post(function (req, res) {
                         expiresIn: 1800
                     })
 
-                    // // Guardar el momento de la conexión actual como última conexión 
-                    // if (user.rol == "alumno") {
-                    //     var aux = user.ultima_conexion;
-                    //     user.ultima_conexion = new Date();
+                    // Guardar el momento de la conexión actual como última conexión 
+                    if (user.rol == "alumno") {
+                        var aux = user.ultima_conexion;
+                        user.ultima_conexion = new Date();
 
-                    //     // Actualizar la racha
-                    //     if (aux != null) {
-                    //         var one_day = 1000 * 60 * 60 * 24;
-                    //         var d1 = aux.getTime();
-                    //         var d2 = user.ultima_conexion.getTime();
-                    //         user.racha = Math.round(Math.abs(d2 - d1) / one_day);
-                    //         user.save();
-                    //     }
-                    // }
+                        // // Actualizar la racha
+                        // if (aux != null) {
+                        //     var one_day = 1000 * 60 * 60 * 24;
+                        //     var d1 = aux.getTime();
+                        //     var d2 = user.ultima_conexion.getTime();
+                        //     user.racha = Math.round(Math.abs(d2 - d1) / one_day);
+                        user.save();
+                        // }
+                    }
 
                     res.send(token);
                 } else {
@@ -143,30 +143,47 @@ userRoutes.route('/updateracha/:id').get(function (req, res) {
             var copia = user.racha;
             var hoy = new Date();
             user.ultima_conexion = hoy;
+            // console.log(aux)
+            // console.log(hoy)
 
             // Actualizar la racha. Pregunta si es nulo para que no lo compare en caso de que sea la primera vez que se conecta (No hay dos fechas que comparar)
             if (aux != null) {
 
-                var one_day = 1000 * 60 * 60 * 24;
+                var dia = 1000 * 60 * 60 * 24;
+
+                // Dia de ult conexion
                 var d1 = aux.getTime();
+                // console.log(d1);
+
+                // Dia de hoy
                 var d2 = user.ultima_conexion.getTime();
+                // console.log(d2);
 
-                var diff = Math.round(Math.abs(d2 - d1) / one_day);
+                var diff = (d2 - d1) / dia;
+                // var diff = Math.round(Math.abs(d2 - d1) / dia);
 
+                // console.log(diff)
                 // Si ha pasado más de un día sin conectarse
-                if (diff > 1) {
+                if (diff >= 1) {
                     user.racha = 0
-                } else
+                    // console.log("la racha se resetea")
+                } else {
+
                     // Si se ha conectado en menos de 1 dia pero los dias son distintos, por lo tanto, aumenta la racha en un día
-                    if (user.ultima_conexion.getDate() != hoy.getDate()) {
+                    if (user.ultima_conexion.getDate() != aux.getDate()) {
                         user.racha++;
+                        // console.log("La racha aumenta")
+
                     } else {
                         // user.racha--;
-                    } user.save().then(response => {
-                    res.json({
-                        racha: copia
+                        // console.log("la racha sigue igual")
+                    }
+                    user.save().then(response => {
+                        res.json({
+                            racha: copia
+                        });
                     })
-                })
+                }
 
             } else {
                 user.save();

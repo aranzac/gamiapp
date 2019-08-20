@@ -480,7 +480,7 @@ export default {
 
 <style>
 .main {
-  margin-top: 30px !important;
+  margin-top: 15px !important;
   margin-bottom: 30px !important;
 }
 
