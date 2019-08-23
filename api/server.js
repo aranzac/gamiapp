@@ -12,6 +12,7 @@ const tareaRoute = require('./routes/tarea.route');
 const solucionesRoute = require('./routes/soluciones.route');
 const logrosRoute = require('./routes/logros.route');
 const juegosRoute = require('./routes/juegos.route');
+const compression = require('compression')
 
 const path = require("path")
 
@@ -22,6 +23,7 @@ var enforce = require('express-sslify');
 // const sslRedirect = require('heroku-ssl-redirect');
 // const secure = require('express-force-https');
 
+app.use(compression());
 
 // Use enforce.HTTPS({ trustProtoHeader: true }) since you're behind Heroku's reverse proxy
 app.use(enforce.HTTPS({

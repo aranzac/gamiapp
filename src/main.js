@@ -2,9 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import BootstrapVue from 'bootstrap-vue';
 import PortalVue from 'portal-vue';
-
 import vueHeadful from 'vue-headful';
-
 import firebase from 'firebase';
 
 import 'bootstrap/dist/css/bootstrap.css';
