@@ -15,6 +15,19 @@ const juegosRoute = require('./routes/juegos.route');
 
 const path = require("path")
 
+var http = require('http');
+var enforce = require('express-sslify');
+
+/////////// SSL //////////
+// const sslRedirect = require('heroku-ssl-redirect');
+// const secure = require('express-force-https');
+
+
+// Use enforce.HTTPS({ trustProtoHeader: true }) since you're behind Heroku's reverse proxy
+app.use(enforce.HTTPS({
+    trustProtoHeader: true
+}));
+
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, {
     useNewUrlParser: true
