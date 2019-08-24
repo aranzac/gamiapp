@@ -85,17 +85,15 @@
 <script>
 export default {
   mounted() {
-    // let recaptchaLink4 = document.createElement("script");
-    // recaptchaLink4.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.js");
-    // document.head.appendChild(recaptchaLink4);
-
+    let recaptchaLink4 = document.createElement("script");
+    recaptchaLink4.setAttribute("src", "/h5p/dist/js/h5p-standalone-main.js");
+    document.head.appendChild(recaptchaLink4);
     let src2 = document.createElement("script");
     src2.setAttribute(
       "src",
       "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/librerias%2Fh5p-standalone-main.js?alt=media&token=3162952e-7ed4-49d2-8ea0-10c6c60050b8"
     );
     document.head.appendChild(src2);
-
     let src3 = document.createElement("script");
     src3.setAttribute(
       "src",

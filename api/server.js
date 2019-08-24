@@ -19,6 +19,13 @@ const path = require("path")
 var http = require('http');
 var enforce = require('express-sslify');
 
+const history = require('connect-history-api-fallback');
+
+app.use(history({
+    disableDotRule: true,
+    verbose: true
+}));
+
 /////////// SSL //////////
 // const sslRedirect = require('heroku-ssl-redirect');
 // const secure = require('express-force-https');
