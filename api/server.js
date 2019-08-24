@@ -22,7 +22,7 @@ var enforce = require('express-sslify');
 const history = require('connect-history-api-fallback');
 
 app.use(history({
-    index: '../public/index.html',
+    index: './../public/index.html',
     disableDotRule: true,
     verbose: true
 }));
