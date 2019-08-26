@@ -295,6 +295,7 @@ export default {
       this.solucion.profesor = this.tarea_aux.creador;
       this.solucion.foto = this.picture;
       this.solucion.id_alumno = decoded._id;
+      this.solucion.opinion = this.opinion;
       let uri = "/soluciones/add";
       this.axios.post(uri, this.solucion);
 
@@ -306,7 +307,7 @@ export default {
       this.solucion.numero = num;
       if (num == 0) this.mostrar = true;
       else this.mostrar = false;
-      this.solucion.opinion = num;
+      // this.solucion.opinion = num;
     },
     onFileSelected(event) {
       this.uploadValue = 0;

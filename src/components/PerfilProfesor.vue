@@ -99,14 +99,14 @@
 
                     <br />
                     <div class="form-group text-center">
-                      <button class="btn btn-primary">Añadir tarea</button>
+                      <button class="btn btn-info">Añadir tarea</button>
                     </div>
                   </form>
                 </div>
               </b-modal>
 
               <div class="col-lg-12 text-right">
-                <b-button variant="primary" @click="showModal">
+                <b-button variant="info" @click="showModal">
                   <b>Añadir</b>
                   <i class="fa fa-plus-square ml-2"></i>
                 </b-button>
@@ -119,7 +119,6 @@
                   <thead>
                     <tr>
                       <th>Título</th>
-
                       <th></th>
                     </tr>
                   </thead>
@@ -128,7 +127,7 @@
                       <td>{{ task.titulo }}</td>
 
                       <td>
-                        <b-button variant="warning" class="text-light" @click="ver(task._id)">
+                        <b-button variant="info" class="text-light" @click="ver(task._id)">
                           <b>Ver</b>
                         </b-button>
                       </td>
@@ -137,8 +136,8 @@
                 </table>
                 <b-modal id="mymodal2" ref="my-modal2" hide-footer title="Ver tarea">
                   <div class="d-block">
-                    <h2 class="mt-2 text-center text-warning">
-                      <i class="fa fa-shapes text-warning"></i>
+                    <h2 class="mt-2 text-center text-info">
+                      <i class="fa fa-shapes text-info"></i>
                       &nbsp;&nbsp;{{tarea_aux.titulo}}
                     </h2>
 
@@ -162,7 +161,7 @@
 
                       <div class="mt-4" align="right">
                         <b-button
-                          variant="warning"
+                          variant="info"
                           class="btn btn-danger btn-sm text-light"
                           @click="borrar(tarea_aux._id)"
                         >
@@ -180,8 +179,8 @@
               <h2 class="mt-2">Tareas por corregir</h2>
               <b-modal id="my-modal3" ref="my-modal3" hide-footer title="Ver solución">
                 <div class="d-block">
-                  <h2 class="mt-2 text-center text-warning">
-                    <i class="fas fa-file text-warning"></i>
+                  <h2 class="mt-2 text-center text-info font-weight-bold">
+                    <i class="fas fa-file text-info"></i>
                     &nbsp;&nbsp;"{{tarea_aux2.titulo}}" realizada por {{tarea_aux2.alumno}}
                   </h2>
 
@@ -193,29 +192,35 @@
                           <td>{{tarea_aux2.descripcion}}</td>
                         </tr>
                         <tr>
-                          <th scope="row">Valoración</th>
+                          <th scope="row">Opinión</th>
                           <td>
-                            <i alt="0 puntos" title="0 puntos" v-if="cero" class="far fa-star"></i>
+                            {{tarea_aux2.opinion}}
+                            <i
+                              v-if="tarea_aux2.opinion=='Divertida'"
+                              class="fas fa-smile text-info"
+                            ></i>
+                            <i v-if="tarea_aux2.opinion=='Aburrida'" class="fas fa-frown text-info"></i>
+                            <!-- <i alt="0 puntos" title="0 puntos" v-if="cero" class="far fa-star"></i>
                             <span v-for="aux in tarea_aux2.opinion">
-                              <i class="fas fa-star text-warning"></i>
-                            </span>
+                              <i class="fas fa-star text-info"></i>
+                            </span>-->
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Foto del proceso</th>
-                          <td>
+                          <td v-if="tarea_aux2.foto!=null">
                             <img :src="tarea_aux2.foto" />
                           </td>
+                          <td
+                            v-if="tarea_aux2.foto==null"
+                            class="font-italic text-muted"
+                          >No ha adjuntado una imagen.</td>
                         </tr>
                       </tbody>
                     </table>
 
                     <div class="mt-4" align="center">
-                      <b-button
-                        variant="primary"
-                        class="btn text-light"
-                        @click="calificar(tarea_aux)"
-                      >
+                      <b-button variant="info" class="btn text-light" @click="calificar(tarea_aux)">
                         <b>Calificar</b>
                       </b-button>
                     </div>
@@ -224,8 +229,8 @@
               </b-modal>
               <b-modal id="my-modal4" ref="my-modal4" hide-footer title="Calificar tarea">
                 <div class="d-block">
-                  <h2 class="mt-2 text-center text-warning">
-                    <i class="fas fa-file text-warning"></i>
+                  <h2 class="mt-2 text-center text-info font-weight-bold">
+                    <i class="fas fa-file text-info"></i>
                     &nbsp;&nbsp;{{tarea_aux2.titulo}} realizada por {{tarea_aux2.alumno}}
                   </h2>
                   <form @submit.prevent="addScore(tarea_aux2.alumno)">
@@ -252,7 +257,7 @@
                     </div>
                     <br />
                     <div class="form-group text-center">
-                      <button class="btn btn-primary">Calificar</button>
+                      <button class="btn btn-info">Calificar</button>
                     </div>
                   </form>
                 </div>
@@ -271,7 +276,7 @@
                       <td>{{ task.titulo }}</td>
                       <!-- <td>{{ task.alumno }}</td> -->
                       <td>
-                        <b-button variant="warning" class="text-light" @click="ver2(task)">
+                        <b-button variant="info" class="text-light" @click="ver2(task)">
                           <b>Ver</b>
                         </b-button>
                       </td>
