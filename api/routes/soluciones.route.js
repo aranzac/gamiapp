@@ -12,17 +12,17 @@ app.use(
   })
 );
 
-var cloudinary = require('cloudinary').v2;
+// var cloudinary = require('cloudinary').v2;
 
-cloudinary.config({
-  cloud_name: 'soluciones',
-  api_key: '258673781426355',
-  api_secret: 'c-XJCn-rD8BpJUeZq9vVJ2iqOkE'
-});
+// cloudinary.config({
+//   cloud_name: 'soluciones',
+//   api_key: '258673781426355',
+//   api_secret: 'c-XJCn-rD8BpJUeZq9vVJ2iqOkE'
+// });
 
-const cloudinaryLib = {
-  Cloudinary: cloudinary
-}
+// const cloudinaryLib = {
+//   Cloudinary: cloudinary
+// }
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -43,6 +43,8 @@ solucionesRoutes.use(cors());
 process.env.SECRET_KEY = 'secret';
 
 solucionesRoutes.route('/add').post(function (req, res) {
+  console.log(req.body)
+  console.log("hola")
   let solu = new Soluciones(req.body);
   solu.corregido = false;
   solu

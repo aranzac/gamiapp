@@ -19,6 +19,7 @@
             >Actividades</router-link>
             <router-link to="/rankings" class="nav-link text-light">Rankings</router-link>
             <router-link v-if="alumno == ''" to="/juegos" class="nav-link text-light">Juegos</router-link>
+            <router-link v-on:click.native="updateNav" to="/">Home</router-link>
             <!-- <router-link to="/jueguini" class="nav-link text-light">Jueguini</router-link>
             <a href="../h5p/demo/juegos.html">Juegaso</a>
             <a href="../h5p/demo/prueba.html">Prueba</a>-->
@@ -163,7 +164,8 @@ export default {
       const decoded = jwtDecode(token);
       if (decoded.rol == "profesor") this.alumno = "profesor";
       else if (decoded.rol == "alumno") this.alumno = "";
-    }
+    },
+    updateNav() {}
   },
   mounted() {
     EventBus.$on("logged-in", status => {

@@ -31,7 +31,8 @@ userRoutes.route('/add').post(function (req, res) {
         tareas_resueltas: 0,
         racha: 0,
         logros: [11],
-        ultima_conexion: null
+        ultima_conexion: null,
+        juegos_jugados: 0
     }
     User.findOne({
             email: req.body.email

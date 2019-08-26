@@ -21,7 +21,7 @@ let Soluciones = new Schema({
         type: String
     },
     opinion: {
-        type: Number
+        type: String
     },
     feedback: {
         type: String

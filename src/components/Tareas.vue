@@ -46,6 +46,39 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
+                        <label for="apellido" class="d-block">¿Qué te ha parecido?</label>
+                        <section class="text-center">
+                          <!-- <label v-bind:style="{"background-color" : (isActive? "#d4a108" : "#ffc107" )}" @click="toggleClass()" class="btn btn-warning text-light btn-secondary"> -->
+                          <label
+                            v-bind:class="{ styleD: isActive, styleC: !isActive }"
+                            class="btn btn-success text-light btn-secondary"
+                          >
+                            <input
+                              id="rol"
+                              class="clase"
+                              type="radio"
+                              v-on:change="toggleClass()"
+                              v-model="opinion"
+                              value="Divertida"
+                              autocomplete="on"
+                            />¡Divertida!
+                          </label>
+                          <label
+                            v-bind:class="{ styleAA: isActive, styleBB: !isActive }"
+                            class="btn btn-danger text-light btn-secondary"
+                          >
+                            <input
+                              class="clase"
+                              type="radio"
+                              v-on:change="toggleClass()"
+                              v-model="opinion"
+                              value="Aburrida"
+                              autocomplete="on"
+                            />Aburrida
+                          </label>
+                        </section>
+                      </div>
+                      <!-- <div class="form-group">
                         <label>¿Qué te ha parecido esta actividad?</label>
 
                         <div align="center" class="mt-3">
@@ -77,7 +110,7 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div>-->
                     </div>
                   </div>
                   <div class="row">
@@ -97,20 +130,36 @@
                           @change="onFileSelected"
                           accept="image/x-png, image/gif, image/jpeg"
                         />
+
                         <div align="center">
                           <img width="320" :src="picture" />
+                          <div class="row m-3">
+                            <div class="tama">
+                              <label v-if="ima==true">Porcentaje de subida</label>
+                              <b-progress
+                                v-if="ima==true"
+                                :max="max"
+                                :min="min"
+                                :value="uploadValue"
+                                variant="success"
+                                striped
+                                :animated="animate"
+                              ></b-progress>
+                            </div>
+                          </div>
                           <button
-                            class="btn btn-warning text-light d-block"
+                            v-if="ima==true && uploadValue!=100"
+                            class="btn btn-success text-light d-block"
                             type="button"
                             @click="onUpload"
-                          >Subir</button>
+                          >Subir imagen</button>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group text-center">
-                    <button class="btn btn-primary">Añadir tarea</button>
+                    <button v-if="uploadValue==100 || !ima" class="btn btn-primary">Añadir tarea</button>
                   </div>
                 </form>
               </div>
@@ -181,11 +230,19 @@ export default {
       tarea_aux: {},
       alumno: "",
       solucion: {},
+      animate: true,
       titulo: "",
       mostrar: false,
       selectedFile: null,
       foto: "",
-      picture: null
+      picture: null,
+      isActive: true,
+      opinion: "",
+      max: 100,
+      min: 0,
+      valor: 50,
+      ima: false,
+      uploadValue: 0
     };
   },
   created() {
@@ -194,7 +251,7 @@ export default {
     });
 
     this.solucion.numero = -1;
-    this.solucion.opinion = 0;
+    this.solucion.opinion = "";
     this.solucion.feedback = "";
     let uri = "/tareas";
 
@@ -208,6 +265,9 @@ export default {
     });
   },
   methods: {
+    toggleClass() {
+      this.isActive = !this.isActive;
+    },
     ver(id) {
       let uri = `/tareas/ver/${id}`;
       this.$refs["my-modal2"].show();
@@ -235,9 +295,12 @@ export default {
       this.solucion.profesor = this.tarea_aux.creador;
       this.solucion.foto = this.picture;
       this.solucion.id_alumno = decoded._id;
-
       let uri = "/soluciones/add";
       this.axios.post(uri, this.solucion);
+
+      this.ima = false;
+      this.uploadValue = 0;
+      this.titulo = this.tarea_aux.creador = this.solucion = this.picture = "";
     },
     valorar(num) {
       this.solucion.numero = num;
@@ -246,6 +309,8 @@ export default {
       this.solucion.opinion = num;
     },
     onFileSelected(event) {
+      this.uploadValue = 0;
+      this.ima = true;
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
@@ -258,7 +323,7 @@ export default {
         snapshot => {
           let percentage =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // this.uploadValue = percentage
+          this.uploadValue = percentage;
         },
         error => {
           console.log(error.message);
@@ -290,6 +355,27 @@ export default {
 </script>
 
 <style scoped>
+.tama {
+  width: 200px;
+  text-align: center;
+  margin: auto;
+}
+.styleBB {
+  background-color: #961b27;
+}
+
+.styleAA {
+  background-color: #dc3545;
+}
+
+.styleC {
+  background-color: #28a745;
+}
+
+.styleD {
+  background-color: #1b6d2e;
+}
+
 .titulo2 {
   font-family: Quicksand;
   font-weight: bold;

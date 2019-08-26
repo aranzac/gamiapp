@@ -4,19 +4,18 @@ import BootstrapVue from 'bootstrap-vue';
 import PortalVue from 'portal-vue';
 import vueHeadful from 'vue-headful';
 import firebase from 'firebase';
+import VueRouter from 'vue-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.use(PortalVue);
-Vue.use(BootstrapVue);
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-
-Vue.component('vue-headful', vueHeadful);
-
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+
+Vue.use(PortalVue);
+Vue.use(BootstrapVue);
+Vue.use(VueRouter);
+Vue.component('vue-headful', vueHeadful);
 
 const base = axios.create({
   // Para despliege
@@ -36,7 +35,6 @@ firebase.initializeApp({
 });
 
 Vue.use(VueAxios, base);
-
 Vue.config.productionTip = false;
 
 import HomeComponent from './components/HomeComponent.vue';
@@ -108,7 +106,6 @@ const rutas = [{
     path: '/juego/:id',
     component: Juego
   }
-
 ];
 
 const router = new VueRouter({
@@ -116,8 +113,6 @@ const router = new VueRouter({
   hash: false,
   routes: rutas
 });
-
-// Vue.component('vue-headful', vueHeadful);
 
 new Vue(
   Vue.util.extend({

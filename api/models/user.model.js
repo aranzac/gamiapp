@@ -45,6 +45,9 @@ let User = new Schema({
     racha: {
         type: Number
     },
+    juegos_jugados: {
+        type: Number
+    },
     logros: [Number]
 }, {
     collection: 'usuarios'

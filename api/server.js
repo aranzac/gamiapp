@@ -71,8 +71,6 @@ app.use('/soluciones', solucionesRoute);
 app.use('/logros', logrosRoute);
 app.use('/juegos', juegosRoute);
 
-
-
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -84,9 +82,9 @@ app.use((req, res, next) => {
 });
 
 // // Para desarrollo
-// app.listen(5000, function () {
-//     console.log('Server is running on Port:', 5000);
-// });
+app.listen(5000, function () {
+    console.log('Server is running on Port:', 5000);
+});
 
 // Para despliegue
 app.listen(process.env.PORT || 4000);
