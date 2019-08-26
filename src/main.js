@@ -20,6 +20,7 @@ Vue.component('vue-headful', vueHeadful);
 const base = axios.create({
   // Para despliege
   baseURL: 'https://appgami.herokuapp.com'
+
   // Para desarrollo
   // baseURL: 'http://localhost:5000/'
 });
