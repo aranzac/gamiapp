@@ -326,7 +326,8 @@ userRoutes.route('/earn').post(function (req, res) {
             }
 
             user.puntuacion = (suma + user.puntuacion);
-            user.juegos_jugados++;
+            if (req.body.completo)
+                user.juegos_jugados++;
 
             if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;

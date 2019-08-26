@@ -182,13 +182,17 @@ export default {
         );
         console.log(puntos_totales);
         if (puntos_totales != 0) {
-          console.log("hola");
-
-          console.log(decoded.email);
+          var completo = false;
+          if (obtenidos == totales) {
+            console.log(completo);
+            completo = true;
+            console.log(completo);
+          }
           this.axios
             .post("/usuarios/earn", {
               _id: decoded._id,
-              puntuacion: puntos_totales
+              puntuacion: puntos_totales,
+              maximo: completo
             })
             .then(res => {
               this.nuevos_puntos = true;

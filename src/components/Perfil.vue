@@ -110,6 +110,16 @@
                   <li class="list-group-item">
                     <div class="row">
                       <div class="col lg-6 inline justify">
+                        <b>Juegos jugados:</b>
+                      </div>
+                      <div class="col lg-6 inline right">
+                        <p class="minimizar">{{juegos}} juegos</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col lg-6 inline justify">
                         <b>Racha:</b>
                       </div>
                       <div class="col lg-6 inline right">
@@ -243,7 +253,8 @@ export default {
       logros_render: [],
       racha: "",
       aux: "",
-      logros_nuevos: []
+      logros_nuevos: [],
+      juegos: 0
     };
   },
   methods: {
@@ -269,6 +280,7 @@ export default {
 
         var logros_nuevos = [];
 
+        console.log(aux);
         for (var i = 0; i < aux.length; i++) {
           switch (aux[i]) {
             case 1:
@@ -276,9 +288,11 @@ export default {
               break;
             case 2:
               if (this.nivel_nuevo) if (this.nivel >= 3) logros_nuevos.push(2);
+
               break;
             case 3:
               if (this.nivel_nuevo) if (this.nivel >= 4) logros_nuevos.push(3);
+
               break;
             case 4:
               if (this.nivel_nuevo) if (this.nivel >= 5) logros_nuevos.push(4);
@@ -392,6 +406,7 @@ export default {
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
         this.puntuacion_final = niveles[this.nivel - 1];
+        this.juegos = this.usuario.juegos_jugados;
         this.racha = this.usuario.racha;
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];
