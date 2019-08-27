@@ -329,6 +329,9 @@ export default {
             case 15:
               if (this.racha >= 30) logros_nuevos.push(15);
               break;
+            case 16:
+              if (this.juegos >= 5) logros_nuevos.push(16);
+              break;
           }
         }
         if (!logros_nuevos.length == 0) this.logro_nuevo = true;
@@ -386,6 +389,8 @@ export default {
 
     this.logro_nuevo = false;
 
+    this.axios.post("logros/add");
+
     let uri = "/jugados";
 
     this.axios
@@ -403,7 +408,7 @@ export default {
         this.nivel = this.usuario.nivel;
         this.animal = animales[this.nivel - 1];
         this.puntuacion_final = niveles[this.nivel - 1];
-        this.juegos = this.usuario.juegos_jugados;
+        this.juegos = this.usuario.puntuaciones_maximas;
         this.racha = this.usuario.racha;
         if (this.nivel > 1)
           this.puntuacion = this.puntuacion_total - limites[this.nivel - 2];

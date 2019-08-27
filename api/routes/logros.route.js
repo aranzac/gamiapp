@@ -6,9 +6,9 @@ let Logro = require('../models/logros.model');
 logrosRoutes.route('/add').post(function (req, res) {
     const logros = {
         inx: 16,
-        titulo: "Premio a la perseverancia",
-        descripcion: "Por conectarte un mes seguido",
-        imagen: "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/logros%2F15.png?alt=media&token=efec863e-e14f-4844-ad35-03fac46b33ad"
+        titulo: "En la diana",
+        descripcion: "Por haber obtenido 5 puntuaciones perfectas en juegos",
+        imagen: "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/logros%2F16.png?alt=media&token=9c5b01b2-7a61-4977-9ae2-93685f04676b"
     }
     Logro.create(logros)
         .then(user => {
