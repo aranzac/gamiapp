@@ -181,18 +181,22 @@ export default {
             1.5
         );
         console.log(puntos_totales);
+        console.log(obtenidos);
+
+        console.log(totales);
+
+        // Si obtiene la mayor puntuación añade que ha jugado un juego
         if (puntos_totales != 0) {
           var completo = false;
-          if (obtenidos == totales) {
-            console.log(completo);
+          if (obtenidos.textContent == totales.textContent) {
             completo = true;
-            console.log(completo);
           }
           this.axios
             .post("/usuarios/earn", {
               _id: decoded._id,
               puntuacion: puntos_totales,
-              maximo: completo
+              maximo: completo,
+              id_juego: this.juego._id
             })
             .then(res => {
               this.nuevos_puntos = true;

@@ -279,8 +279,7 @@ export default {
         }
 
         var logros_nuevos = [];
-        console.log(this.nivel_nuevo);
-        console.log(aux);
+
         for (var i = 0; i < aux.length; i++) {
           switch (aux[i]) {
             case 1:

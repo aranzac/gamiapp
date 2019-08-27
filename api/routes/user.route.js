@@ -32,8 +32,9 @@ userRoutes.route('/add').post(function (req, res) {
         racha: 0,
         logros: [11],
         ultima_conexion: null,
-        juegos_jugados: 0,
-        puntuacion_anterior: 0
+        juegos_jugados: [],
+        puntuacion_anterior: 0,
+        puntuaciones_maximas: 0
 
     }
     User.findOne({
@@ -328,10 +329,17 @@ userRoutes.route('/earn').post(function (req, res) {
                 suma = req.body.puntuacion;
             }
 
+            // Se añade el juego si se ha obtenido la puntuación máxima
             user.puntuacion = (suma + user.puntuacion);
-            if (req.body.maximo)
-                user.juegos_jugados++;
-            console.log(req.body.maximo)
+            if (req.body.maximo) {
+                // Para que no se añadan dos puntuaciones perfectas por el mismo juego se comprueba si ya lo ha jugado antes
+                if (!user.juegos_jugados.includes(req.body.id_juego)) {
+                    user.puntuaciones_maximas++;
+                    user.juegos_jugados.push(req.body.id_juego);
+                }
+            }
+            user.juegos_jugados++;
+
             if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;
 
