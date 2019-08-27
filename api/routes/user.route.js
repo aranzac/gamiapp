@@ -32,7 +32,9 @@ userRoutes.route('/add').post(function (req, res) {
         racha: 0,
         logros: [11],
         ultima_conexion: null,
-        juegos_jugados: 0
+        juegos_jugados: 0,
+        puntuacion_anterior: 0
+
     }
     User.findOne({
             email: req.body.email
@@ -309,6 +311,7 @@ userRoutes.route('/calificar').post(function (req, res) {
 });
 
 userRoutes.route('/earn').post(function (req, res) {
+    console.log("earn")
     User.findById({
         _id: req.body._id
     }, function (err, user) {

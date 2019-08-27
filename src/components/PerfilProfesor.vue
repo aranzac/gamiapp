@@ -58,9 +58,8 @@
 
                             <option>Abstracción</option>
                             <option>Descomposición</option>
-                            <option>Pensamiento iterativo</option>
+                            <option>Reconocimiento de patrones</option>
                             <option>Algoritmos</option>
-                            <option>Depuración</option>
                           </select>
                         </div>
                       </div>

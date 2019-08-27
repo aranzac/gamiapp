@@ -279,7 +279,7 @@ export default {
         }
 
         var logros_nuevos = [];
-
+        console.log(this.nivel_nuevo);
         console.log(aux);
         for (var i = 0; i < aux.length; i++) {
           switch (aux[i]) {
@@ -288,11 +288,9 @@ export default {
               break;
             case 2:
               if (this.nivel_nuevo) if (this.nivel >= 3) logros_nuevos.push(2);
-
               break;
             case 3:
               if (this.nivel_nuevo) if (this.nivel >= 4) logros_nuevos.push(3);
-
               break;
             case 4:
               if (this.nivel_nuevo) if (this.nivel >= 5) logros_nuevos.push(4);
