@@ -338,7 +338,6 @@ userRoutes.route('/earn').post(function (req, res) {
                     user.juegos_jugados.push(req.body.id_juego);
                 }
             }
-            user.juegos_jugados++;
 
             if (user.puntuacion >= limites[user.nivel - 1] && user.nivel < 10)
                 user.nivel++;

@@ -184,6 +184,7 @@ export default {
         console.log(obtenidos);
 
         console.log(totales);
+        console.log(this.juego._id);
 
         // Si obtiene la mayor puntuación añade que ha jugado un juego
         if (puntos_totales != 0) {
