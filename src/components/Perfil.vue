@@ -332,6 +332,9 @@ export default {
             case 16:
               if (this.juegos >= 5) logros_nuevos.push(16);
               break;
+            case 17:
+              if (this.juegos >= 15) logros_nuevos.push(17);
+              break;
           }
         }
         if (!logros_nuevos.length == 0) this.logro_nuevo = true;
@@ -389,7 +392,7 @@ export default {
 
     this.logro_nuevo = false;
 
-    this.axios.post("logros/add");
+    // this.axios.post("logros/add");
 
     let uri = "/jugados";
 

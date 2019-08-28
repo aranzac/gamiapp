@@ -5,10 +5,10 @@ let Logro = require('../models/logros.model');
 
 logrosRoutes.route('/add').post(function (req, res) {
     const logros = {
-        inx: 16,
-        titulo: "En la diana",
-        descripcion: "Por haber obtenido 5 puntuaciones perfectas en juegos",
-        imagen: "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/logros%2F16.png?alt=media&token=9c5b01b2-7a61-4977-9ae2-93685f04676b"
+        inx: 17,
+        titulo: "Pro del Pensamiento Computacional",
+        descripcion: "Por haber obtenido 15 puntuaciones perfectas en juegos",
+        imagen: "https://firebasestorage.googleapis.com/v0/b/gami-314da.appspot.com/o/logros%2F17.png?alt=media&token=e7d91033-ca00-4aee-8f39-5db9c20ca70c"
     }
     Logro.create(logros)
         .then(user => {
