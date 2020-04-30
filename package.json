@@ -32,7 +32,7 @@
     "html-loader": "^0.5.5",
     "http": "0.0.0",
     "http-vue-loader": "^1.4.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "mongoose": "^5.5.11",
