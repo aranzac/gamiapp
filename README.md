@@ -49,6 +49,6 @@ npm run build
 
 ## Autor/a
 
-Aranza Carolina Cabrera Castellano (alu0100889680@ull.edu.es)
+ACCC (alu0100889680@ull.edu.es)
 
 ## Copyright
